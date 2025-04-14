@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Lịch Thi - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'lichhoc' }) %>
+
+        <section class="page-banner">
+            <div class="container">
+                <h1>Lịch Thi</h1>
+                <p>Xem lịch thi giữa kỳ, cuối kỳ và các kỳ thi đặc biệt</p>
+            </div>
+        </section>
+
+        <section class="schedule-options">
+            <div class="container">
+                <div class="schedule-tabs">
+                    <a href="/lichhoc" class="tab-btn">Lịch học</a>
+                    <a href="/lichthi" class="tab-btn active">Lịch thi</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="schedule-section">
+            <div class="container">
+                <div class="schedule-dashboard">
+                    <div class="dashboard-sidebar">
+                        <div class="student-info">
+                            <div class="student-avatar">
+                                <img src="/images/lambo.jpg" alt="Avatar">
+                            </div>
+                            <div class="student-details">
+                                <h3>Nguyễn Văn A</h3>
+                                <p>MSSV: 20000123</p>
+                                <p>Ngành: Công nghệ thông tin</p>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <h3>Lọc lịch thi</h3>
+                            <div class="filter-group">
+                                <label>Học kỳ:</label>
+                                <select id="semester-select">
+                                    <option value="2023-1" selected>Học kỳ 1 - 2023-2024</option>
+                                    <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                    <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Loại kỳ thi:</label>
+                                <select id="exam-type-select">
+                                    <option value="all" selected>Tất cả</option>
+                                    <option value="midterm">Giữa kỳ</option>
+                                    <option value="final">Cuối kỳ</option>
+                                    <option value="special">Đặc biệt</option>
+                                </select>
+                            </div>
+                            <div class="filter-group">
+                                <label>Môn học:</label>
+                                <select id="course-select">
+                                    <option value="all" selected>Tất cả môn học</option>
+                                    <option value="COMP301">COMP301 - Cơ sở dữ liệu</option>
+                                    <option value="COMP302">COMP302 - Mạng máy tính</option>
+                                    <option value="COMP304">COMP304 - Công nghệ phần mềm</option>
+                                    <option value="COMP306">COMP306 - An toàn thông tin</option>
+                                    <option value="COMP307">COMP307 - Phân tích thiết kế hệ thống</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="date-navigator">
+                            <h3>Thời gian thi</h3>
+                            <div class="date-range">
+                                <div class="date-group">
+                                    <label>Từ ngày:</label>
+                                    <input type="date" id="date-from" value="2023-11-10">
+                                </div>
+                                <div class="date-group">
+                                    <label>Đến ngày:</label>
+                                    <input type="date" id="date-to" value="2023-12-30">
+                                </div>
+                            </div>
+                            <div class="date-navigation">
+                                <button class="nav-btn secondary full-width" id="search-btn">
+                                    <i class="fas fa-search"></i> Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                        <div class="download-section">
+                            <h3>Tải xuống</h3>
+                            <div class="action-buttons">
+                                <button class="btn secondary full-width"><i class="fas fa-file-pdf"></i> Xuất
+                                    PDF</button>
+                                <button class="btn secondary full-width"><i class="fas fa-file-excel"></i> Xuất
+                                    Excel</button>
+                                <button class="btn secondary full-width"><i class="fas fa-print"></i> In lịch
+                                    thi</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="schedule-header">
+                            <div class="schedule-title">
+                                <h2>Lịch thi học kỳ 1 năm học 2023-2024</h2>
+                                <span class="schedule-period">10/11/2023 - 30/12/2023</span>
+                            </div>
+                            <div class="view-options">
+                                <button class="view-btn" data-view="calendar"><i class="fas fa-calendar-alt"></i>
+                                    Lịch</button>
+                                <button class="view-btn active" data-view="list"><i class="fas fa-list"></i> Danh
+                                    sách</button>
+                            </div>
+                        </div>
+
+                        <div class="exam-alert">
+                            <i class="fas fa-exclamation-circle"></i>
+                            <div class="alert-content">
+                                <h4>Sắp thi: COMP302 - Mạng máy tính (15/11/2023)</h4>
+                                <p>Còn 3 ngày nữa đến kỳ thi giữa kỳ môn Mạng máy tính. Đừng quên ôn tập!</p>
+                            </div>
+                        </div>
+
+                        <div class="exam-tabs">
+                            <button class="exam-tab active" data-type="all">Tất cả</button>
+                            <button class="exam-tab" data-type="midterm">Giữa kỳ</button>
+                            <button class="exam-tab" data-type="final">Cuối kỳ</button>
+                        </div>
+
+                        <div class="exam-list-view">
+                            <table class="exam-table">
+                                <thead>
+                                    <tr>
+                                        <th>Mã môn</th>
+                                        <th>Tên môn học</th>
+                                        <th>Loại thi</th>
+                                        <th>Ngày thi</th>
+                                        <th>Giờ thi</th>
+                                        <th>Phòng thi</th>
+                                        <th>Ca thi</th>
+                                        <th>Ghi chú</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="upcoming-exam">
+                                        <td>COMP302</td>
+                                        <td>Mạng máy tính</td>
+                                        <td>Giữa kỳ</td>
+                                        <td>15/11/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>B205</td>
+                                        <td>1</td>
+                                        <td>Mang theo bút, máy tính</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP301</td>
+                                        <td>Cơ sở dữ liệu</td>
+                                        <td>Giữa kỳ</td>
+                                        <td>20/11/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>A301</td>
+                                        <td>1</td>
+                                        <td>Thi thực hành trên máy tính</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP304</td>
+                                        <td>Công nghệ phần mềm</td>
+                                        <td>Giữa kỳ</td>
+                                        <td>22/11/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>A402</td>
+                                        <td>1</td>
+                                        <td>Mang theo tài liệu môn học</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP306</td>
+                                        <td>An toàn thông tin</td>
+                                        <td>Giữa kỳ</td>
+                                        <td>25/11/2023</td>
+                                        <td>13:30 - 15:30</td>
+                                        <td>C103</td>
+                                        <td>3</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP307</td>
+                                        <td>Phân tích thiết kế hệ thống</td>
+                                        <td>Giữa kỳ</td>
+                                        <td>01/12/2023</td>
+                                        <td>13:30 - 15:30</td>
+                                        <td>A305</td>
+                                        <td>3</td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP302</td>
+                                        <td>Mạng máy tính</td>
+                                        <td>Cuối kỳ</td>
+                                        <td>15/12/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>B205</td>
+                                        <td>1</td>
+                                        <td>Không được mang tài liệu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP301</td>
+                                        <td>Cơ sở dữ liệu</td>
+                                        <td>Cuối kỳ</td>
+                                        <td>18/12/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>A301</td>
+                                        <td>1</td>
+                                        <td>Không được mang tài liệu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP304</td>
+                                        <td>Công nghệ phần mềm</td>
+                                        <td>Cuối kỳ</td>
+                                        <td>20/12/2023</td>
+                                        <td>13:30 - 15:30</td>
+                                        <td>A402</td>
+                                        <td>3</td>
+                                        <td>Không được mang tài liệu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP306</td>
+                                        <td>An toàn thông tin</td>
+                                        <td>Cuối kỳ</td>
+                                        <td>22/12/2023</td>
+                                        <td>13:30 - 15:30</td>
+                                        <td>C103</td>
+                                        <td>3</td>
+                                        <td>Không được mang tài liệu</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP307</td>
+                                        <td>Phân tích thiết kế hệ thống</td>
+                                        <td>Cuối kỳ</td>
+                                        <td>26/12/2023</td>
+                                        <td>7:30 - 9:30</td>
+                                        <td>A305</td>
+                                        <td>1</td>
+                                        <td>Không được mang tài liệu</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="calendar-view" style="display: none;">
+                            <div class="calendar-container">
+                                <div class="calendar-header">
+                                    <button class="calendar-nav-btn" id="prev-month"><i
+                                            class="fas fa-chevron-left"></i></button>
+                                    <h3>Tháng 11/2023</h3>
+                                    <button class="calendar-nav-btn" id="next-month"><i
+                                            class="fas fa-chevron-right"></i></button>
+                                </div>
+                                <div class="calendar-grid">
+                                    <div class="calendar-weekdays">
+                                        <div>CN</div>
+                                        <div>T2</div>
+                                        <div>T3</div>
+                                        <div>T4</div>
+                                        <div>T5</div>
+                                        <div>T6</div>
+                                        <div>T7</div>
+                                    </div>
+                                    <div class="calendar-days">
+                                        <!-- Calendar days would be generated dynamically -->
+                                        <!-- Example of some days -->
+                                        <div class="calendar-day empty"></div>
+                                        <div class="calendar-day empty"></div>
+                                        <div class="calendar-day empty"></div>
+                                        <div class="calendar-day">1</div>
+                                        <div class="calendar-day">2</div>
+                                        <div class="calendar-day">3</div>
+                                        <div class="calendar-day">4</div>
+                                        <div class="calendar-day">5</div>
+                                        <div class="calendar-day">6</div>
+                                        <div class="calendar-day">7</div>
+                                        <div class="calendar-day">8</div>
+                                        <div class="calendar-day">9</div>
+                                        <div class="calendar-day">10</div>
+                                        <div class="calendar-day">11</div>
+                                        <div class="calendar-day">12</div>
+                                        <div class="calendar-day">13</div>
+                                        <div class="calendar-day">14</div>
+                                        <div class="calendar-day has-exam">15</div>
+                                        <div class="calendar-day">16</div>
+                                        <div class="calendar-day">17</div>
+                                        <div class="calendar-day">18</div>
+                                        <div class="calendar-day">19</div>
+                                        <div class="calendar-day has-exam">20</div>
+                                        <div class="calendar-day">21</div>
+                                        <div class="calendar-day has-exam">22</div>
+                                        <div class="calendar-day">23</div>
+                                        <div class="calendar-day">24</div>
+                                        <div class="calendar-day has-exam">25</div>
+                                        <div class="calendar-day">26</div>
+                                        <div class="calendar-day">27</div>
+                                        <div class="calendar-day">28</div>
+                                        <div class="calendar-day">29</div>
+                                        <div class="calendar-day">30</div>
+                                        <!-- More days would go here -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="exam-card-container">
+                                <div class="exam-day-title">Lịch thi ngày 15/11/2023</div>
+                                <div class="exam-card">
+                                    <div class="exam-card-header">
+                                        <h4>COMP302 - Mạng máy tính</h4>
+                                        <span class="exam-type">Giữa kỳ</span>
+                                    </div>
+                                    <div class="exam-card-details">
+                                        <div class="detail-item">
+                                            <i class="far fa-clock"></i>
+                                            <span>7:30 - 9:30</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span>Phòng B205</span>
+                                        </div>
+                                        <div class="detail-item">
+                                            <i class="fas fa-info-circle"></i>
+                                            <span>Ca 1</span>
+                                        </div>
+                                    </div>
+                                    <div class="exam-card-note">
+                                        <p>Mang theo bút, máy tính</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="schedule-notes">
+                            <h3><i class="fas fa-info-circle"></i> Quy định thi</h3>
+                            <ul>
+                                <li>Sinh viên phải có mặt trước giờ thi ít nhất 15 phút và mang theo thẻ sinh viên</li>
+                                <li>Không mang tài liệu vào phòng thi trừ khi có hướng dẫn cụ thể</li>
+                                <li>Không sử dụng điện thoại hoặc thiết bị điện tử không được phép trong phòng thi</li>
+                                <li>Sinh viên đến trễ quá 15 phút sẽ không được dự thi</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Toggle between calendar and list views
+                    const viewBtns = document.querySelectorAll('.view-btn');
+                    const calendarView = document.querySelector('.calendar-view');
+                    const listView = document.querySelector('.exam-list-view');
+
+                    viewBtns.forEach(btn => {
+                        btn.addEventListener('click', function () {
+                            viewBtns.forEach(b => b.classList.remove('active'));
+                            this.classList.add('active');
+
+                            const view = this.getAttribute('data-view');
+                            if (view === 'calendar') {
+                                calendarView.style.display = 'block';
+                                listView.style.display = 'none';
+                            } else {
+                                calendarView.style.display = 'none';
+                                listView.style.display = 'block';
+                            }
+                        });
+                    });
+
+                    // Exam tab filters
+                    const examTabs = document.querySelectorAll('.exam-tab');
+
+                    examTabs.forEach(tab => {
+                        tab.addEventListener('click', function () {
+                            examTabs.forEach(t => t.classList.remove('active'));
+                            this.classList.add('active');
+
+                            const type = this.getAttribute('data-type');
+                            alert('Lọc theo loại thi: ' + type);
+                            // In a real app, this would filter the exam list
+                        });
+                    });
+
+                    // Calendar navigation
+                    document.getElementById('prev-month').addEventListener('click', function () {
+                        alert('Chuyển đến tháng trước');
+                        // In a real app, this would show the previous month
+                    });
+
+                    document.getElementById('next-month').addEventListener('click', function () {
+                        alert('Chuyển đến tháng sau');
+                        // In a real app, this would show the next month
+                    });
+
+                    // Search button
+                    document.getElementById('search-btn').addEventListener('click', function () {
+                        const fromDate = document.getElementById('date-from').value;
+                        const toDate = document.getElementById('date-to').value;
+                        alert('Tìm kiếm lịch thi từ ' + fromDate + ' đến ' + toDate);
+                        // In a real app, this would search for exams within the date range
+                    });
+
+                    // Filters
+                    document.getElementById('semester-select').addEventListener('change', function () {
+                        alert('Đã chọn ' + this.options[this.selectedIndex].text);
+                        // In a real app, this would filter exams by semester
+                    });
+
+                    document.getElementById('exam-type-select').addEventListener('change', function () {
+                        alert('Đã chọn ' + this.options[this.selectedIndex].text);
+                        // In a real app, this would filter by exam type
+                    });
+
+                    document.getElementById('course-select').addEventListener('change', function () {
+                        alert('Đã chọn ' + this.options[this.selectedIndex].text);
+                        // In a real app, this would filter by course
+                    });
+                });
+            </script>
+</body>
+
+</html>

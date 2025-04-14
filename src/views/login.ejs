@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/auth.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Đăng Nhập - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body class="auth-body">
+    <div class="auth-container">
+        <div class="auth-content">
+            <div class="auth-card">
+                <div class="auth-header">
+                    <a href="/trangchu" class="logo-link">
+                        <h1>EDUMANAGER</h1>
+                    </a>
+                    <h2>Đăng Nhập</h2>
+                    <p>Sử dụng tài khoản được cấp bởi nhà trường</p>
+                </div>
+
+                <form class="auth-form" action="/login" method="POST">
+                    <div class="form-group">
+                        <label for="username">Mã số sinh viên/giảng viên</label>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-user"></i></span>
+                            <input type="text" id="username" name="username"
+                                placeholder="Nhập mã số sinh viên/giảng viên" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Mật khẩu</label>
+                        <div class="input-group">
+                            <span class="input-icon"><i class="fas fa-lock"></i></span>
+                            <input type="password" id="password" name="password" placeholder="Nhập mật khẩu" required>
+                            <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                                <i class="far fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-options">
+                        <div class="remember-me">
+                            <input type="checkbox" id="remember" name="remember">
+                            <label for="remember">Ghi nhớ đăng nhập</label>
+                        </div>
+                        <a href="/forgot-password" class="forgot-link">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="btn primary full-width">Đăng nhập</button>
+                </form>
+
+                <div class="auth-note">
+                    <div class="info-alert">
+                        <i class="fas fa-info-circle"></i>
+                        <p>Sử dụng tài khoản và mật khẩu được cấp bởi nhà trường. Liên hệ với phòng đào tạo nếu bạn chưa
+                            nhận được thông tin đăng nhập hoặc gặp sự cố truy cập.</p>
+                    </div>
+                </div>
+
+                <div class="auth-footer">
+                    <p>Đăng nhập lần đầu? <a href="/reset-password">Đổi mật khẩu</a></p>
+                </div>
+            </div>
+
+            <div class="auth-info">
+                <div class="info-content">
+                    <h2>Hệ thống quản lý đào tạo đại học</h2>
+                    <p>Cổng thông tin chính thức dành cho sinh viên, giảng viên và cán bộ nhà trường.</p>
+
+                    <div class="info-features">
+                        <div class="feature-item">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Quản lý khóa học và điểm số</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Lịch học và lịch thi</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Đăng ký học phần trực tuyến</span>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-file-invoice-dollar"></i>
+                            <span>Quản lý học phí và thanh toán</span>
+                        </div>
+                    </div>
+
+                    <div class="support-contact">
+                        <h3>Hỗ trợ kỹ thuật</h3>
+                        <p><i class="fas fa-phone"></i> Hotline: (028) 1234 5678</p>
+                        <p><i class="fas fa-envelope"></i> Email: support@edumanager.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle password visibility
+            const togglePassword = document.querySelector('.toggle-password');
+            const passwordInput = document.querySelector('#password');
+
+            togglePassword.addEventListener('click', function () {
+                // Toggle type attribute
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+
+                // Toggle icon
+                this.querySelector('i').classList.toggle('fa-eye');
+                this.querySelector('i').classList.toggle('fa-eye-slash');
+            });
+        });
+    </script>
+</body>
+
+</html>

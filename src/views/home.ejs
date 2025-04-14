@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('partials/head') %>
+        <link rel="stylesheet" href="/css/home.css">
+        <title>Hệ thống Quản lý Đào tạo Đại học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'trangchu' }) %>
+
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Hệ thống Quản lý Đào tạo Đại học</h1>
+                    <p>Tối ưu hóa quá trình học tập, giảng dạy và quản lý thông tin sinh viên. Hệ thống cung cấp các
+                        công cụ
+                        hiện đại giúp sinh viên theo dõi tiến trình học tập, đăng ký môn học trực tuyến, truy cập tài
+                        liệu
+                        giảng dạy
+                        và tương tác hiệu quả với giảng viên. Đối với đội ngũ quản lý, nền tảng này đảm bảo tính minh
+                        bạch
+                        và
+                        nâng cao chất lượng quản trị đào tạo toàn diện.</p>
+                </div>
+                <div class="hero-image">
+                    <img src="/images/lambo.jpg" alt="University Education">
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Tính năng nổi bật</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <h3>Quản lý khóa học</h3>
+                        <p>Dễ dàng đăng ký và theo dõi tiến trình các khóa học trong chương trình đào tạo</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Lịch học thông minh</h3>
+                        <p>Tự động hóa lịch học, lịch thi và thông báo nhắc nhở kịp thời</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>Theo dõi kết quả</h3>
+                        <p>Xem kết quả học tập, điểm số và tiến độ hoàn thành chương trình đào tạo</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Tương tác giảng viên</h3>
+                        <p>Kết nối trực tiếp với giảng viên và nhận phản hồi về bài tập, bài kiểm tra</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>15,000+</h3>
+                        <p>Sinh viên</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>500+</h3>
+                        <p>Giảng viên</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>50+</h3>
+                        <p>Chương trình đào tạo</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>95%</h3>
+                        <p>Tỷ lệ việc làm sau tốt nghiệp</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="announcements">
+            <div class="container">
+                <h2 class="section-title">Thông báo mới nhất</h2>
+                <div class="announcement-list">
+                    <div class="announcement-item">
+                        <div class="announcement-date">15/06/2023</div>
+                        <h3>Lịch thi học kỳ 2 năm học 2022-2023</h3>
+                        <p>Lịch thi học kỳ 2 đã được cập nhật. Sinh viên vui lòng kiểm tra thông tin và chuẩn bị...</p>
+                        <a href="#" class="read-more">Xem thêm</a>
+                    </div>
+                    <div class="announcement-item">
+                        <div class="announcement-date">10/06/2023</div>
+                        <h3>Đăng ký học phần học kỳ 1 năm học 2023-2024</h3>
+                        <p>Thông báo về việc đăng ký học phần cho học kỳ 1 năm học 2023-2024. Thời gian bắt đầu...</p>
+                        <a href="#" class="read-more">Xem thêm</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>

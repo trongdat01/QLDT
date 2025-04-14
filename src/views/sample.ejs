@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Tin Tức - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'sample' }) %>
+
+        <section class="page-banner">
+            <div class="container">
+                <h1>Tin Tức & Thông Báo</h1>
+                <p>Cập nhật thông tin mới nhất về hoạt động đào tạo của trường</p>
+            </div>
+        </section>
+
+        <section class="news-featured">
+            <div class="container">
+                <div class="featured-article">
+                    <div class="featured-image">
+                        <img src="/images/lambo.jpg" alt="Tin tức nổi bật">
+                        <div class="featured-category">Sự kiện</div>
+                    </div>
+                    <div class="featured-content">
+                        <div class="featured-meta">
+                            <span class="date"><i class="far fa-calendar-alt"></i> 20/06/2023</span>
+                            <span class="author"><i class="far fa-user"></i> Ban Đào Tạo</span>
+                        </div>
+                        <h2>Lễ Tốt Nghiệp Năm Học 2022-2023 Sẽ Được Tổ Chức Vào Ngày 30/06/2023</h2>
+                        <p>Nhà trường trân trọng thông báo Lễ tốt nghiệp cho sinh viên khóa 2019-2023 sẽ diễn ra vào
+                            ngày
+                            30/06/2023 tại Hội trường lớn. Sinh viên tốt nghiệp vui lòng xác nhận tham dự và làm thủ tục
+                            nhận bằng theo lịch thông báo...</p>
+                        <a href="#" class="btn primary">Xem chi tiết</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-categories">
+            <div class="container">
+                <div class="category-tabs">
+                    <button class="category-tab active" data-category="all">Tất cả</button>
+                    <button class="category-tab" data-category="notices">Thông báo</button>
+                    <button class="category-tab" data-category="events">Sự kiện</button>
+                    <button class="category-tab" data-category="academics">Học thuật</button>
+                    <button class="category-tab" data-category="admissions">Tuyển sinh</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="news-list">
+            <div class="container">
+                <div class="news-grid">
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Thông báo đăng ký học">
+                            <div class="news-category">Thông báo</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 15/06/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 1.2k</span>
+                            </div>
+                            <h3>Thông Báo Đăng Ký Học Phần Học Kỳ 1 Năm Học 2023-2024</h3>
+                            <p>Phòng Đào tạo thông báo kế hoạch đăng ký học phần trực tuyến học kỳ 1 năm học
+                                2023-2024...
+                            </p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Hội thảo khoa học">
+                            <div class="news-category">Học thuật</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 10/06/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 856</span>
+                            </div>
+                            <h3>Hội Thảo Khoa Học "Ứng Dụng Trí Tuệ Nhân Tạo Trong Giáo Dục"</h3>
+                            <p>Khoa Công nghệ thông tin tổ chức hội thảo khoa học về ứng dụng trí tuệ nhân tạo trong
+                                giáo
+                                dục...</p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Thông tin tuyển sinh">
+                            <div class="news-category">Tuyển sinh</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 05/06/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 2.4k</span>
+                            </div>
+                            <h3>Thông Tin Tuyển Sinh Đại Học Chính Quy Năm 2023</h3>
+                            <p>Trường công bố thông tin tuyển sinh đại học chính quy năm 2023 với nhiều ngành học mới...
+                            </p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Lịch thi học kỳ">
+                            <div class="news-category">Thông báo</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 01/06/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 1.8k</span>
+                            </div>
+                            <h3>Lịch Thi Học Kỳ 2 Năm Học 2022-2023</h3>
+                            <p>Phòng Khảo thí và Đảm bảo chất lượng thông báo lịch thi kết thúc học kỳ 2 năm học
+                                2022-2023...</p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Cuộc thi khởi nghiệp">
+                            <div class="news-category">Sự kiện</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 25/05/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 1.1k</span>
+                            </div>
+                            <h3>Cuộc Thi Khởi Nghiệp Sinh Viên 2023</h3>
+                            <p>Trung tâm Hỗ trợ Sinh viên và Quan hệ Doanh nghiệp tổ chức cuộc thi Khởi nghiệp Sinh viên
+                                2023...</p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="news-card">
+                        <div class="news-image">
+                            <img src="/images/lambo.jpg" alt="Chương trình trao đổi">
+                            <div class="news-category">Học thuật</div>
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="date"><i class="far fa-calendar-alt"></i> 20/05/2023</span>
+                                <span class="views"><i class="far fa-eye"></i> 932</span>
+                            </div>
+                            <h3>Chương Trình Trao Đổi Sinh Viên Với Đại Học Quốc Tế</h3>
+                            <p>Phòng Hợp tác Quốc tế thông báo chương trình trao đổi sinh viên với các trường đại học
+                                đối
+                                tác...</p>
+                            <a href="#" class="read-more">Xem chi tiết <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pagination">
+                    <a href="#" class="page-item active">1</a>
+                    <a href="#" class="page-item">2</a>
+                    <a href="#" class="page-item">3</a>
+                    <a href="#" class="page-item">4</a>
+                    <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Đăng ký nhận tin tức</h2>
+                    <p>Nhận thông báo và tin tức mới nhất từ trường thông qua email</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Nhập địa chỉ email của bạn">
+                        <button type="submit" class="btn primary">Đăng ký</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                // Simple script for category tabs
+                document.addEventListener('DOMContentLoaded', function () {
+                    const categoryTabs = document.querySelectorAll('.category-tab');
+
+                    categoryTabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Remove active class from all tabs
+                            categoryTabs.forEach(t => t.classList.remove('active'));
+
+                            // Add active class to clicked tab
+                            tab.classList.add('active');
+
+                            // Here you would normally filter news by category
+                            // For demo, we're just changing the active state
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>

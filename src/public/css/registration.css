@@ -1,0 +1,750 @@
+/* Registration Info Section */
+.registration-info {
+    padding: 30px 0;
+}
+
+.info-card {
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.info-header {
+    background-color: #f8f9fa;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.info-header i {
+    font-size: 1.5rem;
+    color: #0056b3;
+    margin-right: 15px;
+}
+
+.info-header h2 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0;
+}
+
+.info-content {
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.info-block {
+    flex: 1;
+    min-width: 300px;
+}
+
+.info-block h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.info-block ul,
+.info-block p {
+    color: #555;
+}
+
+.info-block ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.info-block ul li:before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+.info-status {
+    padding: 15px 20px;
+    display: flex;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.info-status i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.info-status.alert {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.info-status.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.info-status.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+/* Registration Dashboard */
+.registration-section,
+.results-section {
+    padding: 40px 0 60px;
+}
+
+.registration-dashboard,
+.results-dashboard {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.dashboard-sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.student-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.student-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.student-details p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.registration-progress,
+.registration-summary {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.registration-progress h3,
+.financial-info h3,
+.registration-summary h3,
+.semester-selector h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.progress-item,
+.financial-item,
+.summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.progress-label,
+.financial-label,
+.summary-label {
+    color: #666;
+}
+
+.progress-value,
+.financial-value,
+.summary-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+.progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.financial-info {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.financial-btn {
+    width: 100%;
+    margin-top: 10px;
+    background-color: #f8f9fa;
+    color: #333;
+    text-align: center;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Course Search */
+.course-search {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.search-container {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-container input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 0.95rem;
+}
+
+.search-btn {
+    padding: 10px 15px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.filter-container {
+    display: flex;
+    gap: 10px;
+}
+
+.filter-container select {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    min-width: 150px;
+}
+
+/* Course Tabs */
+.course-tabs,
+.results-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #e9ecef;
+    overflow-x: auto;
+}
+
+.tab-btn {
+    padding: 12px 20px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 0;
+    height: 3px;
+    background-color: #0056b3;
+    transition: width 0.3s ease;
+}
+
+.tab-btn:hover {
+    color: #0056b3;
+}
+
+.tab-btn.active {
+    color: #0056b3;
+}
+
+.tab-btn.active::after {
+    width: 100%;
+}
+
+/* Courses Table */
+.courses-table-container,
+.results-table-container {
+    margin-bottom: 25px;
+    overflow-x: auto;
+}
+
+.courses-table,
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+
+.courses-table th,
+.courses-table td,
+.results-table th,
+.results-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+.courses-table th,
+.results-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+    position: sticky;
+    top: 0;
+}
+
+.courses-table tr:hover,
+.results-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.select-col {
+    width: 50px;
+}
+
+/* Checkbox styling */
+.checkbox-container {
+    display: block;
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+.checkbox-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: #0056b3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.registered {
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+.slots-available {
+    color: #28a745;
+    font-weight: 600;
+}
+
+.no-slots {
+    color: #dc3545;
+    font-weight: 600;
+}
+
+/* Warning and Conflict */
+.registration-warning,
+.course-conflict {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+    padding: 15px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.registration-warning i,
+.course-conflict i {
+    color: #ffc107;
+    font-size: 1.5rem;
+    margin-right: 15px;
+}
+
+.course-conflict {
+    background-color: #f8d7da;
+    border-left-color: #dc3545;
+}
+
+.course-conflict i {
+    color: #dc3545;
+}
+
+.course-conflict h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #721c24;
+}
+
+.conflict-item {
+    display: flex;
+    align-items: flex-start;
+    margin-top: 15px;
+}
+
+.conflict-content {
+    flex: 1;
+}
+
+/* Timetable Preview */
+.timetable-preview,
+.timetable-view {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.timetable-preview h3,
+.timetable-view h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.timetable-container {
+    overflow-x: auto;
+}
+
+.timetable {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+}
+
+.timetable th,
+.timetable td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+.timetable th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.time-slot {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.has-class {
+    background-color: rgba(0, 86, 179, 0.1);
+    color: #0056b3;
+    font-weight: 500;
+}
+
+.conflict {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.class-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.course-code {
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.room {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+/* Registration Actions */
+.registration-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+/* Results Page Specific Styles */
+.results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.results-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+}
+
+.results-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-label {
+    margin-right: 10px;
+    color: #666;
+}
+
+.status-value {
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+}
+
+.status-value.confirmed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status-value.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.status-value.rejected {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.course-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.course-status.confirmed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.course-status.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.course-status.rejected {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.payment-status {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.payment-status.paid {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.payment-status.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.semester-selector {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.semester-selector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.notes-section {
+    margin-top: 30px;
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.notes-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.notes-section ul li {
+    margin-bottom: 10px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.notes-section ul li:before {
+    content: '\2022';
+    position: absolute;
+    left: 0;
+    color: #0056b3;
+    font-weight: bold;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+
+    .registration-dashboard,
+    .results-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        margin-bottom: 20px;
+    }
+
+    .info-content {
+        flex-direction: column;
+    }
+
+    .info-block {
+        min-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .course-search {
+        flex-direction: column;
+    }
+
+    .search-container {
+        max-width: 100%;
+    }
+
+    .filter-container {
+        width: 100%;
+    }
+
+    .filter-container select {
+        flex: 1;
+    }
+
+    .registration-actions {
+        flex-direction: column;
+    }
+
+    .registration-actions button {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+
+    .course-tabs,
+    .results-tabs {
+        flex-wrap: wrap;
+    }
+
+    .tab-btn {
+        flex: 1;
+        text-align: center;
+        padding: 10px;
+    }
+}

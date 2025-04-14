@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/curriculum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Chương Trình Học - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'hoctap' }) %>
+
+        <section class="page-banner curriculum-banner">
+            <div class="container">
+                <h1>Chương Trình Học</h1>
+                <p>Xem thông tin chương trình đào tạo và tiến độ học tập</p>
+                <div class="banner-badges">
+                    <div class="badge">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Kỹ sư Công nghệ thông tin</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Khóa 2020-2024</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-clipboard-check"></i>
+                        <span>58% Hoàn thành</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="curriculum-section">
+            <div class="container">
+                <div class="curriculum-dashboard">
+                    <div class="dashboard-sidebar">
+                        <div class="student-info">
+                            <div class="student-avatar">
+                                <img src="/images/lambo.jpg" alt="Avatar">
+                            </div>
+                            <div class="student-details">
+                                <h3>Nguyễn Văn A</h3>
+                                <p>MSSV: 20000123</p>
+                                <p>Ngành: Công nghệ thông tin</p>
+                            </div>
+                        </div>
+
+                        <div class="progress-summary">
+                            <h3>Tiến độ học tập</h3>
+                            <div class="circular-progress">
+                                <div class="progress-ring">
+                                    <svg width="160" height="160">
+                                        <circle class="progress-ring-circle-bg" stroke="#e9ecef" stroke-width="12"
+                                            cx="80" cy="80" r="65" fill="transparent" />
+                                        <circle class="progress-ring-circle" stroke="#0056b3" stroke-width="12" cx="80"
+                                            cy="80" r="65" fill="transparent" stroke-dasharray="408.4"
+                                            stroke-dashoffset="171.5" />
+                                    </svg>
+                                    <div class="progress-text">
+                                        <span class="progress-value">58%</span>
+                                        <span class="progress-label">Hoàn thành</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="credits-summary">
+                                <div class="credit-item">
+                                    <span class="credit-value">85</span>
+                                    <span class="credit-label">Tín chỉ đã học</span>
+                                </div>
+                                <div class="credit-divider"></div>
+                                <div class="credit-item">
+                                    <span class="credit-value">145</span>
+                                    <span class="credit-label">Tổng tín chỉ</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="program-info">
+                            <h3>Thông tin chương trình</h3>
+                            <div class="info-card">
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-graduation-cap"></i></div>
+                                    <div class="info-content">
+                                        <div class="info-label">Chương trình đào tạo:</div>
+                                        <div class="info-value">Kỹ sư Công nghệ thông tin</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                                    <div class="info-content">
+                                        <div class="info-label">Khóa học:</div>
+                                        <div class="info-value">2020-2024</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-certificate"></i></div>
+                                    <div class="info-content">
+                                        <div class="info-label">Hệ đào tạo:</div>
+                                        <div class="info-value">Chính quy</div>
+                                    </div>
+                                </div>
+                                <div class="info-item">
+                                    <div class="info-icon"><i class="fas fa-user-tie"></i></div>
+                                    <div class="info-content">
+                                        <div class="info-label">Cố vấn học tập:</div>
+                                        <div class="info-value">TS. Nguyễn Văn B</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="action-buttons">
+                            <button class="btn secondary full-width"><i class="fas fa-print"></i> In chương trình
+                                học</button>
+                            <button class="btn primary full-width"><i class="fas fa-graduation-cap"></i> Kiểm tra tốt
+                                nghiệp</button>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-content">
+                        <div class="curriculum-header">
+                            <h2>Danh sách học phần</h2>
+                            <div class="curriculum-tabs">
+                                <button class="tab-btn active" data-tab="all">Tất cả</button>
+                                <button class="tab-btn" data-tab="complete">Đã hoàn thành</button>
+                                <button class="tab-btn" data-tab="current">Đang học</button>
+                                <button class="tab-btn" data-tab="upcoming">Chưa học</button>
+                            </div>
+                        </div>
+
+                        <div class="semester-accordion">
+                            <div class="semester-item">
+                                <div class="semester-header active">
+                                    <div class="semester-info">
+                                        <div class="semester-icon completed">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <h3>Năm 1 - Học kỳ 1</h3>
+                                    </div>
+                                    <div class="semester-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-book"></i>
+                                            <span>4 môn</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-award"></i>
+                                            <span>12 tín chỉ</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="semester-status completed">Đã hoàn thành</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="semester-content" style="display: block;">
+                                    <div class="responsive-table">
+                                        <table class="courses-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã môn</th>
+                                                    <th>Tên môn học</th>
+                                                    <th>Tín chỉ</th>
+                                                    <th>Loại</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Điểm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="course-code">COMP101</span></td>
+                                                    <td>
+                                                        <div class="course-name">Nhập môn lập trình</div>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade excellent">A</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">MATH101</span></td>
+                                                    <td>
+                                                        <div class="course-name">Giải tích 1</div>
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade good">B+</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">PHY101</span></td>
+                                                    <td>
+                                                        <div class="course-name">Vật lý đại cương</div>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade good">B+</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">ENG101</span></td>
+                                                    <td>
+                                                        <div class="course-name">Tiếng Anh học thuật</div>
+                                                    </td>
+                                                    <td>2</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade excellent">A-</span></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2" class="semester-summary">Tổng kết học kỳ</td>
+                                                    <td>12</td>
+                                                    <td colspan="2">GPA học kỳ</td>
+                                                    <td><span class="grade excellent">3.70</span></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="semester-item">
+                                <div class="semester-header">
+                                    <div class="semester-info">
+                                        <div class="semester-icon completed">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <h3>Năm 1 - Học kỳ 2</h3>
+                                    </div>
+                                    <div class="semester-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-book"></i>
+                                            <span>4 môn</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-award"></i>
+                                            <span>12 tín chỉ</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="semester-status completed">Đã hoàn thành</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="semester-content">
+                                    <div class="responsive-table">
+                                        <table class="courses-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Mã môn</th>
+                                                    <th>Tên môn học</th>
+                                                    <th>Tín chỉ</th>
+                                                    <th>Loại</th>
+                                                    <th>Trạng thái</th>
+                                                    <th>Điểm</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td><span class="course-code">COMP102</span></td>
+                                                    <td>
+                                                        <div class="course-name">Cấu trúc dữ liệu và giải thuật</div>
+                                                    </td>
+                                                    <td>4</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade excellent">A</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">MATH102</span></td>
+                                                    <td>
+                                                        <div class="course-name">Đại số tuyến tính</div>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade good">B</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">COMP103</span></td>
+                                                    <td>
+                                                        <div class="course-name">Kiến trúc máy tính</div>
+                                                    </td>
+                                                    <td>3</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade excellent">A-</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><span class="course-code">ENG102</span></td>
+                                                    <td>
+                                                        <div class="course-name">Tiếng Anh chuyên ngành</div>
+                                                    </td>
+                                                    <td>2</td>
+                                                    <td><span class="course-type required">Bắt buộc</span></td>
+                                                    <td><span class="status completed">Đã hoàn thành</span></td>
+                                                    <td><span class="grade good">B+</span></td>
+                                                </tr>
+                                            </tbody>
+                                            <tfoot>
+                                                <tr>
+                                                    <td colspan="2" class="semester-summary">Tổng kết học kỳ</td>
+                                                    <td>12</td>
+                                                    <td colspan="2">GPA học kỳ</td>
+                                                    <td><span class="grade excellent">3.65</span></td>
+                                                </tr>
+                                            </tfoot>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="semester-item">
+                                <div class="semester-header">
+                                    <div class="semester-info">
+                                        <div class="semester-icon current">
+                                            <i class="fas fa-clock"></i>
+                                        </div>
+                                        <h3>Năm 2 - Học kỳ 1</h3>
+                                    </div>
+                                    <div class="semester-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-book"></i>
+                                            <span>5 môn</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-award"></i>
+                                            <span>15 tín chỉ</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="semester-status current">Đang học</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="semester-content">
+                                    <!-- Similar table structure as above -->
+                                </div>
+                            </div>
+
+                            <div class="semester-item">
+                                <div class="semester-header">
+                                    <div class="semester-info">
+                                        <div class="semester-icon upcoming">
+                                            <i class="fas fa-hourglass-start"></i>
+                                        </div>
+                                        <h3>Năm 2 - Học kỳ 2</h3>
+                                    </div>
+                                    <div class="semester-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-book"></i>
+                                            <span>5 môn</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-award"></i>
+                                            <span>14 tín chỉ</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <span class="semester-status upcoming">Chưa học</span>
+                                        </div>
+                                        <div class="toggle-icon">
+                                            <i class="fas fa-chevron-down"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="semester-content">
+                                    <!-- Similar table structure as above -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="curriculum-map">
+            <div class="container">
+                <h2 class="section-title">Sơ đồ chương trình học</h2>
+                <p class="section-desc">Sơ đồ dưới đây hiển thị mối quan hệ giữa các môn học và yêu cầu tiên quyết</p>
+
+                <div class="map-container">
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #0056b3;"></span>
+                            <span class="legend-text">Đã hoàn thành</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #ffc107;"></span>
+                            <span class="legend-text">Đang học</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-color" style="background-color: #e9ecef;"></span>
+                            <span class="legend-text">Chưa học</span>
+                        </div>
+                        <div class="legend-item">
+                            <span class="legend-line"></span>
+                            <span class="legend-text">Môn tiên quyết</span>
+                        </div>
+                    </div>
+
+                    <div class="curriculum-graph">
+                        <!-- This is a placeholder. In a real app, you'd use a visualization library -->
+                        <img src="/images/lambo.jpg" alt="Sơ đồ chương trình học" class="graph-placeholder">
+                        <div class="graph-overlay">
+                            <p>Chức năng sơ đồ chương trình học đang được phát triển.</p>
+                            <a href="#" class="btn primary">Xem dạng danh sách</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Accordion functionality for semester items
+                    const semesterHeaders = document.querySelectorAll('.semester-header');
+
+                    semesterHeaders.forEach(header => {
+                        header.addEventListener('click', function () {
+                            this.classList.toggle('active');
+                            const content = this.nextElementSibling;
+
+                            if (content.style.display === 'block') {
+                                content.style.display = 'none';
+                            } else {
+                                content.style.display = 'block';
+                            }
+                        });
+                    });
+
+                    // Tab functionality
+                    const tabBtns = document.querySelectorAll('.tab-btn');
+
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', function () {
+                            // Remove active class from all buttons
+                            tabBtns.forEach(b => b.classList.remove('active'));
+
+                            // Add active class to clicked button
+                            this.classList.add('active');
+
+                            // Get tab value
+                            const tab = this.getAttribute('data-tab');
+
+                            // In a real app, you would filter the semester items based on the tab
+                            console.log('Selected tab:', tab);
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>

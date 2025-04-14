@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/learning.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Góc Học Tập - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'hoctap' }) %>
+
+        <section class="page-banner">
+            <div class="container">
+                <h1>Góc Học Tập</h1>
+                <p>Truy cập thông tin học tập, điểm số và chương trình đào tạo</p>
+            </div>
+        </section>
+
+        <section class="learning-options">
+            <div class="container">
+                <div class="learning-grid">
+                    <div class="learning-card">
+                        <div class="learning-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h2>Tra Cứu Điểm</h2>
+                        <p>Theo dõi kết quả học tập, điểm thi và điểm quá trình của bạn theo từng học kỳ.</p>
+                        <div class="learning-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Điểm thi cuối kỳ</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Điểm quá trình</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Điểm trung bình tích lũy</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Báo cáo năm học</span>
+                            </div>
+                        </div>
+                        <a href="/tracuudiem" class="btn primary full-width">Truy cập tra cứu điểm</a>
+                    </div>
+
+                    <div class="learning-card">
+                        <div class="learning-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <h2>Chương Trình Học</h2>
+                        <p>Xem kế hoạch học tập, danh sách môn học và tiến độ hoàn thành chương trình đào tạo.</p>
+                        <div class="learning-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Chương trình đào tạo ngành</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Tiến độ hoàn thành</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Danh sách môn học</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Môn học tiên quyết</span>
+                            </div>
+                        </div>
+                        <a href="/chuongtrinhhoc" class="btn primary full-width">Xem chương trình học</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="learning-resources">
+            <div class="container">
+                <h2 class="section-title">Tài Nguyên Học Tập</h2>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h3>Giáo Trình & Tài Liệu</h3>
+                        <p>Truy cập thư viện số với đầy đủ giáo trình và tài liệu tham khảo.</p>
+                        <a href="#" class="btn secondary">Truy cập thư viện</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Bài Giảng Trực Tuyến</h3>
+                        <p>Xem lại các bài giảng được ghi hình và nội dung giảng dạy trực tuyến.</p>
+                        <a href="#" class="btn secondary">Xem bài giảng</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-comments"></i>
+                        </div>
+                        <h3>Diễn Đàn Học Tập</h3>
+                        <p>Tham gia thảo luận, đặt câu hỏi và chia sẻ kiến thức với sinh viên khác.</p>
+                        <a href="#" class="btn secondary">Tham gia diễn đàn</a>
+                    </div>
+
+                    <div class="resource-card">
+                        <div class="resource-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Bài Tập & Lab</h3>
+                        <p>Nộp bài tập, bài thực hành và nhận phản hồi từ giảng viên.</p>
+                        <a href="#" class="btn secondary">Xem bài tập</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="academic-support">
+            <div class="container">
+                <div class="support-content">
+                    <div class="support-text">
+                        <h2>Hỗ Trợ Học Tập</h2>
+                        <p>Gặp khó khăn trong việc học tập? Đội ngũ cố vấn học tập và trợ giảng luôn sẵn sàng hỗ trợ
+                            bạn.
+                        </p>
+                        <ul class="support-list">
+                            <li><i class="fas fa-user-tie"></i> Tư vấn từ cố vấn học tập</li>
+                            <li><i class="fas fa-chalkboard-teacher"></i> Hỗ trợ từ trợ giảng</li>
+                            <li><i class="fas fa-hands-helping"></i> Hướng dẫn phương pháp học tập</li>
+                            <li><i class="fas fa-graduation-cap"></i> Tư vấn lộ trình học tập</li>
+                        </ul>
+                        <a href="#" class="btn primary">Đăng ký tư vấn</a>
+                    </div>
+                    <div class="support-image">
+                        <img src="/images/lambo.jpg" alt="Hỗ trợ học tập">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>

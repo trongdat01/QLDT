@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/finance.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Thanh Toán Trực Tuyến - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'hocphi' }) %>
+
+        <section class="page-banner">
+            <div class="container">
+                <h1>Thanh Toán Trực Tuyến</h1>
+                <p>Thanh toán học phí và các khoản thu một cách nhanh chóng, an toàn</p>
+            </div>
+        </section>
+
+        <section class="finance-options">
+            <div class="container">
+                <div class="finance-tabs">
+                    <a href="/hocphi" class="tab-btn">Học phí & Công nợ</a>
+                    <a href="/thanhtoan" class="tab-btn active">Thanh toán trực tuyến</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="finance-section">
+            <div class="container">
+                <div class="finance-dashboard">
+                    <div class="dashboard-sidebar">
+                        <div class="student-info">
+                            <div class="student-avatar">
+                                <img src="/images/lambo.jpg" alt="Avatar">
+                            </div>
+                            <div class="student-details">
+                                <h3>Nguyễn Văn A</h3>
+                                <p>MSSV: 20000123</p>
+                                <p>Ngành: Công nghệ thông tin</p>
+                            </div>
+                        </div>
+                        <div class="payment-summary">
+                            <h3>Tổng quan thanh toán</h3>
+                            <div class="payment-info-card">
+                                <div class="payment-info-header">
+                                    <h4>HK1 2023-2024</h4>
+                                    <div class="payment-badge unpaid">Chưa thanh toán</div>
+                                </div>
+                                <div class="payment-info-content">
+                                    <div class="payment-info-item">
+                                        <div class="info-label">Tổng cần thanh toán:</div>
+                                        <div class="info-value">12,800,000 VNĐ</div>
+                                    </div>
+                                    <div class="payment-info-item">
+                                        <div class="info-label">Hạn thanh toán:</div>
+                                        <div class="info-value">25/08/2023</div>
+                                    </div>
+                                    <div class="payment-info-item">
+                                        <div class="info-label">Trạng thái:</div>
+                                        <div class="info-value status-text warning">Đang chờ thanh toán</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="payment-history-mini">
+                            <h3>Lịch sử giao dịch gần đây</h3>
+                            <div class="history-list">
+                                <div class="history-item">
+                                    <div class="history-icon completed">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="history-details">
+                                        <h4>HK2 2022-2023</h4>
+                                        <p>Thanh toán thành công</p>
+                                        <span>23/05/2023 - 12,600,000 VNĐ</span>
+                                    </div>
+                                </div>
+                                <div class="history-item">
+                                    <div class="history-icon completed">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                    <div class="history-details">
+                                        <h4>HK1 2022-2023</h4>
+                                        <p>Thanh toán thành công</p>
+                                        <span>20/12/2022 - 13,400,000 VNĐ</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="view-all">
+                                <a href="/hocphi">Xem tất cả <i class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn secondary full-width"><i class="fas fa-question-circle"></i> Hỗ trợ thanh
+                                toán</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="tuition-alert alert-info">
+                            <i class="fas fa-info-circle"></i>
+                            <div class="alert-content">
+                                <h4>Hướng dẫn thanh toán</h4>
+                                <p>Vui lòng chọn khoản cần thanh toán, điền thông tin và chọn phương thức thanh toán phù
+                                    hợp. Bạn sẽ nhận được biên lai điện tử sau khi thanh toán thành công.</p>
+                            </div>
+                        </div>
+
+                        <div class="payment-form-container">
+                            <h3>Chọn khoản thanh toán</h3>
+                            <div class="payment-selection">
+                                <div class="payment-option selected">
+                                    <div class="option-radio">
+                                        <input type="radio" id="tuition-fee" name="payment-type" checked>
+                                        <label for="tuition-fee"></label>
+                                    </div>
+                                    <div class="option-details">
+                                        <h4>Học phí học kỳ 1 năm học 2023-2024</h4>
+                                        <div class="option-info">
+                                            <div class="info-col">
+                                                <span class="label">Hạn thanh toán:</span>
+                                                <span class="value">25/08/2023</span>
+                                            </div>
+                                            <div class="info-col">
+                                                <span class="label">Số tiền:</span>
+                                                <span class="value amount">12,800,000 VNĐ</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="payment-option">
+                                    <div class="option-radio">
+                                        <input type="radio" id="other-fee" name="payment-type">
+                                        <label for="other-fee"></label>
+                                    </div>
+                                    <div class="option-details">
+                                        <h4>Khoản phí khác</h4>
+                                        <div class="option-info">
+                                            <div class="option-input">
+                                                <select class="full-width">
+                                                    <option value="">-- Chọn loại phí --</option>
+                                                    <option value="dormitory">Phí ký túc xá</option>
+                                                    <option value="certificate">Phí cấp chứng chỉ</option>
+                                                    <option value="transcript">Phí bảng điểm tiếng Anh</option>
+                                                    <option value="event">Phí sự kiện</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Phương thức thanh toán</h3>
+                            <div class="payment-methods">
+                                <div class="payment-method-tabs">
+                                    <button class="method-tab active" data-method="bank">
+                                        <i class="fas fa-university"></i> Chuyển khoản ngân hàng
+                                    </button>
+                                    <button class="method-tab" data-method="card">
+                                        <i class="far fa-credit-card"></i> Thẻ tín dụng/ghi nợ
+                                    </button>
+                                    <button class="method-tab" data-method="wallet">
+                                        <i class="fas fa-wallet"></i> Ví điện tử
+                                    </button>
+                                </div>
+
+                                <div class="payment-method-content" id="bank-method">
+                                    <div class="bank-options">
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank1" name="bank" checked>
+                                            <label for="bank1">
+                                                <img src="/images/lambo.jpg" alt="Vietcombank">
+                                                <span>Vietcombank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank2" name="bank">
+                                            <label for="bank2">
+                                                <img src="/images/lambo.jpg" alt="BIDV">
+                                                <span>BIDV</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank3" name="bank">
+                                            <label for="bank3">
+                                                <img src="/images/lambo.jpg" alt="Techcombank">
+                                                <span>Techcombank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank4" name="bank">
+                                            <label for="bank4">
+                                                <img src="/images/lambo.jpg" alt="Agribank">
+                                                <span>Agribank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank5" name="bank">
+                                            <label for="bank5">
+                                                <img src="/images/lambo.jpg" alt="MB Bank">
+                                                <span>MB Bank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank6" name="bank">
+                                            <label for="bank6">
+                                                <img src="/images/lambo.jpg" alt="Sacombank">
+                                                <span>Sacombank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank7" name="bank">
+                                            <label for="bank7">
+                                                <img src="/images/lambo.jpg" alt="VPBank">
+                                                <span>VPBank</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option">
+                                            <input type="radio" id="bank8" name="bank">
+                                            <label for="bank8">
+                                                <img src="/images/lambo.jpg" alt="ACB">
+                                                <span>ACB</span>
+                                            </label>
+                                        </div>
+                                        <div class="bank-option more">
+                                            <input type="radio" id="bank-more" name="bank">
+                                            <label for="bank-more">
+                                                <i class="fas fa-ellipsis-h"></i>
+                                                <span>Ngân hàng khác</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="payment-method-content" id="card-method" style="display: none;">
+                                    <div class="card-form">
+                                        <div class="form-group">
+                                            <label>Số thẻ</label>
+                                            <input type="text" placeholder="XXXX-XXXX-XXXX-XXXX">
+                                        </div>
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label>Ngày hết hạn</label>
+                                                <input type="text" placeholder="MM/YY">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>CVC/CVV</label>
+                                                <input type="text" placeholder="123">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Tên chủ thẻ</label>
+                                            <input type="text" placeholder="NGUYEN VAN A">
+                                        </div>
+                                        <div class="card-brands">
+                                            <img src="/images/lambo.jpg" alt="Visa">
+                                            <img src="/images/lambo.jpg" alt="Mastercard">
+                                            <img src="/images/lambo.jpg" alt="JCB">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="payment-method-content" id="wallet-method" style="display: none;">
+                                    <div class="wallet-options">
+                                        <div class="wallet-option">
+                                            <input type="radio" id="wallet1" name="wallet" checked>
+                                            <label for="wallet1">
+                                                <img src="/images/lambo.jpg" alt="MoMo">
+                                                <span>MoMo</span>
+                                            </label>
+                                        </div>
+                                        <div class="wallet-option">
+                                            <input type="radio" id="wallet2" name="wallet">
+                                            <label for="wallet2">
+                                                <img src="/images/lambo.jpg" alt="ZaloPay">
+                                                <span>ZaloPay</span>
+                                            </label>
+                                        </div>
+                                        <div class="wallet-option">
+                                            <input type="radio" id="wallet3" name="wallet">
+                                            <label for="wallet3">
+                                                <img src="/images/lambo.jpg" alt="VNPay">
+                                                <span>VNPay</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="payment-summary-container">
+                                <h3>Tóm tắt thanh toán</h3>
+                                <div class="payment-summary-box">
+                                    <div class="summary-row">
+                                        <div class="summary-label">Khoản thanh toán:</div>
+                                        <div class="summary-value">Học phí học kỳ 1 năm học 2023-2024</div>
+                                    </div>
+                                    <div class="summary-row">
+                                        <div class="summary-label">Phương thức:</div>
+                                        <div class="summary-value">Chuyển khoản ngân hàng - Vietcombank</div>
+                                    </div>
+                                    <div class="summary-row">
+                                        <div class="summary-label">Số tiền:</div>
+                                        <div class="summary-value">12,800,000 VNĐ</div>
+                                    </div>
+                                    <div class="summary-row">
+                                        <div class="summary-label">Phí giao dịch:</div>
+                                        <div class="summary-value">0 VNĐ</div>
+                                    </div>
+                                    <hr>
+                                    <div class="summary-row total">
+                                        <div class="summary-label">Tổng thanh toán:</div>
+                                        <div class="summary-value">12,800,000 VNĐ</div>
+                                    </div>
+                                </div>
+
+                                <div class="confirm-box">
+                                    <label class="checkbox-container">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        <span class="label-text">Tôi đã đọc và đồng ý với <a href="#">các điều khoản
+                                                thanh
+                                                toán</a></span>
+                                    </label>
+                                </div>
+
+                                <button class="btn primary full-width payment-btn"><i class="fas fa-lock"></i> Thanh
+                                    toán an
+                                    toàn</button>
+                            </div>
+                        </div>
+
+                        <div class="payment-guide">
+                            <h3>Hướng dẫn thanh toán</h3>
+                            <div class="guide-steps">
+                                <div class="guide-step">
+                                    <div class="step-number">1</div>
+                                    <div class="step-content">
+                                        <h4>Chọn khoản thanh toán</h4>
+                                        <p>Lựa chọn khoản phí cần thanh toán. Hệ thống sẽ hiển thị chi tiết khoản phí và
+                                            số
+                                            tiền cần thanh toán.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-step">
+                                    <div class="step-number">2</div>
+                                    <div class="step-content">
+                                        <h4>Chọn phương thức thanh toán</h4>
+                                        <p>Lựa chọn phương thức thanh toán phù hợp: chuyển khoản ngân hàng, thẻ tín
+                                            dụng/ghi
+                                            nợ hoặc ví điện tử.</p>
+                                    </div>
+                                </div>
+                                <div class="guide-step">
+                                    <div class="step-number">3</div>
+                                    <div class="step-content">
+                                        <h4>Xác nhận thông tin thanh toán</h4>
+                                        <p>Kiểm tra lại tất cả thông tin thanh toán, đồng ý với điều khoản và điều kiện.
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="guide-step">
+                                    <div class="step-number">4</div>
+                                    <div class="step-content">
+                                        <h4>Hoàn tất thanh toán</h4>
+                                        <p>Nhấn nút "Thanh toán an toàn" và làm theo hướng dẫn để hoàn tất giao dịch.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="support-info">
+                                <h4><i class="fas fa-headset"></i> Hỗ trợ thanh toán</h4>
+                                <p>Nếu bạn gặp khó khăn trong quá trình thanh toán, vui lòng liên hệ Phòng Tài chính qua
+                                    email <a href="mailto:finance@edumanager.vn">finance@edumanager.vn</a> hoặc hotline
+                                    <a href="tel:02812345678">(028) 1234 5678</a> (trong giờ hành chính).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Payment method tabs
+                    const methodTabs = document.querySelectorAll('.method-tab');
+                    const methodContents = document.querySelectorAll('.payment-method-content');
+
+                    methodTabs.forEach(tab => {
+                        tab.addEventListener('click', () => {
+                            // Remove active class from all tabs
+                            methodTabs.forEach(t => t.classList.remove('active'));
+
+                            // Add active class to clicked tab
+                            tab.classList.add('active');
+
+                            // Hide all content sections
+                            methodContents.forEach(content => {
+                                content.style.display = 'none';
+                            });
+
+                            // Show selected content
+                            const method = tab.getAttribute('data-method');
+                            document.getElementById(`${method}-method`).style.display = 'block';
+
+                            // Update payment summary
+                            const summaryMethod = document.querySelector('.summary-row:nth-child(2) .summary-value');
+                            let methodText = '';
+
+                            if (method === 'bank') {
+                                methodText = 'Chuyển khoản ngân hàng - Vietcombank';
+                            } else if (method === 'card') {
+                                methodText = 'Thẻ tín dụng/ghi nợ';
+                            } else {
+                                methodText = 'Ví điện tử - MoMo';
+                            }
+
+                            summaryMethod.textContent = methodText;
+                        });
+                    });
+
+                    // Payment option selection
+                    const paymentOptions = document.querySelectorAll('.payment-option');
+
+                    paymentOptions.forEach(option => {
+                        option.addEventListener('click', () => {
+                            // Remove selected class from all options
+                            paymentOptions.forEach(o => o.classList.remove('selected'));
+
+                            // Add selected class to clicked option
+                            option.classList.add('selected');
+
+                            // Find the radio button and check it
+                            const radio = option.querySelector('input[type="radio"]');
+                            radio.checked = true;
+
+                            // Update payment summary if tuition fee is selected
+                            if (radio.id === 'tuition-fee') {
+                                document.querySelector('.summary-row:nth-child(1) .summary-value').textContent = 'Học phí học kỳ 1 năm học 2023-2024';
+                                document.querySelector('.summary-row:nth-child(3) .summary-value').textContent = '12,800,000 VNĐ';
+                                document.querySelector('.summary-row.total .summary-value').textContent = '12,800,000 VNĐ';
+                            }
+                        });
+                    });
+
+                    // Payment button click
+                    document.querySelector('.payment-btn').addEventListener('click', function () {
+                        alert('Chuyển đến cổng thanh toán. Trong ứng dụng thực tế, bạn sẽ được chuyển đến trang thanh toán an toàn.');
+                    });
+                });
+            </script>
+</body>
+
+</html>

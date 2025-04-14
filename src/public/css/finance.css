@@ -1,0 +1,1152 @@
+/* Finance Options */
+.finance-options {
+    background-color: white;
+    border-bottom: 1px solid #e9ecef;
+    padding: 10px 0;
+}
+
+.finance-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.finance-tabs .tab-btn {
+    padding: 10px 30px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #555;
+    position: relative;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.finance-tabs .tab-btn:hover {
+    color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+.finance-tabs .tab-btn.active {
+    color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.1);
+}
+
+/* Finance Dashboard */
+.finance-section {
+    padding: 40px 0 60px;
+}
+
+.finance-dashboard {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.dashboard-sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.student-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.student-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.student-details p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+/* Finance Summary */
+.finance-summary,
+.payment-summary,
+.semester-selector,
+.payment-history-mini {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.finance-summary h3,
+.payment-summary h3,
+.semester-selector h3,
+.payment-history-mini h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.finance-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+}
+
+.stat-label {
+    color: #666;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.stat-value.warning {
+    color: #ffc107;
+}
+
+.stat-value.success {
+    color: #28a745;
+}
+
+.progress-bar-container {
+    margin-top: 15px;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+.progress-value {
+    font-size: 0.9rem;
+    text-align: right;
+    color: #666;
+}
+
+.semester-selector select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+/* Tuition Section */
+.tuition-alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.tuition-alert i {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.alert-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-left: 4px solid #ffc107;
+}
+
+.alert-warning i,
+.alert-warning h4 {
+    color: #856404;
+}
+
+.alert-warning p {
+    color: #856404;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border-left: 4px solid #17a2b8;
+}
+
+.alert-info i,
+.alert-info h4 {
+    color: #0c5460;
+}
+
+.alert-info p {
+    color: #0c5460;
+}
+
+.tuition-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.tuition-tab {
+    padding: 10px 20px;
+    background: none;
+    border: none;
+    font-size: 1rem;
+    color: #555;
+    cursor: pointer;
+    position: relative;
+    font-weight: 500;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+}
+
+.tuition-tab:hover {
+    color: #0056b3;
+}
+
+.tuition-tab.active {
+    color: #0056b3;
+    border-bottom-color: #0056b3;
+}
+
+.tuition-section {
+    margin-bottom: 30px;
+}
+
+.tuition-section h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+/* Tuition Detail Card */
+.tuition-detail-card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tuition-header {
+    background-color: #f8f9fa;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.semester-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.semester-date {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.payment-status {
+    display: flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.payment-status.paid {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.payment-status.unpaid {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.payment-status.overdue {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.payment-status i {
+    margin-right: 5px;
+}
+
+.tuition-details {
+    padding: 15px;
+}
+
+.tuition-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tuition-table th,
+.tuition-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+.tuition-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.tuition-table tfoot {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.total-label {
+    text-align: right;
+    padding-right: 20px;
+}
+
+.total-value {
+    text-align: left;
+    color: #333;
+}
+
+.total-value.discount {
+    color: #28a745;
+}
+
+.total-value.final {
+    font-size: 1.1rem;
+    color: #0056b3;
+}
+
+.tuition-footer {
+    background-color: #f8f9fa;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.deadline-info {
+    display: flex;
+    align-items: center;
+    color: #dc3545;
+    font-weight: 500;
+}
+
+.deadline-info i {
+    margin-right: 5px;
+}
+
+/* Payment History Table */
+.payment-history-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.payment-history-table th,
+.payment-history-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+.payment-history-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.status-badge.completed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.status-badge.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.status-badge.failed {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #f8f9fa;
+    color: #0056b3;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-icon:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+/* Tuition Policy */
+.tuition-policy {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.policy-item {
+    margin-bottom: 20px;
+}
+
+.policy-item:last-child {
+    margin-bottom: 0;
+}
+
+.policy-item h4 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.policy-item h4 i {
+    color: #0056b3;
+    margin-right: 10px;
+}
+
+.policy-item p {
+    color: #666;
+    font-size: 0.95rem;
+    padding-left: 28px;
+}
+
+/* Payment Summary */
+.payment-info-card {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.payment-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.payment-info-header h4 {
+    font-size: 1.05rem;
+    color: #333;
+    margin: 0;
+}
+
+.payment-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.payment-badge.paid {
+    background-color: #28a745;
+    color: white;
+}
+
+.payment-badge.unpaid {
+    background-color: #ffc107;
+    color: #856404;
+}
+
+.payment-info-content {
+    margin-bottom: 5px;
+}
+
+.payment-info-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.info-label {
+    color: #666;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.status-text {
+    font-size: 0.9rem;
+}
+
+.status-text.warning {
+    color: #ffc107;
+}
+
+.status-text.success {
+    color: #28a745;
+}
+
+/* Payment History Mini */
+.history-list {
+    margin-bottom: 15px;
+}
+
+.history-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.history-item:last-child {
+    border-bottom: none;
+}
+
+.history-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.history-icon.completed {
+    background-color: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+}
+
+.history-icon.pending {
+    background-color: rgba(255, 193, 7, 0.1);
+    color: #ffc107;
+}
+
+.history-details h4 {
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.history-details p {
+    font-size: 0.9rem;
+    margin-bottom: 3px;
+    color: #666;
+}
+
+.history-details span {
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.view-all {
+    text-align: center;
+    padding-top: 10px;
+}
+
+.view-all a {
+    font-size: 0.95rem;
+    color: #0056b3;
+    display: inline-flex;
+    align-items: center;
+}
+
+.view-all a i {
+    margin-left: 5px;
+    font-size: 0.85rem;
+}
+
+/* Payment Form */
+.payment-form-container {
+    margin-bottom: 30px;
+}
+
+.payment-form-container h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    color: #333;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.payment-selection {
+    margin-bottom: 30px;
+}
+
+.payment-option {
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.payment-option:hover {
+    background-color: #f8f9fa;
+}
+
+.payment-option.selected {
+    border-color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+.option-radio {
+    margin-right: 15px;
+    margin-top: 5px;
+}
+
+.option-radio input[type="radio"] {
+    display: none;
+}
+
+.option-radio label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    position: relative;
+    cursor: pointer;
+}
+
+.option-radio input[type="radio"]:checked+label {
+    border-color: #0056b3;
+}
+
+.option-radio input[type="radio"]:checked+label::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #0056b3;
+}
+
+.option-details {
+    flex: 1;
+}
+
+.option-details h4 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.option-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.info-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 3px;
+}
+
+.value {
+    font-size: 1rem;
+    font-weight: 500;
+    color: #333;
+}
+
+.value.amount {
+    color: #0056b3;
+}
+
+.option-input {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.option-input select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+/* Payment Methods */
+.payment-methods {
+    margin-bottom: 30px;
+}
+
+.payment-method-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.method-tab {
+    flex: 1;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.method-tab i {
+    margin-right: 8px;
+    font-size: 1.1rem;
+}
+
+.method-tab:hover {
+    background-color: #e9ecef;
+}
+
+.method-tab.active {
+    background-color: #0056b3;
+    color: white;
+    border-color: #0056b3;
+}
+
+.payment-method-content {
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Bank Options */
+.bank-options,
+.wallet-options {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 15px;
+}
+
+.bank-option,
+.wallet-option {
+    text-align: center;
+}
+
+.bank-option input,
+.wallet-option input {
+    display: none;
+}
+
+.bank-option label,
+.wallet-option label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    padding: 10px;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.bank-option img,
+.wallet-option img {
+    width: 60px;
+    height: 40px;
+    object-fit: contain;
+}
+
+.bank-option span,
+.wallet-option span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.bank-option input:checked+label,
+.wallet-option input:checked+label {
+    border-color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.05);
+}
+
+.bank-option.more i {
+    font-size: 24px;
+    color: #666;
+    margin: 8px 0;
+}
+
+/* Card Form */
+.card-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.form-group input {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.card-brands {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.card-brands img {
+    width: 40px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* Payment Summary */
+.payment-summary-container {
+    margin-top: 30px;
+}
+
+.payment-summary-box {
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.summary-label {
+    color: #666;
+    font-size: 0.95rem;
+}
+
+.summary-value {
+    font-weight: 500;
+    color: #333;
+    font-size: 0.95rem;
+}
+
+.summary-row.total {
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.summary-row.total .summary-label {
+    font-weight: 600;
+    color: #333;
+}
+
+.summary-row.total .summary-value {
+    font-weight: 700;
+    color: #0056b3;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #e9ecef;
+    margin: 15px 0;
+}
+
+.confirm-box {
+    margin-bottom: 20px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: #eee;
+    border-radius: 3px;
+}
+
+.checkbox-container:hover input~.checkmark {
+    background-color: #ccc;
+}
+
+.checkbox-container input:checked~.checkmark {
+    background-color: #0056b3;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-container input:checked~.checkmark:after {
+    display: block;
+}
+
+.checkbox-container .checkmark:after {
+    left: 5px;
+    top: 2px;
+    width: 3px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.label-text {
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.label-text a {
+    color: #0056b3;
+}
+
+.payment-btn {
+    font-size: 1.1rem;
+    padding: 15px;
+}
+
+.payment-btn i {
+    margin-right: 8px;
+}
+
+/* Payment Guide */
+.payment-guide {
+    margin-top: 40px;
+    border-top: 1px solid #e9ecef;
+    padding-top: 30px;
+}
+
+.guide-steps {
+    margin-bottom: 30px;
+}
+
+.guide-step {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.step-number {
+    width: 30px;
+    height: 30px;
+    background-color: #0056b3;
+    color: white;
+    font-weight: 600;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.step-content h4 {
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.support-info {
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    padding: 20px;
+}
+
+.support-info h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.support-info h4 i {
+    color: #0056b3;
+    margin-right: 10px;
+}
+
+.support-info p {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.support-info a {
+    color: #0056b3;
+    font-weight: 500;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .finance-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        margin-bottom: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .payment-method-tabs {
+        flex-direction: column;
+    }
+
+    .tuition-header,
+    .tuition-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-info {
+        flex-direction: column;
+    }
+
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 576px) {
+    .finance-tabs {
+        flex-direction: column;
+    }
+
+    .bank-options,
+    .wallet-options {
+        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    }
+
+    .tuition-tab {
+        padding: 10px 15px;
+    }
+}

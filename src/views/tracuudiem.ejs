@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/grades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Tra Cứu Điểm - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'hoctap' }) %>
+
+        <section class="page-banner">
+            <div class="container">
+                <h1>Tra Cứu Điểm</h1>
+                <p>Theo dõi kết quả học tập và điểm số của bạn</p>
+            </div>
+        </section>
+
+        <section class="grades-section">
+            <div class="container">
+                <div class="grades-dashboard">
+                    <div class="dashboard-sidebar">
+                        <div class="student-info">
+                            <div class="student-avatar">
+                                <img src="/images/lambo.jpg" alt="Avatar">
+                            </div>
+                            <div class="student-details">
+                                <h3>Nguyễn Văn A</h3>
+                                <p>MSSV: 20000123</p>
+                                <p>Ngành: Công nghệ thông tin</p>
+                            </div>
+                        </div>
+                        <div class="semester-selector">
+                            <h3>Chọn học kỳ</h3>
+                            <select id="semester-select">
+                                <option value="all">Tất cả các học kỳ</option>
+                                <option value="2022-2">Học kỳ 2 - Năm học 2022-2023</option>
+                                <option value="2022-1">Học kỳ 1 - Năm học 2022-2023</option>
+                                <option value="2021-2">Học kỳ 2 - Năm học 2021-2022</option>
+                                <option value="2021-1">Học kỳ 1 - Năm học 2021-2022</option>
+                            </select>
+                        </div>
+                        <div class="stats-summary">
+                            <h3>Tổng quan</h3>
+                            <div class="stat-item">
+                                <div class="stat-label">GPA tích lũy:</div>
+                                <div class="stat-value">3.65</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Số tín chỉ đạt:</div>
+                                <div class="stat-value">85/145</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-label">Xếp loại:</div>
+                                <div class="stat-value">Giỏi</div>
+                            </div>
+                            <div class="stat-progress">
+                                <div class="progress-label">Tiến độ học tập</div>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 58%;"></div>
+                                </div>
+                                <div class="progress-value">58%</div>
+                            </div>
+                        </div>
+                        <div class="action-buttons">
+                            <button class="btn secondary full-width"><i class="fas fa-print"></i> In bảng điểm</button>
+                            <button class="btn secondary full-width"><i class="fas fa-file-export"></i> Xuất
+                                PDF</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="grades-controls">
+                            <div class="grades-search">
+                                <input type="text" placeholder="Tìm kiếm môn học...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="grades-filter">
+                                <select id="grades-filter-select">
+                                    <option value="all">Tất cả môn học</option>
+                                    <option value="passed">Môn đã đạt</option>
+                                    <option value="failed">Môn chưa đạt</option>
+                                    <option value="inProgress">Môn đang học</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="grades-chart">
+                            <h3>Biểu đồ điểm số</h3>
+                            <div class="chart-container">
+                                <!-- This is a placeholder. In a real app, you'd use a chart library like Chart.js -->
+                                <div class="chart-placeholder">
+                                    <div class="bar-chart">
+                                        <div class="chart-bar" style="height: 60%;" data-semester="HK1 21-22">
+                                            <span class="bar-value">3.4</span>
+                                        </div>
+                                        <div class="chart-bar" style="height: 70%;" data-semester="HK2 21-22">
+                                            <span class="bar-value">3.7</span>
+                                        </div>
+                                        <div class="chart-bar" style="height: 65%;" data-semester="HK1 22-23">
+                                            <span class="bar-value">3.6</span>
+                                        </div>
+                                        <div class="chart-bar active" style="height: 80%;" data-semester="HK2 22-23">
+                                            <span class="bar-value">3.9</span>
+                                        </div>
+                                    </div>
+                                    <div class="chart-labels">
+                                        <span>HK1 21-22</span>
+                                        <span>HK2 21-22</span>
+                                        <span>HK1 22-23</span>
+                                        <span>HK2 22-23</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="grades-table">
+                            <h3>Bảng điểm chi tiết</h3>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Mã môn</th>
+                                        <th>Tên môn học</th>
+                                        <th>Tín chỉ</th>
+                                        <th>Điểm QT</th>
+                                        <th>Điểm thi</th>
+                                        <th>Tổng kết</th>
+                                        <th>Điểm chữ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>COMP101</td>
+                                        <td>Nhập môn lập trình</td>
+                                        <td>3</td>
+                                        <td>8.5</td>
+                                        <td>9.0</td>
+                                        <td>8.8</td>
+                                        <td>A</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MATH101</td>
+                                        <td>Giải tích 1</td>
+                                        <td>4</td>
+                                        <td>7.5</td>
+                                        <td>8.0</td>
+                                        <td>7.8</td>
+                                        <td>B+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>PHY101</td>
+                                        <td>Vật lý đại cương</td>
+                                        <td>3</td>
+                                        <td>8.0</td>
+                                        <td>7.5</td>
+                                        <td>7.7</td>
+                                        <td>B+</td>
+                                    </tr>
+                                    <tr>
+                                        <td>COMP102</td>
+                                        <td>Cấu trúc dữ liệu và giải thuật</td>
+                                        <td>4</td>
+                                        <td>9.0</td>
+                                        <td>8.5</td>
+                                        <td>8.7</td>
+                                        <td>A</td>
+                                    </tr>
+                                    <tr>
+                                        <td>MATH102</td>
+                                        <td>Đại số tuyến tính</td>
+                                        <td>3</td>
+                                        <td>7.0</td>
+                                        <td>7.5</td>
+                                        <td>7.3</td>
+                                        <td>B</td>
+                                    </tr>
+                                    <tr>
+                                        <td>ENG101</td>
+                                        <td>Tiếng Anh học thuật</td>
+                                        <td>2</td>
+                                        <td>8.5</td>
+                                        <td>8.0</td>
+                                        <td>8.2</td>
+                                        <td>A-</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="pagination">
+                            <a href="#" class="page-item active">1</a>
+                            <a href="#" class="page-item">2</a>
+                            <a href="#" class="page-item">3</a>
+                            <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Simple functionality for semester select
+                    document.getElementById('semester-select').addEventListener('change', function () {
+                        // In a real app, this would fetch data for the selected semester via AJAX
+                        // For demo, just show an alert
+                        alert('Đã chọn ' + this.options[this.selectedIndex].text);
+                    });
+
+                    // Simple functionality for grades filter
+                    document.getElementById('grades-filter-select').addEventListener('change', function () {
+                        // In a real app, this would filter the displayed grades
+                        // For demo, just show an alert
+                        alert('Lọc theo: ' + this.options[this.selectedIndex].text);
+                    });
+                });
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,22 @@
+<header>
+    <div class="container">
+        <div class="logo">
+            <a href="/trangchu">
+                <h1>EDUMANAGER</h1>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/trangchu" class="<%= currentPage === 'home' ? 'active' : '' %>">Trang chủ</a></li>
+                <li><a href="/hoctap" class="<%= currentPage === 'hoctap' ? 'active' : '' %>">Góc học tập</a></li>
+                <li><a href="/dangky" class="<%= currentPage === 'dangky' ? 'active' : '' %>">Đăng ký học</a></li>
+                <li><a href="/lichhoc" class="<%= currentPage === 'lichhoc' ? 'active' : '' %>">Lịch học/thi</a></li>
+                <li><a href="/hocphi" class="<%= currentPage === 'hocphi' ? 'active' : '' %>">Tài chính</a></li>
+                <li><a href="/sample" class="<%= currentPage === 'tintuc' ? 'active' : '' %>">Tin tức</a></li>
+            </ul>
+        </nav>
+        <div class="auth-buttons">
+            <a href="/login" class="btn login">Đăng nhập</a>
+        </div>
+    </div>
+</header>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/registration-result.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Kết Quả Đăng Ký Học Phần - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: 'dangky' }) %>
+
+        <section class="page-banner registration-result-banner">
+            <div class="banner-overlay"></div>
+            <div class="container">
+                <h1>Kết Quả Đăng Ký Học Phần</h1>
+                <p>Xem và theo dõi trạng thái đăng ký học phần của bạn</p>
+                <div class="banner-badges">
+                    <div class="badge">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Học kỳ 1 - 2023-2024</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-check-circle"></i>
+                        <span>Đã xác nhận</span>
+                    </div>
+                    <div class="badge">
+                        <i class="fas fa-clock"></i>
+                        <span>Hạn thanh toán: 25/08/2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="result-section">
+            <div class="container">
+                <div class="results-dashboard">
+                    <div class="dashboard-sidebar">
+                        <div class="student-info">
+                            <div class="student-avatar">
+                                <img src="/images/lambo.jpg" alt="Avatar">
+                            </div>
+                            <div class="student-details">
+                                <h3>Nguyễn Văn A</h3>
+                                <p>MSSV: 20000123</p>
+                                <p>Ngành: Công nghệ thông tin</p>
+                                <p>Năm học: 3</p>
+                            </div>
+                        </div>
+                        <div class="registration-summary">
+                            <h3><i class="fas fa-clipboard-list"></i> Tổng hợp đăng ký</h3>
+                            <div class="summary-item">
+                                <div class="summary-label">Số học phần đăng ký:</div>
+                                <div class="summary-value">5 học phần</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Tổng số tín chỉ:</div>
+                                <div class="summary-value">16 tín chỉ</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Học phí tạm tính:</div>
+                                <div class="summary-value">12.800.000 VNĐ</div>
+                            </div>
+                            <div class="summary-item">
+                                <div class="summary-label">Trạng thái đóng học phí:</div>
+                                <div class="summary-value"><span class="payment-status pending">Chờ thanh toán</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="semester-selector">
+                            <h3><i class="fas fa-calendar-alt"></i> Chọn học kỳ</h3>
+                            <select id="semester-select">
+                                <option value="1-2023" selected>Học kỳ 1 - 2023-2024</option>
+                                <option value="2-2022">Học kỳ 2 - 2022-2023</option>
+                                <option value="1-2022">Học kỳ 1 - 2022-2023</option>
+                                <option value="2-2021">Học kỳ 2 - 2021-2022</option>
+                            </select>
+                        </div>
+                        <div class="action-buttons">
+                            <a href="/dangky" class="btn secondary full-width"><i class="fas fa-edit"></i> Quay lại đăng
+                                ký</a>
+                            <button class="btn secondary full-width"><i class="fas fa-print"></i> In kết quả đăng
+                                ký</button>
+                            <button class="btn primary full-width"><i class="fas fa-money-bill-wave"></i> Thanh toán học
+                                phí</button>
+                        </div>
+                    </div>
+                    <div class="dashboard-content">
+                        <div class="results-header">
+                            <h2><i class="fas fa-clipboard-check"></i> Kết quả đăng ký học phần</h2>
+                            <div class="results-status">
+                                <span class="status-label">Trạng thái:</span>
+                                <span class="status-value confirmed">Đã xác nhận</span>
+                            </div>
+                        </div>
+
+                        <div class="results-tabs">
+                            <button class="tab-btn active" data-tab="all">
+                                <i class="fas fa-th-list"></i> Tất cả học phần
+                            </button>
+                            <button class="tab-btn" data-tab="confirmed">
+                                <i class="fas fa-check"></i> Đã xác nhận
+                            </button>
+                            <button class="tab-btn" data-tab="pending">
+                                <i class="fas fa-clock"></i> Đang chờ
+                            </button>
+                            <button class="tab-btn" data-tab="rejected">
+                                <i class="fas fa-times"></i> Từ chối
+                            </button>
+                        </div>
+
+                        <div class="stats-overview">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">5</div>
+                                    <div class="stat-label">Học phần</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-award"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">16</div>
+                                    <div class="stat-label">Tín chỉ</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">24</div>
+                                    <div class="stat-label">Tiết học/tuần</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon payment-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value payment-value">Chờ thanh toán</div>
+                                    <div class="stat-label">Trạng thái học phí</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="results-table-container">
+                            <table class="results-table">
+                                <thead>
+                                    <tr>
+                                        <th>STT</th>
+                                        <th>Mã học phần</th>
+                                        <th>Tên học phần</th>
+                                        <th>Nhóm</th>
+                                        <th>Tín chỉ</th>
+                                        <th>Lịch học</th>
+                                        <th>Phòng học</th>
+                                        <th>Giảng viên</th>
+                                        <th>Trạng thái</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>COMP301</td>
+                                        <td>Cơ sở dữ liệu</td>
+                                        <td>1</td>
+                                        <td>3</td>
+                                        <td>T2 (7-9), T5 (7-9)</td>
+                                        <td>A301, A301</td>
+                                        <td>TS. Nguyễn Văn B</td>
+                                        <td><span class="course-status confirmed">Đã xác nhận</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>COMP302</td>
+                                        <td>Mạng máy tính</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>T3 (1-3), T6 (1-3)</td>
+                                        <td>B205, B205</td>
+                                        <td>TS. Trần Thị C</td>
+                                        <td><span class="course-status confirmed">Đã xác nhận</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>COMP304</td>
+                                        <td>Công nghệ phần mềm</td>
+                                        <td>1</td>
+                                        <td>4</td>
+                                        <td>T2 (1-3), T5 (1-3)</td>
+                                        <td>A402, A402</td>
+                                        <td>TS. Phạm Văn E</td>
+                                        <td><span class="course-status confirmed">Đã xác nhận</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>COMP306</td>
+                                        <td>An toàn thông tin</td>
+                                        <td>1</td>
+                                        <td>3</td>
+                                        <td>T4 (1-3), T7 (7-9)</td>
+                                        <td>C103, C103</td>
+                                        <td>TS. Vũ Văn G</td>
+                                        <td><span class="course-status confirmed">Đã xác nhận</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>COMP307</td>
+                                        <td>Phân tích thiết kế hệ thống</td>
+                                        <td>2</td>
+                                        <td>3</td>
+                                        <td>T2 (4-6), T5 (4-6)</td>
+                                        <td>A305, A305</td>
+                                        <td>TS. Ngô Thị H</td>
+                                        <td><span class="course-status confirmed">Đã xác nhận</span></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="timetable-view">
+                            <div class="view-header">
+                                <h3><i class="fas fa-calendar-week"></i> Thời khóa biểu học kỳ</h3>
+                                <div class="view-options">
+                                    <button class="btn-sm secondary active"><i class="fas fa-th"></i> Dạng lưới</button>
+                                    <button class="btn-sm secondary"><i class="fas fa-list"></i> Dạng danh sách</button>
+                                </div>
+                            </div>
+                            <div class="timetable-container">
+                                <table class="timetable">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Thứ 2</th>
+                                            <th>Thứ 3</th>
+                                            <th>Thứ 4</th>
+                                            <th>Thứ 5</th>
+                                            <th>Thứ 6</th>
+                                            <th>Thứ 7</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td class="time-slot">1-3</td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP304</div>
+                                                    <div class="room">A402</div>
+                                                </div>
+                                            </td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP302</div>
+                                                    <div class="room">B205</div>
+                                                </div>
+                                            </td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP306</div>
+                                                    <div class="room">C103</div>
+                                                </div>
+                                            </td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP304</div>
+                                                    <div class="room">A402</div>
+                                                </div>
+                                            </td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP302</div>
+                                                    <div class="room">B205</div>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-slot">4-6</td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP307</div>
+                                                    <div class="room">A305</div>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP307</div>
+                                                    <div class="room">A305</div>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-slot">7-9</td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP301</div>
+                                                    <div class="room">A301</div>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP301</div>
+                                                    <div class="room">A301</div>
+                                                </div>
+                                            </td>
+                                            <td></td>
+                                            <td class="has-class">
+                                                <div class="class-info">
+                                                    <div class="course-code">COMP306</div>
+                                                    <div class="room">C103</div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="time-slot">10-12</td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="notes-section">
+                            <h3><i class="fas fa-info-circle"></i> Ghi chú</h3>
+                            <ul>
+                                <li>Sinh viên vui lòng đóng học phí trước ngày <strong>25/08/2023</strong>.</li>
+                                <li>Thời khóa biểu có thể thay đổi, vui lòng kiểm tra thường xuyên để cập nhật thông tin
+                                    mới
+                                    nhất.</li>
+                                <li>Mọi thắc mắc về kết quả đăng ký học phần, vui lòng liên hệ Phòng Đào tạo, phòng
+                                    A105.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Tab switching functionality
+                    const tabBtns = document.querySelectorAll('.tab-btn');
+
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', function () {
+                            // Remove active class from all buttons
+                            tabBtns.forEach(b => b.classList.remove('active'));
+
+                            // Add active class to clicked button
+                            this.classList.add('active');
+
+                            // Get tab value
+                            const tab = this.getAttribute('data-tab');
+
+                            // Filter results based on tab (in a real application)
+                            alert('Đã chọn tab: ' + tab);
+                        });
+                    });
+
+                    // Semester select functionality
+                    document.getElementById('semester-select').addEventListener('change', function () {
+                        const selectedSemester = this.value;
+                        alert('Đã chọn học kỳ: ' + selectedSemester);
+                    });
+                });
+            </script>
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<header>
+    <div class="container">
+        <div class="logo">
+            <h1>EDUMANAGER</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/trangchu" class="<%= activeTab === 'trangchu' ? 'active' : '' %>">Trang chủ</a></li>
+                <li><a href="/hoctap" class="<%= activeTab === 'hoctap' ? 'active' : '' %>">Góc học tập</a></li>
+                <li><a href="/dangky" class="<%= activeTab === 'dangky' ? 'active' : '' %>">Đăng ký học</a></li>
+                <li><a href="/lichhoc" class="<%= activeTab === 'lichhoc' ? 'active' : '' %>">Lịch học/thi</a></li>
+                <li><a href="/hocphi" class="<%= activeTab === 'hocphi' ? 'active' : '' %>">Tài chính</a></li>
+                <li><a href="/sample" class="<%= activeTab === 'sample' ? 'active' : '' %>">Tin tức</a></li>
+            </ul>
+        </nav>
+        <div class="student-header-info">
+            <a href="/thongtinsinhvien"
+                style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 10px;">
+                <div class="student-avatar-mini">
+                    <img src="/images/lambo.jpg" alt="Avatar">
+                </div>
+                <div class="student-details-mini">
+                    <h4>Nguyễn Văn A</h4>
+                    <p>MSSV: 20000123</p>
+                </div>
+            </a>
+        </div>
+    </div>
+</header>

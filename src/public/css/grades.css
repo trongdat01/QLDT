@@ -1,0 +1,348 @@
+/* Grades section styles */
+.grades-section {
+    padding: 60px 0;
+    background-color: #f8f9fa;
+}
+
+.grades-dashboard {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 30px;
+}
+
+.dashboard-sidebar {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    align-self: start;
+}
+
+.student-info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.student-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    flex-shrink: 0;
+}
+
+.student-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+}
+
+.student-details p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 5px;
+}
+
+.semester-selector {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.semester-selector h3,
+.stats-summary h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.semester-selector select,
+.grades-filter select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    color: #333;
+    background-color: #fff;
+}
+
+.stats-summary {
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+}
+
+.stat-label {
+    color: #666;
+}
+
+.stat-value {
+    font-weight: 600;
+    color: #333;
+}
+
+.stat-progress {
+    margin-top: 20px;
+}
+
+.progress-label {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.progress-bar {
+    height: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 5px;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: #0056b3;
+    border-radius: 5px;
+}
+
+.progress-value {
+    font-size: 0.9rem;
+    text-align: right;
+    color: #333;
+    font-weight: 500;
+}
+
+.action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.dashboard-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+}
+
+.grades-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.grades-search {
+    display: flex;
+    flex: 1;
+    max-width: 350px;
+}
+
+.grades-search input {
+    flex: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    font-size: 0.95rem;
+}
+
+.grades-search button {
+    padding: 10px 15px;
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.grades-search button:hover {
+    background-color: #004494;
+}
+
+.grades-chart {
+    margin-bottom: 40px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.grades-chart h3,
+.grades-table h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #333;
+    border-bottom: 1px solid #e9ecef;
+    padding-bottom: 10px;
+}
+
+.chart-container {
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    padding: 20px;
+    height: 250px;
+}
+
+.chart-placeholder {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.bar-chart {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    height: 200px;
+    padding-bottom: 10px;
+}
+
+.chart-bar {
+    width: 50px;
+    background-color: #0056b3;
+    border-radius: 5px 5px 0 0;
+    position: relative;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.chart-bar.active {
+    opacity: 1;
+}
+
+.chart-bar:hover {
+    opacity: 1;
+}
+
+.bar-value {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-weight: 600;
+    color: #333;
+}
+
+.chart-labels {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+
+.chart-labels span {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.grades-table {
+    margin-bottom: 30px;
+}
+
+.grades-table table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.grades-table th,
+.grades-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e9ecef;
+    font-size: 0.95rem;
+}
+
+.grades-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: #333;
+}
+
+.grades-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 992px) {
+    .grades-dashboard {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .grades-controls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .grades-search {
+        max-width: 100%;
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .grades-filter {
+        width: 100%;
+    }
+
+    .chart-bar {
+        width: 40px;
+    }
+
+    .grades-table {
+        overflow-x: auto;
+        display: block;
+    }
+}
+
+@media (max-width: 576px) {
+    .chart-bar {
+        width: 30px;
+    }
+
+    .bar-value {
+        font-size: 0.8rem;
+    }
+
+    .chart-labels span {
+        font-size: 0.8rem;
+        transform: rotate(-45deg);
+    }
+}
+
+/* Fix for table overflow on small screens */
+@media (max-width: 768px) {
+    .grades-table table {
+        min-width: 650px;
+    }
+
+    .grades-table {
+        overflow-x: auto;
+        display: block;
+    }
+}

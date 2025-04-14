@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Thông Tin Sinh Viên - Hệ Thống Quản Lý Đào Tạo Đại Học</title>
+</head>
+
+<body>
+    <%- include('partials/header', { activeTab: '' }) %>
+
+        <section class="page-banner profile-banner">
+            <div class="banner-overlay"></div>
+            <div class="container">
+                <div class="profile-banner-content">
+                    <div class="profile-banner-avatar">
+                        <img src="/images/lambo.jpg" alt="Avatar">
+                    </div>
+                    <div class="profile-banner-info">
+                        <h1>Nguyễn Văn A</h1>
+                        <div class="profile-banner-meta">
+                            <div class="meta-item">
+                                <i class="fas fa-id-card"></i>
+                                <span>MSSV: 20000123</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-graduation-cap"></i>
+                                <span>Kỹ thuật phần mềm</span>
+                            </div>
+                            <div class="meta-item">
+                                <i class="fas fa-user-graduate"></i>
+                                <span>Khóa 2020-2024</span>
+                            </div>
+                        </div>
+                        <span class="status-badge active">Đang học</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-tabs">
+                    <button class="tab-btn active" data-tab="personal">
+                        <i class="fas fa-user"></i>
+                        <span>Thông tin cá nhân</span>
+                    </button>
+                    <button class="tab-btn" data-tab="academic">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Thông tin học tập</span>
+                    </button>
+                    <button class="tab-btn" data-tab="account">
+                        <i class="fas fa-cog"></i>
+                        <span>Tài khoản</span>
+                    </button>
+                    <button class="tab-btn" data-tab="documents">
+                        <i class="fas fa-file-alt"></i>
+                        <span>Hồ sơ & Giấy tờ</span>
+                    </button>
+                </div>
+
+                <div class="profile-content">
+                    <!-- Personal Information Tab -->
+                    <div class="tab-content active" id="personal">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h2><i class="fas fa-info-circle"></i> Thông tin cá nhân</h2>
+                                <div class="profile-actions">
+                                    <button class="btn secondary"><i class="fas fa-print"></i> In thông tin</button>
+                                    <button class="btn primary"><i class="fas fa-edit"></i> Cập nhật</button>
+                                </div>
+                            </div>
+
+                            <div class="profile-body">
+                                <div class="info-section">
+                                    <h3>Thông tin cơ bản</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-user"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Họ và tên:</span>
+                                                <span class="info-value">Nguyễn Văn A</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-birthday-cake"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Ngày sinh:</span>
+                                                <span class="info-value">15/08/2002</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-venus-mars"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Giới tính:</span>
+                                                <span class="info-value">Nam</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-id-card"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">CMND/CCCD:</span>
+                                                <span class="info-value">079202012345</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Nơi sinh:</span>
+                                                <span class="info-value">TP. Hồ Chí Minh</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-users"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Dân tộc:</span>
+                                                <span class="info-value">Kinh</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-pray"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Tôn giáo:</span>
+                                                <span class="info-value">Không</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-flag"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Quốc tịch:</span>
+                                                <span class="info-value">Việt Nam</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <h3>Thông tin liên hệ</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item full-width">
+                                            <div class="info-icon"><i class="fas fa-home"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Địa chỉ thường trú:</span>
+                                                <span class="info-value">123 Đường Nguyễn Văn Cừ, Phường 4, Quận 5, TP.
+                                                    Hồ
+                                                    Chí Minh</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item full-width">
+                                            <div class="info-icon"><i class="fas fa-building"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Địa chỉ hiện tại:</span>
+                                                <span class="info-value">456 Đường Lý Thường Kiệt, Phường 14, Quận 10,
+                                                    TP.
+                                                    Hồ Chí Minh</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Email cá nhân:</span>
+                                                <span class="info-value">nguyenvana@gmail.com</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-envelope-open-text"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Email trường:</span>
+                                                <span class="info-value">20000123@student.edu.vn</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Số điện thoại:</span>
+                                                <span class="info-value">0912 345 678</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-phone-volume"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">SĐT phụ huynh:</span>
+                                                <span class="info-value">0987 654 321</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Academic Information Tab -->
+                    <div class="tab-content" id="academic">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h2><i class="fas fa-graduation-cap"></i> Thông tin học tập</h2>
+                                <div class="profile-actions">
+                                    <button class="btn secondary"><i class="fas fa-chart-line"></i> Xem thống
+                                        kê</button>
+                                    <button class="btn primary"><i class="fas fa-file-download"></i> Xuất bảng
+                                        điểm</button>
+                                </div>
+                            </div>
+
+                            <div class="academic-overview">
+                                <div class="overview-card">
+                                    <div class="overview-icon">
+                                        <i class="fas fa-chart-pie"></i>
+                                    </div>
+                                    <div class="overview-content">
+                                        <h4>GPA</h4>
+                                        <div class="overview-value">3.65</div>
+                                        <div class="overview-label">Xếp loại: Giỏi</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-icon">
+                                        <i class="fas fa-award"></i>
+                                    </div>
+                                    <div class="overview-content">
+                                        <h4>Tín chỉ</h4>
+                                        <div class="overview-value">85/145</div>
+                                        <div class="overview-label">Tín chỉ đã hoàn thành</div>
+                                    </div>
+                                </div>
+                                <div class="overview-card">
+                                    <div class="overview-icon">
+                                        <i class="fas fa-tasks"></i>
+                                    </div>
+                                    <div class="overview-content">
+                                        <h4>Tiến độ</h4>
+                                        <div class="overview-value">58%</div>
+                                        <div class="overview-label">Hoàn thành chương trình</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-body">
+                                <div class="info-section">
+                                    <h3>Thông tin chương trình</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <span class="info-label">Ngành học:</span>
+                                            <span class="info-value">Công nghệ thông tin</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Chuyên ngành:</span>
+                                            <span class="info-value">Kỹ thuật phần mềm</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Khóa học:</span>
+                                            <span class="info-value">2020-2024</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Lớp:</span>
+                                            <span class="info-value">CNTT2020A</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Cố vấn học tập:</span>
+                                            <span class="info-value">TS. Nguyễn Văn B</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Trạng thái:</span>
+                                            <span class="info-value">Đang học</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Tín chỉ đã hoàn thành:</span>
+                                            <span class="info-value">85/145</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">GPA hiện tại:</span>
+                                            <span class="info-value">3.65</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <h3>Thông tin nhập học</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <span class="info-label">Ngày nhập học:</span>
+                                            <span class="info-value">15/09/2020</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Đối tượng:</span>
+                                            <span class="info-value">Chính quy</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Khối thi:</span>
+                                            <span class="info-value">A00</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Điểm đầu vào:</span>
+                                            <span class="info-value">25.75</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Hình thức trúng tuyển:</span>
+                                            <span class="info-value">Xét tuyển thẳng</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Trường THPT:</span>
+                                            <span class="info-value">THPT Nguyễn Thị Minh Khai</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="academic-progress">
+                                    <h3>Tiến độ học tập</h3>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 58%;">
+                                                <span>58%</span>
+                                            </div>
+                                        </div>
+                                        <div class="progress-stats">
+                                            <div class="stat-item">
+                                                <span class="stat-label">Tín chỉ hoàn thành:</span>
+                                                <span class="stat-value">85</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Tín chỉ còn lại:</span>
+                                                <span class="stat-value">60</span>
+                                            </div>
+                                            <div class="stat-item">
+                                                <span class="stat-label">Tổng tín chỉ:</span>
+                                                <span class="stat-value">145</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Tab -->
+                    <div class="tab-content" id="account">
+                        <div class="profile-card">
+                            <div class="profile-header">
+                                <h2><i class="fas fa-cog"></i> Thông tin tài khoản</h2>
+                                <div class="profile-actions">
+                                    <button class="btn secondary"><i class="fas fa-shield-alt"></i> Bảo mật</button>
+                                    <button class="btn primary"><i class="fas fa-edit"></i> Cập nhật</button>
+                                </div>
+                            </div>
+
+                            <div class="account-overview">
+                                <div class="account-card">
+                                    <div class="account-icon">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <div class="account-content">
+                                        <h4>Trạng thái</h4>
+                                        <div class="account-value">Hoạt động</div>
+                                        <div class="account-detail">Tài khoản đang hoạt động bình thường</div>
+                                    </div>
+                                </div>
+                                <div class="account-card">
+                                    <div class="account-icon">
+                                        <i class="fas fa-calendar-check"></i>
+                                    </div>
+                                    <div class="account-content">
+                                        <h4>Tài khoản được tạo</h4>
+                                        <div class="account-value">15/09/2020</div>
+                                        <div class="account-detail">Đã hoạt động 3 năm</div>
+                                    </div>
+                                </div>
+                                <div class="account-card">
+                                    <div class="account-icon">
+                                        <i class="fas fa-clock"></i>
+                                    </div>
+                                    <div class="account-content">
+                                        <h4>Đăng nhập cuối</h4>
+                                        <div class="account-value">Hôm nay, 09:45</div>
+                                        <div class="account-detail">Từ TP. Hồ Chí Minh, Việt Nam</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="profile-body">
+                                <div class="info-section">
+                                    <h3>Thông tin đăng nhập</h3>
+                                    <div class="info-grid">
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-user"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Tài khoản:</span>
+                                                <span class="info-value">20000123</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Email đăng nhập:</span>
+                                                <span class="info-value">20000123@student.edu.vn</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-mobile-alt"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Số điện thoại:</span>
+                                                <span class="info-value">0912 345 678</span>
+                                            </div>
+                                        </div>
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-key"></i></div>
+                                            <div class="info-content">
+                                                <span class="info-label">Mật khẩu:</span>
+                                                <span class="info-value">••••••••••</span>
+                                                <a href="#" class="edit-link"><i class="fas fa-pencil-alt"></i> Thay
+                                                    đổi</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="security-section">
+                                    <h3>Bảo mật tài khoản</h3>
+                                    <div class="security-options">
+                                        <div class="security-option">
+                                            <div class="option-header">
+                                                <div class="option-icon enabled">
+                                                    <i class="fas fa-lock"></i>
+                                                </div>
+                                                <div class="option-info">
+                                                    <h4>Mật khẩu mạnh</h4>
+                                                    <p>Mật khẩu của bạn đáp ứng các yêu cầu bảo mật</p>
+                                                </div>
+                                            </div>
+                                            <button class="btn-sm secondary">Cập nhật</button>
+                                        </div>
+
+                                        <div class="security-option">
+                                            <div class="option-header">
+                                                <div class="option-icon disabled">
+                                                    <i class="fas fa-shield-alt"></i>
+                                                </div>
+                                                <div class="option-info">
+                                                    <h4>Xác thực hai yếu tố</h4>
+                                                    <p>Bảo vệ tài khoản bằng lớp xác thực thứ hai</p>
+                                                </div>
+                                            </div>
+                                            <button class="btn-sm primary">Kích hoạt</button>
+                                        </div>
+
+                                        <div class="security-option">
+                                            <div class="option-header">
+                                                <div class="option-icon enabled">
+                                                    <i class="fas fa-envelope"></i>
+                                                </div>
+                                                <div class="option-info">
+                                                    <h4>Thông báo qua email</h4>
+                                                    <p>Nhận thông báo khi có đăng nhập mới</p>
+                                                </div>
+                                            </div>
+                                            <button class="btn-sm secondary">Tắt</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="info-section">
+                                    <div class="section-header">
+                                        <h3>Hoạt động gần đây</h3>
+                                        <a href="#" class="view-all-link">Xem tất cả <i
+                                                class="fas fa-angle-right"></i></a>
+                                    </div>
+                                    <div class="activity-container">
+                                        <table class="activity-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Thời gian</th>
+                                                    <th>Hoạt động</th>
+                                                    <th>Địa chỉ IP</th>
+                                                    <th>Thiết bị</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="activity-time">
+                                                            <div class="time-main">Hôm nay</div>
+                                                            <div class="time-sub">09:45</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="activity-type login">
+                                                            <i class="fas fa-sign-in-alt"></i>
+                                                            <span>Đăng nhập thành công</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>192.168.1.1</td>
+                                                    <td>
+                                                        <div class="device-info">
+                                                            <i class="fab fa-chrome"></i>
+                                                            <span>Chrome - Windows</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="activity-time">
+                                                            <div class="time-main">Hôm qua</div>
+                                                            <div class="time-sub">15:30</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="activity-type">
+                                                            <i class="fas fa-edit"></i>
+                                                            <span>Đăng ký học phần</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>192.168.1.1</td>
+                                                    <td>
+                                                        <div class="device-info">
+                                                            <i class="fab fa-chrome"></i>
+                                                            <span>Chrome - Windows</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="activity-time">
+                                                            <div class="time-main">15/06/2023</div>
+                                                            <div class="time-sub">10:15</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="activity-type">
+                                                            <i class="fas fa-user-edit"></i>
+                                                            <span>Cập nhật thông tin cá nhân</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>192.168.1.1</td>
+                                                    <td>
+                                                        <div class="device-info">
+                                                            <i class="fab fa-chrome"></i>
+                                                            <span>Chrome - Windows</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="activity-time">
+                                                            <div class="time-main">14/06/2023</div>
+                                                            <div class="time-sub">08:20</div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        <div class="activity-type login">
+                                                            <i class="fas fa-sign-in-alt"></i>
+                                                            <span>Đăng nhập thành công</span>
+                                                        </div>
+                                                    </td>
+                                                    <td>192.168.1.1</td>
+                                                    <td>
+                                                        <div class="device-info">
+                                                            <i class="fab fa-chrome"></i>
+                                                            <span>Chrome - Windows</span>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Documents Tab -->
+                    <div class="tab-content" id="documents">
+                        <div class="profile-card">
+                            <div class="document-actions">
+                                <button class="btn primary"><i class="fas fa-upload"></i> Tải lên tài liệu</button>
+                                <button class="btn secondary"><i class="fas fa-download"></i> Tải xuống tất cả</button>
+                            </div>
+
+                            <div class="document-section">
+                                <h3>Giấy tờ sinh viên</h3>
+                                <table class="document-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên tài liệu</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày cập nhật</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                    <span>Giấy CMND/CCCD</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge verified">Đã xác minh</span></td>
+                                            <td>15/09/2020</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                    <span>Bằng tốt nghiệp THPT</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge verified">Đã xác minh</span></td>
+                                            <td>15/09/2020</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                    <span>Học bạ THPT</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge verified">Đã xác minh</span></td>
+                                            <td>15/09/2020</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-pdf"></i>
+                                                    <span>Giấy khai sinh</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge verified">Đã xác minh</span></td>
+                                            <td>15/09/2020</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-sync-alt"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="document-section">
+                                <h3>Giấy tờ đã yêu cầu</h3>
+                                <table class="document-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên giấy tờ</th>
+                                            <th>Trạng thái</th>
+                                            <th>Ngày yêu cầu</th>
+                                            <th>Thao tác</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <span>Giấy xác nhận sinh viên</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge completed">Đã cấp</span></td>
+                                            <td>10/06/2023</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <span>Bảng điểm học kỳ 1 năm 2022-2023</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge completed">Đã cấp</span></td>
+                                            <td>05/02/2023</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon"><i class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="document-name">
+                                                    <i class="fas fa-file-alt"></i>
+                                                    <span>Giấy xác nhận hoàn thành học phí</span>
+                                                </div>
+                                            </td>
+                                            <td><span class="status-badge processing">Đang xử lý</span></td>
+                                            <td>12/06/2023</td>
+                                            <td>
+                                                <div class="document-actions">
+                                                    <button class="btn-icon disabled"><i
+                                                            class="fas fa-download"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <%- include('partials/footer') %>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    // Tab switching functionality
+                    const tabBtns = document.querySelectorAll('.tab-btn');
+                    const tabContents = document.querySelectorAll('.tab-content');
+
+                    tabBtns.forEach(btn => {
+                        btn.addEventListener('click', () => {
+                            // Remove active class from all buttons and contents
+                            tabBtns.forEach(b => b.classList.remove('active'));
+                            tabContents.forEach(c => c.classList.remove('active'));
+
+                            // Add active class to clicked button
+                            btn.classList.add('active');
+
+                            // Show corresponding content
+                            const tabId = btn.getAttribute('data-tab');
+                            document.getElementById(tabId).classList.add('active');
+                        });
+                    });
+                });
+            </script>
+</body>
+
+</html>

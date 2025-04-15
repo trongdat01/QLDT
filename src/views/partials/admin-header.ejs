@@ -1,0 +1,124 @@
+<header class="admin-header">
+    <div class="header-search">
+        <i class="fas fa-search"></i>
+        <input type="text" placeholder="Tìm kiếm...">
+    </div>
+    <div class="header-actions">
+        <div class="header-notifications">
+            <button class="notifications-btn" id="notificationsToggle">
+                <i class="fas fa-bell"></i>
+                <span class="badge">5</span>
+            </button>
+            <div class="notifications-dropdown" id="notificationsDropdown">
+                <div class="dropdown-header">
+                    <h3>Thông báo</h3>
+                    <button class="mark-read-btn">Đánh dấu đã đọc</button>
+                </div>
+                <ul class="notification-list">
+                    <li class="notification-item unread">
+                        <div class="notification-icon"><i class="fas fa-user-graduate"></i></div>
+                        <div class="notification-content">
+                            <p>Sinh viên mới đã đăng ký tài khoản</p>
+                            <span class="notification-time">5 phút trước</span>
+                        </div>
+                    </li>
+                    <li class="notification-item unread">
+                        <div class="notification-icon"><i class="fas fa-exclamation-circle"></i></div>
+                        <div class="notification-content">
+                            <p>Cần phê duyệt đăng ký học phần</p>
+                            <span class="notification-time">20 phút trước</span>
+                        </div>
+                    </li>
+                    <li class="notification-item">
+                        <div class="notification-icon"><i class="fas fa-file-alt"></i></div>
+                        <div class="notification-content">
+                            <p>Báo cáo mới đã được tạo</p>
+                            <span class="notification-time">1 giờ trước</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="dropdown-footer">
+                    <a href="/admin/notifications">Xem tất cả thông báo</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="header-messages">
+            <button class="messages-btn" id="messagesToggle">
+                <i class="fas fa-envelope"></i>
+                <span class="badge">3</span>
+            </button>
+            <div class="messages-dropdown" id="messagesDropdown">
+                <div class="dropdown-header">
+                    <h3>Tin nhắn</h3>
+                    <button class="mark-read-btn">Đánh dấu đã đọc</button>
+                </div>
+                <ul class="message-list">
+                    <li class="message-item unread">
+                        <div class="message-avatar">
+                            <img src="/images/admin-avatar.jpg" alt="Avatar">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-info">
+                                <span class="message-sender">Nguyễn Văn A</span>
+                                <span class="message-time">10:30 AM</span>
+                            </div>
+                            <p class="message-preview">Gửi thầy/cô, em có thắc mắc về...</p>
+                        </div>
+                    </li>
+                    <li class="message-item unread">
+                        <div class="message-avatar">
+                            <img src="/images/admin-avatar.jpg" alt="Avatar">
+                        </div>
+                        <div class="message-content">
+                            <div class="message-info">
+                                <span class="message-sender">Trần Thị B</span>
+                                <span class="message-time">Hôm qua</span>
+                            </div>
+                            <p class="message-preview">Kính gửi phòng đào tạo, em cần...</p>
+                        </div>
+                    </li>
+                </ul>
+                <div class="dropdown-footer">
+                    <a href="/admin/messages">Xem tất cả tin nhắn</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-mobile-menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </div>
+</header>
+
+<script>
+    // Initialize dropdown functionality for notifications and messages
+    document.addEventListener('DOMContentLoaded', function () {
+        const notificationsToggle = document.getElementById('notificationsToggle');
+        const notificationsDropdown = document.getElementById('notificationsDropdown');
+        const messagesToggle = document.getElementById('messagesToggle');
+        const messagesDropdown = document.getElementById('messagesDropdown');
+
+        if (notificationsToggle && notificationsDropdown) {
+            notificationsToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                notificationsDropdown.classList.toggle('show');
+                if (messagesDropdown) messagesDropdown.classList.remove('show');
+            });
+        }
+
+        if (messagesToggle && messagesDropdown) {
+            messagesToggle.addEventListener('click', function (e) {
+                e.stopPropagation();
+                messagesDropdown.classList.toggle('show');
+                if (notificationsDropdown) notificationsDropdown.classList.remove('show');
+            });
+        }
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function () {
+            if (notificationsDropdown) notificationsDropdown.classList.remove('show');
+            if (messagesDropdown) messagesDropdown.classList.remove('show');
+        });
+    });
+</script>

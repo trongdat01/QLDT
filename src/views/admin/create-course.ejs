@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Thêm Học Phần Mới - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'courses' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <!-- Page Header -->
+                        <div class="page-header">
+                            <div class="header-title">
+                                <h1><i class="fas fa-plus-circle"></i> Thêm Học Phần Mới</h1>
+                                <p class="header-subtitle">Tạo học phần mới trong hệ thống quản lý đào tạo</p>
+                            </div>
+                            <div class="page-actions">
+                                <a href="/admin/courses" class="btn secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Course Creation Form Card -->
+                        <div class="admin-card create-course-card">
+                            <div class="admin-card-header">
+                                <h2><i class="fas fa-edit"></i> Thông tin học phần</h2>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="createCourseForm" class="create-course-form">
+                                    <!-- Basic Information Section -->
+                                    <div class="form-section">
+                                        <h3 class="section-title">Thông tin cơ bản</h3>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="courseCode">Mã học phần <span
+                                                        class="required">*</span></label>
+                                                <input type="text" id="courseCode" name="courseCode"
+                                                    placeholder="Ví dụ: COMP101" required>
+                                                <small class="form-hint">Mã học phần duy nhất, không trùng lặp</small>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseName">Tên học phần <span
+                                                        class="required">*</span></label>
+                                                <input type="text" id="courseName" name="courseName"
+                                                    placeholder="Nhập tên học phần" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="courseNameEn">Tên tiếng Anh</label>
+                                                <input type="text" id="courseNameEn" name="courseNameEn"
+                                                    placeholder="Tên học phần bằng tiếng Anh">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseAlias">Tên viết tắt</label>
+                                                <input type="text" id="courseAlias" name="courseAlias"
+                                                    placeholder="Tên viết tắt của học phần">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Academic Information Section -->
+                                    <div class="form-section">
+                                        <h3 class="section-title">Thông tin học thuật</h3>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="courseDepartment">Khoa phụ trách <span
+                                                        class="required">*</span></label>
+                                                <select id="courseDepartment" name="courseDepartment" required>
+                                                    <option value="">-- Chọn khoa --</option>
+                                                    <option value="cntt">Công nghệ thông tin</option>
+                                                    <option value="toan">Toán - Thống kê</option>
+                                                    <option value="kt">Kinh tế</option>
+                                                    <option value="nn">Ngoại ngữ</option>
+                                                    <option value="kythuat">Kỹ thuật</option>
+                                                    <option value="vatly">Vật lý</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseType">Loại học phần <span
+                                                        class="required">*</span></label>
+                                                <select id="courseType" name="courseType" required>
+                                                    <option value="">-- Chọn loại --</option>
+                                                    <option value="required">Bắt buộc</option>
+                                                    <option value="elective">Tự chọn</option>
+                                                    <option value="project">Đồ án</option>
+                                                    <option value="internship">Thực tập</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseCredits">Số tín chỉ <span
+                                                        class="required">*</span></label>
+                                                <input type="number" id="courseCredits" name="courseCredits" min="1"
+                                                    max="10" value="3" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="courseTheoryCredits">Tín chỉ lý thuyết</label>
+                                                <input type="number" id="courseTheoryCredits" name="courseTheoryCredits"
+                                                    min="0" max="10" value="2">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="coursePracticeCredits">Tín chỉ thực hành</label>
+                                                <input type="number" id="coursePracticeCredits"
+                                                    name="coursePracticeCredits" min="0" max="10" value="1">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseLessons">Số tiết học</label>
+                                                <input type="number" id="courseLessons" name="courseLessons" min="1"
+                                                    value="45">
+                                                <small class="form-hint">Tổng số tiết học của học phần</small>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Prerequisites Section -->
+                                    <div class="form-section">
+                                        <h3 class="section-title">Điều kiện học phần</h3>
+
+                                        <div class="form-group prerequisites-container">
+                                            <label>Học phần tiên quyết</label>
+                                            <div class="search-add-container">
+                                                <div class="search-input-group">
+                                                    <input type="text" id="prerequisiteSearch"
+                                                        placeholder="Tìm học phần tiên quyết...">
+                                                    <button type="button" id="addPrerequisiteBtn"
+                                                        class="btn-sm primary">
+                                                        <i class="fas fa-plus"></i> Thêm
+                                                    </button>
+                                                </div>
+                                                <div class="search-results" id="prerequisiteSearchResults"
+                                                    style="display: none;">
+                                                    <!-- Search results will be populated here via JavaScript -->
+                                                </div>
+                                            </div>
+                                            <div class="selected-items" id="selectedPrerequisites">
+                                                <!-- Selected prerequisites will be displayed here -->
+                                                <p class="empty-message">Chưa có học phần tiên quyết nào được chọn</p>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Học phần song hành</label>
+                                            <div class="search-add-container">
+                                                <div class="search-input-group">
+                                                    <input type="text" id="corequisiteSearch"
+                                                        placeholder="Tìm học phần song hành...">
+                                                    <button type="button" id="addCorequisiteBtn" class="btn-sm primary">
+                                                        <i class="fas fa-plus"></i> Thêm
+                                                    </button>
+                                                </div>
+                                                <div class="search-results" id="corequisiteSearchResults"
+                                                    style="display: none;">
+                                                    <!-- Search results will be populated here via JavaScript -->
+                                                </div>
+                                            </div>
+                                            <div class="selected-items" id="selectedCorequisites">
+                                                <!-- Selected corequisites will be displayed here -->
+                                                <p class="empty-message">Chưa có học phần song hành nào được chọn</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Description Section -->
+                                    <div class="form-section">
+                                        <h3 class="section-title">Mô tả và nội dung</h3>
+
+                                        <div class="form-group">
+                                            <label for="courseDescription">Mô tả học phần</label>
+                                            <textarea id="courseDescription" name="courseDescription" rows="4"
+                                                placeholder="Nhập mô tả chi tiết về học phần..."></textarea>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="courseObjectives">Mục tiêu học phần</label>
+                                            <textarea id="courseObjectives" name="courseObjectives" rows="4"
+                                                placeholder="Nhập mục tiêu của học phần..."></textarea>
+                                            <small class="form-hint">Mỗi mục tiêu nên được viết trên một dòng và bắt đầu
+                                                bằng dấu gạch ngang (-)</small>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="courseSyllabus">Đề cương môn học</label>
+                                            <textarea id="courseSyllabus" name="courseSyllabus" rows="4"
+                                                placeholder="Nhập đề cương môn học..."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Additional Information Section -->
+                                    <div class="form-section">
+                                        <h3 class="section-title">Thông tin bổ sung</h3>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="courseStatus">Trạng thái</label>
+                                                <select id="courseStatus" name="courseStatus">
+                                                    <option value="active" selected>Đang mở</option>
+                                                    <option value="inactive">Đã đóng</option>
+                                                    <option value="pending">Chờ duyệt</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseLanguage">Ngôn ngữ giảng dạy</label>
+                                                <select id="courseLanguage" name="courseLanguage">
+                                                    <option value="vi" selected>Tiếng Việt</option>
+                                                    <option value="en">Tiếng Anh</option>
+                                                    <option value="mixed">Song ngữ</option>
+                                                </select>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseLevel">Trình độ</label>
+                                                <select id="courseLevel" name="courseLevel">
+                                                    <option value="undergraduate" selected>Đại học</option>
+                                                    <option value="graduate">Sau đại học</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="courseNotes">Ghi chú</label>
+                                            <textarea id="courseNotes" name="courseNotes" rows="2"
+                                                placeholder="Ghi chú thêm về học phần..."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <!-- Form Actions -->
+                                    <div class="form-actions">
+                                        <button type="button" class="btn secondary" id="cancelBtn">Hủy</button>
+                                        <button type="reset" class="btn outline">Làm lại</button>
+                                        <button type="submit" class="btn primary">Tạo học phần</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle text-success"></i> Thành công</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message">
+                    <p>Học phần đã được tạo thành công!</p>
+                    <div class="course-info-panel">
+                        <div class="info-header">
+                            <span class="course-code-display" id="createdCourseCode">COMP101</span>
+                            <h4 id="createdCourseName">Tên học phần</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/courses" class="btn secondary">Quay lại danh sách</a>
+                <a href="#" id="viewCourseBtn" class="btn primary">Xem chi tiết học phần</a>
+                <button class="btn outline" id="addAnotherBtn">Tạo học phần khác</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Form validation and submission
+            const courseForm = document.getElementById('createCourseForm');
+            const cancelBtn = document.getElementById('cancelBtn');
+
+            cancelBtn.addEventListener('click', function () {
+                if (confirm('Bạn có chắc muốn hủy? Mọi thay đổi sẽ không được lưu.')) {
+                    window.location.href = '/admin/courses';
+                }
+            });
+
+            courseForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Basic validation
+                const requiredFields = courseForm.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+
+                        // Add error message if it doesn't exist
+                        let errorMessage = field.parentNode.querySelector('.error-message');
+                        if (!errorMessage) {
+                            errorMessage = document.createElement('div');
+                            errorMessage.className = 'error-message';
+                            errorMessage.textContent = 'Trường này không được để trống';
+                            field.parentElement.appendChild(errorMessage);
+                        }
+                    } else {
+                        field.classList.remove('error');
+                        const errorMessage = field.parentNode.querySelector('.error-message');
+                        if (errorMessage) {
+                            errorMessage.remove();
+                        }
+                    }
+                });
+
+                if (!isValid) {
+                    // Scroll to first error
+                    const firstError = document.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                // Code for form submission would go here (AJAX)
+                // For now, we'll just show the success modal
+
+                // Populate the success modal with course details
+                document.getElementById('createdCourseCode').textContent = document.getElementById('courseCode').value;
+                document.getElementById('createdCourseName').textContent = document.getElementById('courseName').value;
+
+                // Show success modal
+                document.getElementById('successModal').classList.add('show');
+            });
+
+            // Success modal actions
+            const successModal = document.getElementById('successModal');
+            const closeModalBtn = successModal.querySelector('.close-modal');
+            const addAnotherBtn = document.getElementById('addAnotherBtn');
+            const viewCourseBtn = document.getElementById('viewCourseBtn');
+
+            closeModalBtn.addEventListener('click', function () {
+                successModal.classList.remove('show');
+            });
+
+            addAnotherBtn.addEventListener('click', function () {
+                successModal.classList.remove('show');
+                courseForm.reset();
+            });
+
+            viewCourseBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const courseCode = document.getElementById('courseCode').value;
+                window.location.href = `/admin/courses/detail/${courseCode}`;
+            });
+
+            // Handle prerequisites search
+            const prerequisiteSearch = document.getElementById('prerequisiteSearch');
+            const prerequisiteResults = document.getElementById('prerequisiteSearchResults');
+
+            prerequisiteSearch.addEventListener('focus', function () {
+                // In a real app, this would search the database
+                // For demo, we'll show some sample results
+                prerequisiteResults.innerHTML = `
+                    <div class="search-result-item">
+                        <span class="result-code">COMP001</span>
+                        <span class="result-name">Tin học đại cương</span>
+                        <button class="btn-sm primary add-item" data-id="COMP001" data-name="Tin học đại cương">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="search-result-item">
+                        <span class="result-code">MATH101</span>
+                        <span class="result-name">Giải tích 1</span>
+                        <button class="btn-sm primary add-item" data-id="MATH101" data-name="Giải tích 1">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                `;
+                prerequisiteResults.style.display = 'block';
+
+                // Add event listeners to "add" buttons
+                const addButtons = prerequisiteResults.querySelectorAll('.add-item');
+                addButtons.forEach(button => {
+                    button.addEventListener('click', function () {
+                        const id = this.getAttribute('data-id');
+                        const name = this.getAttribute('data-name');
+                        addPrerequisite(id, name);
+                        prerequisiteResults.style.display = 'none';
+                        prerequisiteSearch.value = '';
+                    });
+                });
+            });
+
+            prerequisiteSearch.addEventListener('blur', function () {
+                // Small delay to allow clicking the result items
+                setTimeout(() => {
+                    prerequisiteResults.style.display = 'none';
+                }, 200);
+            });
+
+            function addPrerequisite(id, name) {
+                const selectedPrerequisites = document.getElementById('selectedPrerequisites');
+
+                // Remove empty message if it exists
+                const emptyMessage = selectedPrerequisites.querySelector('.empty-message');
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+
+                // Check if this prerequisite is already added
+                const existingItem = selectedPrerequisites.querySelector(`[data-id="${id}"]`);
+                if (existingItem) return;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'selected-item';
+                itemElement.setAttribute('data-id', id);
+                itemElement.innerHTML = `
+                    <span class="item-code">${id}</span>
+                    <span class="item-name">${name}</span>
+                    <input type="hidden" name="prerequisites[]" value="${id}">
+                    <button type="button" class="btn-icon remove-item">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                selectedPrerequisites.appendChild(itemElement);
+
+                // Add remove functionality
+                const removeButton = itemElement.querySelector('.remove-item');
+                removeButton.addEventListener('click', function () {
+                    itemElement.remove();
+
+                    // Add empty message back if no prerequisites left
+                    if (selectedPrerequisites.children.length === 0) {
+                        selectedPrerequisites.innerHTML = '<p class="empty-message">Chưa có học phần tiên quyết nào được chọn</p>';
+                    }
+                });
+            }
+
+            // Similar functionality for corequisites would go here
+            // ...
+
+            // Auto-calculate total credits when theory or practice credits change
+            const theoryCredits = document.getElementById('courseTheoryCredits');
+            const practiceCredits = document.getElementById('coursePracticeCredits');
+            const totalCredits = document.getElementById('courseCredits');
+
+            function updateTotalCredits() {
+                const theory = parseInt(theoryCredits.value) || 0;
+                const practice = parseInt(practiceCredits.value) || 0;
+                totalCredits.value = theory + practice;
+            }
+
+            theoryCredits.addEventListener('change', updateTotalCredits);
+            practiceCredits.addEventListener('change', updateTotalCredits);
+
+            // Auto-calculate lessons
+            theoryCredits.addEventListener('change', function () {
+                const theory = parseInt(theoryCredits.value) || 0;
+                const practice = parseInt(practiceCredits.value) || 0;
+                document.getElementById('courseLessons').value = (theory * 15) + (practice * 30);
+            });
+
+            practiceCredits.addEventListener('change', function () {
+                const theory = parseInt(theoryCredits.value) || 0;
+                const practice = parseInt(practiceCredits.value) || 0;
+                document.getElementById('courseLessons').value = (theory * 15) + (practice * 30);
+            });
+        });
+    </script>
+</body>
+
+</html>

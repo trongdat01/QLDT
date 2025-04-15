@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Tạo Tin Tức Mới - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'news' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-plus-circle"></i> Tạo Tin Tức Mới</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/news">Tin tức</a> /
+                                <span>Tạo mới</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin tin tức</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary preview-btn">
+                                        <i class="fas fa-eye"></i> Xem trước
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <form class="admin-form" id="newsForm" method="post" action="/admin/news/create"
+                                    enctype="multipart/form-data">
+                                    <div class="news-form-layout">
+                                        <div class="news-form-main">
+                                            <div class="form-group">
+                                                <label for="title">Tiêu đề <span class="required">*</span></label>
+                                                <input type="text" id="title" name="title" required
+                                                    placeholder="Nhập tiêu đề tin tức">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subtitle">Tóm tắt</label>
+                                                <textarea id="subtitle" name="subtitle" rows="2"
+                                                    placeholder="Nhập tóm tắt nội dung (hiển thị ở trang danh sách)"></textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="content">Nội dung <span class="required">*</span></label>
+                                                <div class="editor-toolbar">
+                                                    <button type="button" class="editor-btn" data-command="bold"
+                                                        title="Đậm">
+                                                        <i class="fas fa-bold"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="italic"
+                                                        title="Nghiêng">
+                                                        <i class="fas fa-italic"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="underline"
+                                                        title="Gạch dưới">
+                                                        <i class="fas fa-underline"></i>
+                                                    </button>
+                                                    <span class="editor-divider"></span>
+                                                    <button type="button" class="editor-btn" data-command="justifyLeft"
+                                                        title="Canh trái">
+                                                        <i class="fas fa-align-left"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="justifyCenter" title="Canh giữa">
+                                                        <i class="fas fa-align-center"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="justifyRight"
+                                                        title="Canh phải">
+                                                        <i class="fas fa-align-right"></i>
+                                                    </button>
+                                                    <span class="editor-divider"></span>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="insertUnorderedList" title="Danh sách">
+                                                        <i class="fas fa-list-ul"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="insertOrderedList" title="Danh sách có thứ tự">
+                                                        <i class="fas fa-list-ol"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="createLink"
+                                                        title="Chèn liên kết">
+                                                        <i class="fas fa-link"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="insertImage"
+                                                        title="Chèn hình ảnh">
+                                                        <i class="fas fa-image"></i>
+                                                    </button>
+                                                </div>
+                                                <div id="editor" class="content-editor" contenteditable="true"></div>
+                                                <textarea id="content" name="content" style="display:none"
+                                                    required></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="news-form-sidebar">
+                                            <div class="sidebar-card">
+                                                <h4>Đăng tin</h4>
+                                                <div class="form-group">
+                                                    <label for="status">Trạng thái</label>
+                                                    <select id="status" name="status">
+                                                        <option value="draft">Bản nháp</option>
+                                                        <option value="published">Đăng ngay</option>
+                                                        <option value="scheduled">Lên lịch đăng</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group schedule-group" style="display: none;">
+                                                    <label for="publishDate">Ngày đăng</label>
+                                                    <input type="date" id="publishDate" name="publishDate">
+                                                </div>
+
+                                                <div class="form-group schedule-group" style="display: none;">
+                                                    <label for="publishTime">Giờ đăng</label>
+                                                    <input type="time" id="publishTime" name="publishTime">
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn secondary" name="action"
+                                                        value="saveAsDraft">Lưu nháp</button>
+                                                    <button type="submit" class="btn primary" name="action"
+                                                        value="publish">Đăng bài</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="sidebar-card">
+                                                <h4>Danh mục</h4>
+                                                <div class="form-group">
+                                                    <label for="category">Chọn danh mục <span
+                                                            class="required">*</span></label>
+                                                    <select id="category" name="category" required>
+                                                        <option value="">-- Chọn danh mục --</option>
+                                                        <option value="notice">Thông báo</option>
+                                                        <option value="event">Sự kiện</option>
+                                                        <option value="academics">Học thuật</option>
+                                                        <option value="admissions">Tuyển sinh</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="tags">Thẻ</label>
+                                                    <input type="text" id="tags" name="tags"
+                                                        placeholder="VD: học tập, tuyển sinh (cách nhau bằng dấu phẩy)">
+                                                </div>
+                                            </div>
+
+                                            <div class="sidebar-card">
+                                                <h4>Hình ảnh đại diện</h4>
+                                                <div class="form-group">
+                                                    <div class="featured-image-upload">
+                                                        <div class="upload-area" id="uploadArea">
+                                                            <i class="fas fa-cloud-upload-alt"></i>
+                                                            <p>Kéo thả hoặc nhấp để tải ảnh lên</p>
+                                                            <span>Kích thước khuyến nghị: 1200x630px</span>
+                                                        </div>
+                                                        <input type="file" id="featuredImage" name="featuredImage"
+                                                            accept="image/*" style="display: none;">
+                                                        <div class="image-preview" id="imagePreview"
+                                                            style="display: none;">
+                                                            <img id="previewImg" src="" alt="Xem trước">
+                                                            <button type="button" class="remove-image" id="removeImage">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // WYSIWYG Editor functionality
+            const editor = document.getElementById('editor');
+            const contentTextarea = document.getElementById('content');
+            const buttons = document.querySelectorAll('.editor-btn');
+
+            // Execute command on click
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const command = this.dataset.command;
+
+                    if (command === 'createLink') {
+                        const url = prompt('Enter the link URL:');
+                        if (url) document.execCommand(command, false, url);
+                    } else if (command === 'insertImage') {
+                        const url = prompt('Enter the image URL:');
+                        if (url) document.execCommand(command, false, url);
+                    } else {
+                        document.execCommand(command, false, null);
+                    }
+
+                    // Update hidden textarea with content
+                    contentTextarea.value = editor.innerHTML;
+                });
+            });
+
+            // Update textarea on editor change
+            editor.addEventListener('input', function () {
+                contentTextarea.value = editor.innerHTML;
+            });
+
+            // Handle status change to show/hide scheduling options
+            document.getElementById('status').addEventListener('change', function () {
+                const scheduleGroups = document.querySelectorAll('.schedule-group');
+                if (this.value === 'scheduled') {
+                    scheduleGroups.forEach(group => group.style.display = 'block');
+                } else {
+                    scheduleGroups.forEach(group => group.style.display = 'none');
+                }
+            });
+
+            // Featured image upload handling
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('featuredImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            const removeButton = document.getElementById('removeImage');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', function () {
+                if (this.files.length) {
+                    handleFileSelect(this.files[0]);
+                }
+            });
+
+            removeButton.addEventListener('click', function () {
+                fileInput.value = '';
+                imagePreview.style.display = 'none';
+                uploadArea.style.display = 'flex';
+            });
+
+            function handleFileSelect(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Vui lòng chọn file hình ảnh!');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadArea.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Form submission handling
+            document.getElementById('newsForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate form
+                if (!this.checkValidity()) {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+                    return;
+                }
+
+                // In a real app, this would submit the form
+                alert('Đã lưu tin tức thành công!');
+
+                // Redirect back to news list
+                // window.location.href = '/admin/news';
+            });
+
+            // Preview button functionality
+            document.querySelector('.preview-btn').addEventListener('click', function () {
+                // In a real app, this would show a preview of the news
+                alert('Xem trước tin tức (chức năng đang phát triển)');
+            });
+        });
+    </script>
+</body>
+
+</html>

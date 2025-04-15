@@ -1,0 +1,89 @@
+<nav class="admin-sidebar">
+    <div class="admin-logo">
+        <h2><i class="fas fa-graduation-cap"></i> EDUMANAGER</h2>
+        <span class="admin-badge">Admin</span>
+    </div>
+
+    <div class="admin-user">
+        <div class="admin-avatar">
+            <img src="/images/admin-avatar.jpg" alt="Admin Avatar">
+        </div>
+        <div class="admin-user-info">
+            <h4>Admin User</h4>
+            <p>Quản trị viên</p>
+        </div>
+    </div>
+
+    <ul class="admin-menu">
+        <li class="<%= activeMenu === 'dashboard' ? 'active' : '' %>">
+            <a href="/admin/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        </li>
+
+        <li class="<%= activeMenu === 'settings' ? 'active' : '' %>">
+            <a href="/admin/settings"><i class="fas fa-cog"></i> Cài đặt hệ thống</a>
+        </li>
+
+        <li class="<%= activeMenu === 'logs' ? 'active' : '' %>">
+            <a href="/admin/logs"><i class="fas fa-history"></i> Nhật ký hoạt động</a>
+        </li>
+
+        <li class="menu-header">QUẢN LÝ ĐÀO TẠO</li>
+
+        <li class="<%= activeMenu === 'students' ? 'active' : '' %>">
+            <a href="/admin/students"><i class="fas fa-user-graduate"></i> Sinh viên</a>
+        </li>
+
+        <li class="<%= activeMenu === 'faculty' ? 'active' : '' %>">
+            <a href="/admin/faculty"><i class="fas fa-chalkboard-teacher"></i> Giảng viên</a>
+        </li>
+
+        <li class="<%= activeMenu === 'classes' ? 'active' : '' %>">
+            <a href="/admin/classes"><i class="fas fa-school"></i> Lớp học</a>
+        </li>
+
+        <li class="<%= activeMenu === 'courses' ? 'active' : '' %>">
+            <a href="/admin/courses"><i class="fas fa-book"></i> Học phần</a>
+        </li>
+
+        <li class="<%= activeMenu === 'curriculum' ? 'active' : '' %>">
+            <a href="/admin/curriculum"><i class="fas fa-list-alt"></i> Chương trình học</a>
+        </li>
+
+        <li class="<%= activeMenu === 'schedule' ? 'active' : '' %>">
+            <a href="/admin/schedule"><i class="fas fa-calendar-alt"></i> Lịch học</a>
+        </li>
+
+        <li class="<%= activeMenu === 'exam-schedule' ? 'active' : '' %>">
+            <a href="/admin/exam-schedule"><i class="fas fa-calendar-check"></i> Lịch thi</a>
+        </li>
+
+        <li class="<%= activeMenu === 'grades' ? 'active' : '' %>">
+            <a href="/admin/grades"><i class="fas fa-chart-line"></i> Quản lý điểm</a>
+        </li>
+
+        <li class="menu-header">TÀI CHÍNH & BÁO CÁO</li>
+
+        <li class="<%= activeMenu === 'payments' ? 'active' : '' %>">
+            <a href="/admin/payments"><i class="fas fa-money-bill-wave"></i> Học phí & Tài chính</a>
+        </li>
+
+        <li class="<%= activeMenu === 'payment-reports' ? 'active' : '' %>">
+            <a href="/admin/payment-reports"><i class="fas fa-chart-bar"></i> Thống kê & Báo cáo</a>
+        </li>
+
+        <li class="menu-header">TRUYỀN THÔNG</li>
+
+        <li class="<%= activeMenu === 'news' ? 'active' : '' %>">
+            <a href="/admin/news"><i class="fas fa-newspaper"></i> Quản lý tin tức</a>
+        </li>
+
+        <li class="<%= activeMenu === 'announcements' ? 'active' : '' %>">
+            <a href="/admin/announcements"><i class="fas fa-bullhorn"></i> Thông báo</a>
+        </li>
+    </ul>
+
+    <div class="admin-sidebar-footer">
+        <a href="/admin/profile"><i class="fas fa-user-cog"></i> Tài khoản</a>
+        <a href="/logout" class="logout-button"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+    </div>
+</nav>

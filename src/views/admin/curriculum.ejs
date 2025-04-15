@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-curriculum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Chương Trình Học - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'curriculum' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-list-alt"></i> Quản Lý Chương Trình Học</h1>
+                            <div class="page-actions">
+                                <a href="/admin/curriculum/create" class="btn primary">
+                                    <i class="fas fa-plus"></i> Thêm chương trình mới
+                                </a>
+                                <button class="btn secondary">
+                                    <i class="fas fa-file-export"></i> Xuất báo cáo
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Quick stats summary -->
+                        <div class="curriculum-stats">
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-graduation-cap"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">25</div>
+                                    <div class="stat-label">Tổng số chương trình</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">18</div>
+                                    <div class="stat-label">Đang áp dụng</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-archive"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">7</div>
+                                    <div class="stat-label">Đã lưu trữ</div>
+                                </div>
+                            </div>
+                            <div class="stat-card">
+                                <div class="stat-icon">
+                                    <i class="fas fa-sync-alt"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-value">3</div>
+                                    <div class="stat-label">Cập nhật gần đây</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Bộ lọc</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary toggle-filters">
+                                        <i class="fas fa-sliders-h"></i> Tùy chọn bộ lọc
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body filter-container">
+                                <div class="curriculum-filter-grid">
+                                    <div class="filter-group">
+                                        <label>Khoa</label>
+                                        <select id="faculty-filter">
+                                            <option value="all">Tất cả khoa</option>
+                                            <option value="cntt">Công nghệ thông tin</option>
+                                            <option value="kinh-te">Kinh tế</option>
+                                            <option value="ky-thuat">Kỹ thuật</option>
+                                            <option value="y-duoc">Y dược</option>
+                                            <option value="khxh">Khoa học xã hội</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <label>Hệ đào tạo</label>
+                                        <select id="program-type-filter">
+                                            <option value="all">Tất cả</option>
+                                            <option value="chinh-quy">Chính quy</option>
+                                            <option value="lien-thong">Liên thông</option>
+                                            <option value="vua-hoc-vua-lam">Vừa học vừa làm</option>
+                                            <option value="chat-luong-cao">Chất lượng cao</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="filter-group">
+                                        <label>Loại bằng</label>
+                                        <select id="degree-filter">
+                                            <option value="all">Tất cả</option>
+                                            <option value="dai-hoc">Đại học</option>
+                                            <option value="cao-dang">Cao đẳng</option>
+                                            <option value="thac-si">Thạc sĩ</option>
+                                            <option value="tien-si">Tiến sĩ</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="filter-group search-group">
+                                        <label>Tìm kiếm</label>
+                                        <div class="search-input-group">
+                                            <input type="text" id="search-filter"
+                                                placeholder="Tìm theo tên chương trình...">
+                                            <button><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button class="btn secondary" id="reset-filters">
+                                        <i class="fas fa-undo"></i> Đặt lại bộ lọc
+                                    </button>
+                                    <button class="btn primary" id="apply-filters">
+                                        <i class="fas fa-filter"></i> Áp dụng bộ lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Danh sách chương trình đào tạo</h3>
+                                <div class="card-actions">
+                                    <div class="results-count">Hiển thị 1-10 của 25 kết quả</div>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="curriculum-table-container">
+                                    <table class="curriculum-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px">Mã</th>
+                                                <th>Tên chương trình</th>
+                                                <th>Khoa</th>
+                                                <th>Hệ đào tạo</th>
+                                                <th>Bằng</th>
+                                                <th style="width: 80px">Tín chỉ</th>
+                                                <th style="width: 100px">Thời gian</th>
+                                                <th style="width: 80px">Trạng thái</th>
+                                                <th style="width: 150px">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>CNTT</td>
+                                                <td>
+                                                    <div class="program-name">Kỹ sư Công nghệ thông tin</div>
+                                                    <div class="program-meta">Khóa: 2020-2024 | Cập nhật: 10/05/2023
+                                                    </div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>Chính quy</td>
+                                                <td>Đại học</td>
+                                                <td>145</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge active">Đang áp dụng</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/CNTT" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/curriculum/edit/CNTT" class="action-btn"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="CNTT">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="CNTT" data-name="Kỹ sư Công nghệ thông tin"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>KTPM</td>
+                                                <td>
+                                                    <div class="program-name">Kỹ sư Kỹ thuật phần mềm</div>
+                                                    <div class="program-meta">Khóa: 2020-2024 | Cập nhật: 05/05/2023
+                                                    </div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>Chính quy</td>
+                                                <td>Đại học</td>
+                                                <td>145</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge active">Đang áp dụng</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/KTPM" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/curriculum/edit/KTPM" class="action-btn"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="KTPM">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="KTPM" data-name="Kỹ sư Kỹ thuật phần mềm"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>TMDT</td>
+                                                <td>
+                                                    <div class="program-name">Cử nhân Thương mại điện tử</div>
+                                                    <div class="program-meta">Khóa: 2020-2024 | Cập nhật: 15/05/2023
+                                                    </div>
+                                                </td>
+                                                <td>Kinh tế</td>
+                                                <td>Chính quy</td>
+                                                <td>Đại học</td>
+                                                <td>130</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge active">Đang áp dụng</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/TMDT" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/curriculum/edit/TMDT" class="action-btn"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="TMDT">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="TMDT" data-name="Cử nhân Thương mại điện tử"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>ATTT</td>
+                                                <td>
+                                                    <div class="program-name">Kỹ sư An toàn thông tin</div>
+                                                    <div class="program-meta">Khóa: 2020-2024 | Cập nhật: 12/05/2023
+                                                    </div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>Chất lượng cao</td>
+                                                <td>Đại học</td>
+                                                <td>155</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge active">Đang áp dụng</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/ATTT" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/curriculum/edit/ATTT" class="action-btn"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="ATTT">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="ATTT" data-name="Kỹ sư An toàn thông tin"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>KTOT</td>
+                                                <td>
+                                                    <div class="program-name">Kỹ sư Kỹ thuật ô tô</div>
+                                                    <div class="program-meta">Khóa: 2020-2024 | Cập nhật: 08/05/2023
+                                                    </div>
+                                                </td>
+                                                <td>Kỹ thuật</td>
+                                                <td>Chính quy</td>
+                                                <td>Đại học</td>
+                                                <td>150</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge active">Đang áp dụng</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/KTOT" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/curriculum/edit/KTOT" class="action-btn"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="KTOT">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="KTOT" data-name="Kỹ sư Kỹ thuật ô tô"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="archived-row">
+                                                <td>CNTT20</td>
+                                                <td>
+                                                    <div class="program-name">Kỹ sư Công nghệ thông tin (cũ)</div>
+                                                    <div class="program-meta">Khóa: 2016-2020 | Cập nhật: 20/05/2019
+                                                    </div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>Chính quy</td>
+                                                <td>Đại học</td>
+                                                <td>140</td>
+                                                <td>4 năm</td>
+                                                <td><span class="status-badge inactive">Đã lưu trữ</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/curriculum/detail/CNTT20" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <button class="action-btn restore-program" title="Khôi phục"
+                                                            data-id="CNTT20">
+                                                            <i class="fas fa-redo-alt"></i>
+                                                        </button>
+                                                        <button class="action-btn clone-program" title="Sao chép"
+                                                            data-id="CNTT20">
+                                                            <i class="fas fa-copy"></i>
+                                                        </button>
+                                                        <button class="action-btn delete-program" title="Xóa"
+                                                            data-id="CNTT20" data-name="Kỹ sư Công nghệ thông tin (cũ)"
+                                                            onclick="confirmDelete(this)">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="pagination">
+                                    <a href="#" class="page-item active">1</a>
+                                    <a href="#" class="page-item">2</a>
+                                    <a href="#" class="page-item">3</a>
+                                    <span class="page-ellipsis">...</span>
+                                    <a href="#" class="page-item">5</a>
+                                    <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+
+
+    <!-- Delete Program Confirmation Modal -->
+    <div class="modal" id="deleteProgramModal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Xác nhận xóa chương trình</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa chương trình học sau?</p>
+                <div class="program-info-confirm">
+                    <div class="program-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="program-details">
+                        <h4 id="deleteProgramName">Kỹ sư Công nghệ thông tin</h4>
+                        <p id="deleteProgramCode">Mã: CNTT</p>
+                        <p class="text-danger"><i class="fas fa-exclamation-circle"></i> Hành động này có thể ảnh hưởng
+                            đến dữ liệu sinh viên hiện tại!</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="deleteReason">Lý do xóa <span class="required">*</span></label>
+                    <textarea id="deleteReason" rows="2" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Clone Program Modal -->
+    <div class="modal" id="cloneProgramModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-copy"></i> Sao chép chương trình</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Sao chép chương trình học này để tạo phiên bản mới:</p>
+                <div class="program-info-confirm">
+                    <div class="program-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="program-details">
+                        <h4 id="cloneProgramName">Kỹ sư Công nghệ thông tin</h4>
+                        <p id="cloneProgramCode">Mã: CNTT</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="newProgramCode">Mã chương trình mới <span class="required">*</span></label>
+                    <input type="text" id="newProgramCode" required>
+                </div>
+                <div class="form-group">
+                    <label for="newProgramName">Tên chương trình mới <span class="required">*</span></label>
+                    <input type="text" id="newProgramName" required>
+                </div>
+                <div class="clone-options">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cloneCourses" checked>
+                        <label for="cloneCourses">Sao chép danh sách học phần</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="cloneRequirements" checked>
+                        <label for="cloneRequirements">Sao chép yêu cầu điều kiện</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelClone">Hủy</button>
+                <button class="btn primary" id="confirmClone">Tạo bản sao</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle filters visibility
+            const toggleFiltersBtn = document.querySelector('.toggle-filters');
+            const filterContainer = document.querySelector('.filter-container');
+
+            toggleFiltersBtn.addEventListener('click', function () {
+                filterContainer.classList.toggle('show-filters');
+                const icon = this.querySelector('i');
+                if (filterContainer.classList.contains('show-filters')) {
+                    icon.className = 'fas fa-times';
+                } else {
+                    icon.className = 'fas fa-sliders-h';
+                }
+            });
+
+            // Reset filters
+            document.getElementById('reset-filters').addEventListener('click', function () {
+                const filterSelects = document.querySelectorAll('.curriculum-filter-grid select');
+                const searchInput = document.getElementById('search-filter');
+
+                filterSelects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+
+                searchInput.value = '';
+            });
+
+            // Apply filters
+            document.getElementById('apply-filters').addEventListener('click', function () {
+                // In a real app, this would filter the data based on selected criteria
+                alert('Bộ lọc đã được áp dụng!');
+            });
+
+            // Create program modal functionality
+            const createProgramBtn = document.getElementById('createProgramBtn');
+            const createProgramModal = document.getElementById('createProgramModal');
+            const closeCreateModalBtn = createProgramModal.querySelector('.close-modal');
+            const cancelCreateBtn = document.getElementById('cancelCreateProgram');
+            const confirmCreateBtn = document.getElementById('confirmCreateProgram');
+
+            createProgramBtn.addEventListener('click', function () {
+                createProgramModal.style.display = 'block';
+            });
+
+            closeCreateModalBtn.addEventListener('click', function () {
+                createProgramModal.style.display = 'none';
+            });
+
+            cancelCreateBtn.addEventListener('click', function () {
+                createProgramModal.style.display = 'none';
+            });
+
+            confirmCreateBtn.addEventListener('click', function () {
+                // In a real app, this would submit the form via AJAX
+                const form = document.getElementById('createProgramForm');
+
+                // Simple validation
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+
+                if (isValid) {
+                    alert('Đã tạo chương trình học mới!');
+                    createProgramModal.style.display = 'none';
+                    // Reset form
+                    form.reset();
+                } else {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+                }
+            });
+
+            // Global function to handle delete confirmation
+            window.confirmDelete = function (button) {
+                const programId = button.getAttribute('data-id');
+                const programName = button.getAttribute('data-name');
+
+                console.log("Delete function triggered for:", programId, programName);
+
+                // Get the modal
+                const modal = document.getElementById('deleteProgramModal');
+
+                // Update the modal content
+                document.getElementById('deleteProgramName').textContent = programName;
+                document.getElementById('deleteProgramCode').textContent = 'Mã: ' + programId;
+
+                // Show the modal
+                modal.style.display = 'block';
+                modal.style.visibility = 'visible';
+                modal.style.opacity = '1';
+            };
+
+            // Clone program functionality
+            const cloneButtons = document.querySelectorAll('.clone-program');
+            const cloneProgramModal = document.getElementById('cloneProgramModal');
+            const closeCloneModalBtn = cloneProgramModal.querySelector('.close-modal');
+            const cancelCloneBtn = document.getElementById('cancelClone');
+            const confirmCloneBtn = document.getElementById('confirmClone');
+
+            cloneButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const programId = this.getAttribute('data-id');
+                    const programName = this.parentElement.parentElement.parentElement.querySelector('.program-name').textContent;
+
+                    document.getElementById('cloneProgramName').textContent = programName;
+                    document.getElementById('cloneProgramCode').textContent = 'Mã: ' + programId;
+                    document.getElementById('newProgramCode').value = programId + '_COPY';
+                    document.getElementById('newProgramName').value = programName + ' (Bản sao)';
+
+                    cloneProgramModal.style.display = 'block';
+                });
+            });
+
+            closeCloneModalBtn.addEventListener('click', function () {
+                cloneProgramModal.style.display = 'none';
+            });
+
+            cancelCloneBtn.addEventListener('click', function () {
+                cloneProgramModal.style.display = 'none';
+            });
+
+            confirmCloneBtn.addEventListener('click', function () {
+                const newCode = document.getElementById('newProgramCode').value.trim();
+                const newName = document.getElementById('newProgramName').value.trim();
+
+                if (!newCode || !newName) {
+                    alert('Vui lòng nhập mã và tên chương trình mới!');
+                    return;
+                }
+
+                // In a real app, this would clone the record via AJAX
+                alert('Đã tạo bản sao chương trình học thành công!');
+                cloneProgramModal.style.display = 'none';
+            });
+
+            // Close modals when clicking outside
+            window.addEventListener('click', function (e) {
+                if (e.target === createProgramModal) {
+                    createProgramModal.style.display = 'none';
+                }
+                if (e.target === deleteProgramModal) {
+                    deleteProgramModal.style.display = 'none';
+                }
+                if (e.target === cloneProgramModal) {
+                    cloneProgramModal.style.display = 'none';
+                }
+            });
+        });
+
+        // Add a debug script that runs after page load
+        window.addEventListener('load', function () {
+            // Test modal visibility function
+            window.showDeleteModal = function () {
+                const modal = document.getElementById('deleteProgramModal');
+                if (modal) {
+                    modal.style.display = 'block';
+                    modal.style.opacity = '1';
+                    modal.style.visibility = 'visible';
+                    console.log("Modal shown via test function");
+                } else {
+                    console.error("Modal not found in test function");
+                }
+            };
+
+            // Attach click events for debugging
+            document.querySelectorAll('.delete-program').forEach(btn => {
+                btn.setAttribute('onclick', "console.log('Delete button direct click')");
+            });
+
+            console.log("Debug script loaded, try 'showDeleteModal()' in console to test");
+        });
+    </script>
+</body>
+
+</html>

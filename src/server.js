@@ -1,23 +1,26 @@
 require('dotenv').config();
 const express = require('express');
-const webRoutes = require('./routes/web');
-const configViewEngine = require('./config/viewEngine');
+const path = require('path');
+const routes = require('./routes/index');
 
 const app = express();
-const port = process.env.PORT;
-const hostnam = process.env.HOSTNAME;
+const port = process.env.PORT || 3000;
 
-//config template engine
-configViewEngine(app);
+// Set view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
-//khai bao route
-app.use('/', webRoutes);
+// Serve static files
+app.use(express.static(path.join(__dirname, 'public')));
 
+// Parse request body
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
+// Use routes
+app.use('/', routes);
 
-
-
-
+// Start server
 app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+    console.log(`Server is running on port ${port}`);
+});

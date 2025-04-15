@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Lịch Thi - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'schedule' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-clipboard-check"></i> Quản Lý Lịch Thi</h1>
+                            <div class="page-actions">
+                                <button class="btn secondary" id="import-schedule"><i class="fas fa-file-import"></i>
+                                    Nhập từ Excel</button>
+                                <button class="btn primary" id="add-exam"><i class="fas fa-plus"></i> Thêm lịch
+                                    thi</button>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Bộ lọc lịch thi</h3>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="filter-row">
+                                    <div class="filter-item">
+                                        <label>Học kỳ</label>
+                                        <select id="semester-filter">
+                                            <option value="">Chọn học kỳ</option>
+                                            <option value="1-2023" selected>Học kỳ 1 - 2023-2024</option>
+                                            <option value="2-2022">Học kỳ 2 - 2022-2023</option>
+                                            <option value="1-2022">Học kỳ 1 - 2022-2023</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-item">
+                                        <label>Khoa/Ngành</label>
+                                        <select id="department-filter">
+                                            <option value="">Tất cả khoa/ngành</option>
+                                            <option value="cntt">Công nghệ thông tin</option>
+                                            <option value="ktmt">Kỹ thuật máy tính</option>
+                                            <option value="attt">An toàn thông tin</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-item">
+                                        <label>Loại kỳ thi</label>
+                                        <select id="exam-type-filter">
+                                            <option value="">Tất cả loại</option>
+                                            <option value="midterm">Giữa kỳ</option>
+                                            <option value="final">Cuối kỳ</option>
+                                            <option value="resit">Thi lại</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-item">
+                                        <label>Môn học</label>
+                                        <select id="course-filter">
+                                            <option value="">Tất cả môn học</option>
+                                            <option value="COMP101">COMP101 - Nhập môn lập trình</option>
+                                            <option value="COMP102">COMP102 - Cấu trúc dữ liệu và giải thuật</option>
+                                            <option value="COMP301">COMP301 - Cơ sở dữ liệu</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-item">
+                                        <label>Trạng thái</label>
+                                        <select id="status-filter">
+                                            <option value="">Tất cả trạng thái</option>
+                                            <option value="scheduled">Đã lên lịch</option>
+                                            <option value="inProgress">Đang diễn ra</option>
+                                            <option value="completed">Đã hoàn thành</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-row">
+                            <div class="dashboard-col-3">
+                                <div class="admin-card full-height">
+                                    <div class="admin-card-header">
+                                        <h3>Danh sách kỳ thi</h3>
+                                        <div class="card-actions">
+                                            <div class="search-box">
+                                                <input type="text" placeholder="Tìm kỳ thi...">
+                                                <button><i class="fas fa-search"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body p-0">
+                                        <div class="class-list">
+                                            <div class="class-item active">
+                                                <div class="class-info">
+                                                    <div class="class-code">Kỳ thi cuối kỳ</div>
+                                                    <div class="class-name">Học kỳ 1 - 2023-2024</div>
+                                                </div>
+                                                <div class="class-meta">
+                                                    <span class="class-teacher">15/12/2023 - 31/12/2023</span>
+                                                    <span class="class-status scheduled">Đã lên lịch</span>
+                                                </div>
+                                            </div>
+                                            <div class="class-item">
+                                                <div class="class-info">
+                                                    <div class="class-code">Kỳ thi giữa kỳ</div>
+                                                    <div class="class-name">Học kỳ 1 - 2023-2024</div>
+                                                </div>
+                                                <div class="class-meta">
+                                                    <span class="class-teacher">15/10/2023 - 25/10/2023</span>
+                                                    <span class="class-status completed">Đã hoàn thành</span>
+                                                </div>
+                                            </div>
+                                            <div class="class-item">
+                                                <div class="class-info">
+                                                    <div class="class-code">Kỳ thi cuối kỳ</div>
+                                                    <div class="class-name">Học kỳ 2 - 2022-2023</div>
+                                                </div>
+                                                <div class="class-meta">
+                                                    <span class="class-teacher">05/07/2023 - 20/07/2023</span>
+                                                    <span class="class-status completed">Đã hoàn thành</span>
+                                                </div>
+                                            </div>
+                                            <div class="class-item">
+                                                <div class="class-info">
+                                                    <div class="class-code">Kỳ thi lại</div>
+                                                    <div class="class-name">Học kỳ 2 - 2022-2023</div>
+                                                </div>
+                                                <div class="class-meta">
+                                                    <span class="class-teacher">15/08/2023 - 20/08/2023</span>
+                                                    <span class="class-status completed">Đã hoàn thành</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-col-9">
+                                <div class="admin-card full-height">
+                                    <div class="admin-card-header">
+                                        <h3>Lịch thi Học kỳ 1 - 2023-2024</h3>
+                                        <div class="card-actions">
+                                            <div class="week-navigator">
+                                                <button class="btn-icon"><i class="fas fa-chevron-left"></i></button>
+                                                <span class="current-week">15/12/2023 - 21/12/2023</span>
+                                                <button class="btn-icon"><i class="fas fa-chevron-right"></i></button>
+                                            </div>
+                                            <div class="view-type">
+                                                <button class="btn-sm secondary active"><i
+                                                        class="fas fa-calendar-week"></i> Tuần</button>
+                                                <button class="btn-sm secondary"><i class="fas fa-th"></i> Ngày</button>
+                                                <button class="btn-sm secondary"><i class="fas fa-list"></i> Danh
+                                                    sách</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body p-0">
+                                        <div class="schedule-timetable">
+                                            <table class="timetable exam-timetable fullwidth">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="time-header">/</th>
+                                                        <th>Thứ 2<br>15/12</th>
+                                                        <th>Thứ 3<br>16/12</th>
+                                                        <th>Thứ 4<br>17/12</th>
+                                                        <th>Thứ 5<br>18/12</th>
+                                                        <th>Thứ 6<br>19/12</th>
+                                                        <th>Thứ 7<br>20/12</th>
+                                                        <th>Chủ nhật<br>21/12</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="time-slot">Ca 1<br>(7:00 - 9:00)</td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP101</div>
+                                                                <div class="slot-detail">Nhập môn lập trình</div>
+                                                                <div class="slot-room">A402 (70 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP306</div>
+                                                                <div class="slot-detail">An toàn thông tin</div>
+                                                                <div class="slot-room">C103 (50 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP302</div>
+                                                                <div class="slot-detail">Mạng máy tính</div>
+                                                                <div class="slot-room">B205 (55 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="time-slot">Ca 2<br>(9:30 - 11:30)</td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">MATH101</div>
+                                                                <div class="slot-detail">Giải tích 1</div>
+                                                                <div class="slot-room">A305 (80 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP307</div>
+                                                                <div class="slot-detail">Phân tích thiết kế hệ thống
+                                                                </div>
+                                                                <div class="slot-room">A305 (55 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">ENG101</div>
+                                                                <div class="slot-detail">Tiếng Anh học thuật</div>
+                                                                <div class="slot-room">B302 (120 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="time-slot">Ca 3<br>(13:00 - 15:00)</td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP301</div>
+                                                                <div class="slot-detail">Cơ sở dữ liệu</div>
+                                                                <div class="slot-room">A301 (60 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">COMP304</div>
+                                                                <div class="slot-detail">Công nghệ phần mềm</div>
+                                                                <div class="slot-room">A402 (50 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="time-slot">Ca 4<br>(15:30 - 17:30)</td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">PHY101</div>
+                                                                <div class="slot-detail">Vật lý đại cương</div>
+                                                                <div class="slot-room">D201 (100 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot exam-slot has-exam">
+                                                            <div class="slot-content">
+                                                                <div class="slot-title">MATH102</div>
+                                                                <div class="slot-detail">Đại số tuyến tính</div>
+                                                                <div class="slot-room">B201 (85 SV)</div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="schedule-slot"></td>
+                                                        <td class="schedule-slot"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Chi tiết lịch thi học phần COMP301: Cơ sở dữ liệu</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary"><i class="fas fa-edit"></i> Chỉnh sửa</button>
+                                    <button class="btn-sm danger"><i class="fas fa-trash"></i> Xóa</button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="class-details">
+                                    <div class="detail-row">
+                                        <div class="detail-group">
+                                            <div class="detail-label">Học phần:</div>
+                                            <div class="detail-value">COMP301 - Cơ sở dữ liệu</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Loại kỳ thi:</div>
+                                            <div class="detail-value">Thi cuối kỳ</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Hình thức thi:</div>
+                                            <div class="detail-value">Thi trên máy tính</div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-row">
+                                        <div class="detail-group">
+                                            <div class="detail-label">Thời gian thi:</div>
+                                            <div class="detail-value">15/12/2023 (13:00 - 15:00)</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Phòng thi:</div>
+                                            <div class="detail-value">A301</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Số lượng sinh viên:</div>
+                                            <div class="detail-value">60/70 đăng ký</div>
+                                        </div>
+                                    </div>
+                                    <div class="detail-row">
+                                        <div class="detail-group">
+                                            <div class="detail-label">Giảng viên coi thi:</div>
+                                            <div class="detail-value">TS. Nguyễn Văn B, ThS. Trần Thị C</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Thời gian làm bài:</div>
+                                            <div class="detail-value">90 phút</div>
+                                        </div>
+                                        <div class="detail-group">
+                                            <div class="detail-label">Trạng thái:</div>
+                                            <div class="detail-value"><span class="badge scheduled">Đã lên lịch</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Student List for Exam -->
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Danh sách sinh viên thi học phần COMP301</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary"><i class="fas fa-print"></i> In danh sách</button>
+                                    <button class="btn-sm secondary"><i class="fas fa-download"></i> Xuất Excel</button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="table-toolbar">
+                                    <div class="search-box">
+                                        <input type="text" placeholder="Tìm kiếm sinh viên...">
+                                        <button><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <div class="table-actions">
+                                        <button class="btn-sm secondary"><i class="fas fa-user-plus"></i> Thêm sinh
+                                            viên</button>
+                                        <button class="btn-sm secondary"><i class="fas fa-user-check"></i> Điểm
+                                            danh</button>
+                                    </div>
+                                </div>
+                                <div class="responsive-table">
+                                    <table class="admin-table student-list-table">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>MSSV</th>
+                                                <th>Họ và tên</th>
+                                                <th>Lớp</th>
+                                                <th>SĐT</th>
+                                                <th>Ngày sinh</th>
+                                                <th>Trạng thái</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>20000123</td>
+                                                <td>Nguyễn Văn A</td>
+                                                <td>CNTT1</td>
+                                                <td>0912345678</td>
+                                                <td>10/05/2002</td>
+                                                <td><span class="badge registered">Đã đăng ký</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>20000124</td>
+                                                <td>Trần Thị B</td>
+                                                <td>CNTT1</td>
+                                                <td>0923456789</td>
+                                                <td>15/07/2002</td>
+                                                <td><span class="badge registered">Đã đăng ký</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>20000125</td>
+                                                <td>Lê Văn C</td>
+                                                <td>CNTT2</td>
+                                                <td>0934567890</td>
+                                                <td>22/03/2002</td>
+                                                <td><span class="badge special">Thi đặc biệt</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>20000126</td>
+                                                <td>Phạm Hoàng D</td>
+                                                <td>CNTT2</td>
+                                                <td>0945678901</td>
+                                                <td>05/09/2002</td>
+                                                <td><span class="badge registered">Đã đăng ký</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>20000127</td>
+                                                <td>Võ Minh E</td>
+                                                <td>CNTT1</td>
+                                                <td>0956789012</td>
+                                                <td>18/11/2002</td>
+                                                <td><span class="badge absent">Vắng thi</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                        <button class="btn-icon"><i class="fas fa-times"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination-container">
+                                    <div class="pagination-info">Hiển thị 1-5 của 60 sinh viên</div>
+                                    <div class="pagination">
+                                        <span class="page-item disabled"><i class="fas fa-chevron-left"></i></span>
+                                        <span class="page-item active">1</span>
+                                        <span class="page-item">2</span>
+                                        <span class="page-item">3</span>
+                                        <span class="page-item">...</span>
+                                        <span class="page-item">12</span>
+                                        <span class="page-item"><i class="fas fa-chevron-right"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Add Exam Modal -->
+    <div class="modal" id="addExamModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus-circle"></i> Thêm lịch thi</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="addExamForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="examCourse">Học phần <span class="required">*</span></label>
+                            <select id="examCourse" name="courseId" required>
+                                <option value="">-- Chọn học phần --</option>
+                                <option value="COMP101">COMP101 - Nhập môn lập trình</option>
+                                <option value="COMP102">COMP102 - Cấu trúc dữ liệu và giải thuật</option>
+                                <option value="COMP301">COMP301 - Cơ sở dữ liệu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="examType">Loại kỳ thi <span class="required">*</span></label>
+                            <select id="examType" name="examType" required>
+                                <option value="">-- Chọn loại --</option>
+                                <option value="midterm">Giữa kỳ</option>
+                                <option value="final">Cuối kỳ</option>
+                                <option value="resit">Thi lại</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="examDate">Ngày thi <span class="required">*</span></label>
+                            <input type="date" id="examDate" name="examDate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="examSlot">Ca thi <span class="required">*</span></label>
+                            <select id="examSlot" name="examSlot" required>
+                                <option value="">-- Chọn ca thi --</option>
+                                <option value="1">Ca 1 (7:00 - 9:00)</option>
+                                <option value="2">Ca 2 (9:30 - 11:30)</option>
+                                <option value="3">Ca 3 (13:00 - 15:00)</option>
+                                <option value="4">Ca 4 (15:30 - 17:30)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="examRoom">Phòng thi <span class="required">*</span></label>
+                            <select id="examRoom" name="examRoom" required>
+                                <option value="">-- Chọn phòng thi --</option>
+                                <optgroup label="Khu A">
+                                    <option value="A101">A101 (80 chỗ)</option>
+                                    <option value="A102">A102 (80 chỗ)</option>
+                                    <option value="A301">A301 (70 chỗ)</option>
+                                    <option value="A302">A302 (70 chỗ)</option>
+                                </optgroup>
+                                <optgroup label="Khu B">
+                                    <option value="B201">B201 (100 chỗ)</option>
+                                    <option value="B202">B202 (100 chỗ)</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="examDuration">Thời gian làm bài (phút) <span class="required">*</span></label>
+                            <input type="number" id="examDuration" name="examDuration" min="30" max="180" value="90"
+                                required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="examFormat">Hình thức thi <span class="required">*</span></label>
+                            <select id="examFormat" name="examFormat" required>
+                                <option value="written">Tự luận</option>
+                                <option value="multiplechoice">Trắc nghiệm</option>
+                                <option value="practical">Thực hành</option>
+                                <option value="oral">Vấn đáp</option>
+                                <option value="computer">Trên máy tính</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="examProctors">Giảng viên coi thi <span class="required">*</span></label>
+                            <select id="examProctors" name="examProctors" multiple required>
+                                <option value="GV001">TS. Nguyễn Văn B</option>
+                                <option value="GV002">TS. Trần Thị C</option>
+                                <option value="GV003">TS. Phạm Văn E</option>
+                                <option value="GV004">ThS. Lê Thị D</option>
+                            </select>
+                            <small class="form-hint">Có thể chọn nhiều giảng viên (Giữ Ctrl để chọn nhiều)</small>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="examNotes">Ghi chú</label>
+                        <textarea id="examNotes" name="examNotes" rows="3"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelExamBtn">Hủy</button>
+                <button class="btn primary" id="saveExamBtn">Thêm lịch thi</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div class="notification success" id="successNotification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            <h4>Thành công</h4>
+            <p>Lịch thi đã được thêm thành công!</p>
+        </div>
+        <button class="notification-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Class item click handler
+            const classItems = document.querySelectorAll('.class-item');
+            classItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    classItems.forEach(i => i.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you'd load the selected exam period's schedule
+                });
+            });
+
+            // Search functionality
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const examItems = document.querySelectorAll('.class-item');
+
+                examItems.forEach(item => {
+                    const code = item.querySelector('.class-code').textContent.toLowerCase();
+                    const name = item.querySelector('.class-name').textContent.toLowerCase();
+
+                    if (code.includes(searchTerm) || name.includes(searchTerm)) {
+                        item.style.display = '';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+
+            // Week navigation buttons
+            const prevWeekBtn = document.querySelector('.week-navigator button:first-child');
+            const nextWeekBtn = document.querySelector('.week-navigator button:last-child');
+            const currentWeekSpan = document.querySelector('.current-week');
+
+            const weeks = [
+                '08/12/2023 - 14/12/2023',
+                '15/12/2023 - 21/12/2023',
+                '22/12/2023 - 28/12/2023',
+                '29/12/2023 - 31/12/2023'
+            ];
+            let currentWeekIndex = 1;
+
+            prevWeekBtn.addEventListener('click', function () {
+                if (currentWeekIndex > 0) {
+                    currentWeekIndex--;
+                    currentWeekSpan.textContent = weeks[currentWeekIndex];
+                }
+            });
+
+            nextWeekBtn.addEventListener('click', function () {
+                if (currentWeekIndex < weeks.length - 1) {
+                    currentWeekIndex++;
+                    currentWeekSpan.textContent = weeks[currentWeekIndex];
+                }
+            });
+
+            // View type buttons
+            const viewTypeButtons = document.querySelectorAll('.view-type button');
+            viewTypeButtons.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    viewTypeButtons.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    // In a real app, you'd change the view type here
+                });
+            });
+
+            // Add Exam Modal
+            const addExamBtn = document.getElementById('add-exam');
+            const addExamModal = document.getElementById('addExamModal');
+            const cancelExamBtn = document.getElementById('cancelExamBtn');
+            const closeModalBtn = addExamModal.querySelector('.close-modal');
+            const saveExamBtn = document.getElementById('saveExamBtn');
+
+            addExamBtn.addEventListener('click', function () {
+                addExamModal.classList.add('show');
+            });
+
+            function closeModal() {
+                addExamModal.classList.remove('show');
+            }
+
+            cancelExamBtn.addEventListener('click', closeModal);
+            closeModalBtn.addEventListener('click', closeModal);
+
+            // Save exam button
+            saveExamBtn.addEventListener('click', function () {
+                const form = document.getElementById('addExamForm');
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value) {
+                        isValid = false;
+                        field.classList.add('error');
+                    } else {
+                        field.classList.remove('error');
+                    }
+                });
+
+                if (isValid) {
+                    closeModal();
+
+                    // Show success notification
+                    const successNotification = document.getElementById('successNotification');
+                    successNotification.classList.add('show');
+
+                    // Hide notification after 3 seconds
+                    setTimeout(() => {
+                        successNotification.classList.remove('show');
+                    }, 3000);
+                }
+            });
+
+            // Close notification
+            document.querySelector('.notification-close').addEventListener('click', function () {
+                document.getElementById('successNotification').classList.remove('show');
+            });
+
+            // Import schedule button
+            document.getElementById('import-schedule').addEventListener('click', function () {
+                alert('Tính năng nhập từ Excel đang được phát triển');
+            });
+        });
+    </script>
+
+    <style>
+        /* Additional specific styles for exam schedule */
+        .class-status {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .scheduled {
+            background-color: #4e73df10;
+            color: #4e73df;
+        }
+
+        .completed {
+            background-color: #1cc88a10;
+            color: #1cc88a;
+        }
+
+        .absent {
+            background-color: #e74a3b10;
+            color: #e74a3b;
+        }
+
+        .registered {
+            background-color: #36b9cc10;
+            color: #36b9cc;
+        }
+
+        .special {
+            background-color: #f6c23e10;
+            color: #f6c23e;
+        }
+
+        .table-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .table-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .pagination-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pagination-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .form-hint {
+            display: block;
+            font-size: 0.8rem;
+            color: #858796;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-row {
+                flex-direction: column;
+            }
+
+            .dashboard-col-3,
+            .dashboard-col-9 {
+                width: 100%;
+            }
+
+            .dashboard-col-3 {
+                margin-bottom: 20px;
+            }
+
+            .table-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .pagination-container {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</body>
+
+</html>

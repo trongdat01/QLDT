@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-grades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Nhập Điểm - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'grades' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-file-import"></i> Nhập Điểm</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/grades">Quản lý điểm</a> /
+                                <span>Nhập điểm</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Nhập điểm từ tập tin Excel</h3>
+                            </div>
+                            <div class="admin-card-body import-card">
+                                <div class="import-steps">
+                                    <div class="step active" data-step="1">
+                                        <div class="step-number">1</div>
+                                        <div class="step-title">Chuẩn bị</div>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <div class="step" data-step="2">
+                                        <div class="step-number">2</div>
+                                        <div class="step-title">Tải lên</div>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <div class="step" data-step="3">
+                                        <div class="step-number">3</div>
+                                        <div class="step-title">Xác nhận</div>
+                                    </div>
+                                    <div class="step-line"></div>
+                                    <div class="step" data-step="4">
+                                        <div class="step-number">4</div>
+                                        <div class="step-title">Hoàn tất</div>
+                                    </div>
+                                </div>
+
+                                <div class="step-content" id="step-1">
+                                    <div class="step-header">
+                                        <h3>Chuẩn bị tập tin</h3>
+                                        <p>Vui lòng chọn học phần và tải mẫu Excel để nhập điểm</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="semester-select">Học kỳ</label>
+                                        <select id="semester-select" required>
+                                            <option value="">-- Chọn học kỳ --</option>
+                                            <option value="2023-1">Học kỳ 1 - 2023-2024</option>
+                                            <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                            <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="course-select">Học phần</label>
+                                        <select id="course-select" required>
+                                            <option value="">-- Chọn học phần --</option>
+                                            <option value="COMP301-1">COMP301 - Cơ sở dữ liệu (Nhóm 1)</option>
+                                            <option value="COMP302-2">COMP302 - Mạng máy tính (Nhóm 2)</option>
+                                            <option value="COMP303-1">COMP303 - Lập trình web (Nhóm 1)</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="grade-type">Loại điểm</label>
+                                        <select id="grade-type" required>
+                                            <option value="">-- Chọn loại điểm --</option>
+                                            <option value="all">Tất cả các điểm</option>
+                                            <option value="attendance">Điểm chuyên cần</option>
+                                            <option value="assignment">Điểm bài tập</option>
+                                            <option value="quiz">Điểm kiểm tra</option>
+                                            <option value="exam">Điểm thi</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="download-template">
+                                        <button class="btn secondary" id="download-template">
+                                            <i class="fas fa-download"></i> Tải mẫu Excel
+                                        </button>
+                                        <p class="help-text">Tải mẫu Excel và điền thông tin điểm vào mẫu rồi tải lên hệ
+                                            thống</p>
+                                    </div>
+
+                                    <div class="step-actions">
+                                        <button class="btn secondary"
+                                            onclick="window.location.href='/admin/grades'">Hủy</button>
+                                        <button class="btn primary next-step" data-next="2">Tiếp tục</button>
+                                    </div>
+                                </div>
+
+                                <div class="step-content" id="step-2" style="display: none;">
+                                    <div class="step-header">
+                                        <h3>Tải tập tin lên</h3>
+                                        <p>Tải lên tập tin Excel chứa thông tin điểm của học phần</p>
+                                    </div>
+
+                                    <div class="upload-zone" id="upload-zone">
+                                        <i class="fas fa-cloud-upload-alt"></i>
+                                        <h4>Kéo và thả tập tin Excel vào đây</h4>
+                                        <p>hoặc</p>
+                                        <button class="btn secondary" id="select-file-btn">Chọn tập tin</button>
+                                        <input type="file" id="file-input" style="display: none;" accept=".xlsx, .xls">
+                                        <p class="help-text">Chỉ chấp nhận file Excel (.xlsx, .xls)</p>
+                                    </div>
+
+                                    <div class="upload-info" style="display: none;">
+                                        <div class="file-info">
+                                            <i class="fas fa-file-excel"></i>
+                                            <div class="file-details">
+                                                <span class="file-name">grades-COMP301.xlsx</span>
+                                                <span class="file-size">24 KB</span>
+                                            </div>
+                                            <button class="btn-icon remove-file">
+                                                <i class="fas fa-times"></i>
+                                            </button>
+                                        </div>
+                                        <div class="upload-progress">
+                                            <div class="progress-bar">
+                                                <div class="progress-fill" style="width: 0%"></div>
+                                            </div>
+                                            <span class="progress-text">0%</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="step-actions">
+                                        <button class="btn secondary prev-step" data-prev="1">Quay lại</button>
+                                        <button class="btn primary next-step" data-next="3" disabled>Tiếp tục</button>
+                                    </div>
+                                </div>
+
+                                <div class="step-content" id="step-3" style="display: none;">
+                                    <div class="step-header">
+                                        <h3>Xác nhận thông tin</h3>
+                                        <p>Kiểm tra và xác nhận thông tin điểm trước khi cập nhật</p>
+                                    </div>
+
+                                    <div class="import-summary">
+                                        <div class="summary-item">
+                                            <div class="summary-label">Học phần:</div>
+                                            <div class="summary-value">COMP301 - Cơ sở dữ liệu (Nhóm 1)</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-label">Số sinh viên:</div>
+                                            <div class="summary-value">60</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-label">Loại điểm:</div>
+                                            <div class="summary-value">Tất cả các điểm</div>
+                                        </div>
+                                        <div class="summary-item">
+                                            <div class="summary-label">Trạng thái:</div>
+                                            <div class="summary-value"><span class="status-badge success">Sẵn
+                                                    sàng</span></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="preview-table-container">
+                                        <h4>Xem trước dữ liệu</h4>
+                                        <div class="table-responsive">
+                                            <table class="preview-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th>MSSV</th>
+                                                        <th>Họ và tên</th>
+                                                        <th>Chuyên cần</th>
+                                                        <th>Bài tập</th>
+                                                        <th>Kiểm tra</th>
+                                                        <th>Thi</th>
+                                                        <th>Trạng thái</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>20000123</td>
+                                                        <td>Nguyễn Văn A</td>
+                                                        <td>8.5</td>
+                                                        <td>9.0</td>
+                                                        <td>7.5</td>
+                                                        <td>8.0</td>
+                                                        <td><span class="status-icon valid"><i
+                                                                    class="fas fa-check"></i></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>20000124</td>
+                                                        <td>Trần Thị B</td>
+                                                        <td>9.0</td>
+                                                        <td>8.5</td>
+                                                        <td>8.0</td>
+                                                        <td>8.5</td>
+                                                        <td><span class="status-icon valid"><i
+                                                                    class="fas fa-check"></i></span></td>
+                                                    </tr>
+                                                    <tr class="error-row">
+                                                        <td>20000125</td>
+                                                        <td>Lê Văn C</td>
+                                                        <td>7.0</td>
+                                                        <td>8.0</td>
+                                                        <td>11.5</td>
+                                                        <td>7.0</td>
+                                                        <td><span class="status-icon invalid"
+                                                                title="Điểm kiểm tra không hợp lệ (> 10)"><i
+                                                                    class="fas fa-exclamation-circle"></i></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>20000126</td>
+                                                        <td>Phạm Thị D</td>
+                                                        <td>8.0</td>
+                                                        <td>7.5</td>
+                                                        <td>7.0</td>
+                                                        <td>7.5</td>
+                                                        <td><span class="status-icon valid"><i
+                                                                    class="fas fa-check"></i></span></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>20000127</td>
+                                                        <td>Hoàng Văn E</td>
+                                                        <td>9.5</td>
+                                                        <td>9.0</td>
+                                                        <td>9.5</td>
+                                                        <td>9.0</td>
+                                                        <td><span class="status-icon valid"><i
+                                                                    class="fas fa-check"></i></span></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="import-errors">
+                                            <h4><i class="fas fa-exclamation-triangle"></i> Lỗi dữ liệu (1)</h4>
+                                            <ul class="error-list">
+                                                <li>Dòng 3: Điểm kiểm tra của sinh viên Lê Văn C không hợp lệ (11.5 >
+                                                    10)</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="step-actions">
+                                        <button class="btn secondary prev-step" data-prev="2">Quay lại</button>
+                                        <button class="btn primary next-step" data-next="4">Cập nhật điểm</button>
+                                    </div>
+                                </div>
+
+                                <div class="step-content" id="step-4" style="display: none;">
+                                    <div class="import-result success">
+                                        <div class="result-icon">
+                                            <i class="fas fa-check-circle"></i>
+                                        </div>
+                                        <h3>Nhập điểm thành công!</h3>
+                                        <p>Đã cập nhật điểm cho 59/60 sinh viên.</p>
+                                        <div class="result-details">
+                                            <div class="detail-item">
+                                                <span class="detail-label">Thành công:</span>
+                                                <span class="detail-value">59</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">Thất bại:</span>
+                                                <span class="detail-value">1</span>
+                                            </div>
+                                            <div class="detail-item">
+                                                <span class="detail-label">Thời gian:</span>
+                                                <span class="detail-value">15:30:25, 21/10/2023</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="result-actions">
+                                            <a href="/admin/grades" class="btn secondary">
+                                                <i class="fas fa-list"></i> Danh sách điểm
+                                            </a>
+                                            <button class="btn primary" onclick="window.location.reload()">
+                                                <i class="fas fa-upload"></i> Nhập điểm mới
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Step navigation
+            const nextButtons = document.querySelectorAll('.next-step');
+            const prevButtons = document.querySelectorAll('.prev-step');
+
+            nextButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const nextStep = this.dataset.next;
+
+                    // Hide all steps
+                    document.querySelectorAll('.step-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Show the next step
+                    document.getElementById(`step-${nextStep}`).style.display = 'block';
+
+                    // Update steps indicator
+                    document.querySelectorAll('.step').forEach(step => {
+                        step.classList.remove('active');
+                        if (parseInt(step.dataset.step) <= parseInt(nextStep)) {
+                            step.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            prevButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const prevStep = this.dataset.prev;
+
+                    // Hide all steps
+                    document.querySelectorAll('.step-content').forEach(content => {
+                        content.style.display = 'none';
+                    });
+
+                    // Show the previous step
+                    document.getElementById(`step-${prevStep}`).style.display = 'block';
+
+                    // Update steps indicator
+                    document.querySelectorAll('.step').forEach(step => {
+                        step.classList.remove('active');
+                        if (parseInt(step.dataset.step) <= parseInt(prevStep)) {
+                            step.classList.add('active');
+                        }
+                    });
+                });
+            });
+
+            // Download template
+            document.getElementById('download-template').addEventListener('click', function () {
+                const courseSelect = document.getElementById('course-select');
+                const gradeType = document.getElementById('grade-type');
+
+                if (courseSelect.value && gradeType.value) {
+                    alert(`Đang tải mẫu Excel cho ${courseSelect.options[courseSelect.selectedIndex].text} - ${gradeType.options[gradeType.selectedIndex].text}`);
+                } else {
+                    alert('Vui lòng chọn học phần và loại điểm trước khi tải mẫu.');
+                }
+            });
+
+            // File selection
+            document.getElementById('select-file-btn').addEventListener('click', function () {
+                document.getElementById('file-input').click();
+            });
+
+            document.getElementById('file-input').addEventListener('change', function () {
+                if (this.files.length > 0) {
+                    handleFileUpload(this.files[0]);
+                }
+            });
+
+            // Drag and drop functionality
+            const uploadZone = document.getElementById('upload-zone');
+
+            uploadZone.addEventListener('dragover', function (e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+
+            uploadZone.addEventListener('dragleave', function (e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+            });
+
+            uploadZone.addEventListener('drop', function (e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+
+                if (e.dataTransfer.files.length > 0) {
+                    handleFileUpload(e.dataTransfer.files[0]);
+                }
+            });
+
+            // Handle file upload
+            function handleFileUpload(file) {
+                // Check file type
+                if (!file.name.match(/\.(xlsx|xls)$/i)) {
+                    alert('Vui lòng chỉ tải lên file Excel (.xlsx, .xls)');
+                    return;
+                }
+
+                // Update UI with file info
+                const uploadInfo = document.querySelector('.upload-info');
+                const fileName = document.querySelector('.file-name');
+                const fileSize = document.querySelector('.file-size');
+                const progressFill = document.querySelector('.progress-fill');
+                const progressText = document.querySelector('.progress-text');
+                const continueButton = document.querySelector('[data-next="3"]');
+
+                fileName.textContent = file.name;
+                fileSize.textContent = formatFileSize(file.size);
+                uploadInfo.style.display = 'block';
+
+                // Simulate upload progress
+                let progress = 0;
+                const interval = setInterval(function () {
+                    progress += 5;
+                    progressFill.style.width = `${progress}%`;
+                    progressText.textContent = `${progress}%`;
+
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        continueButton.disabled = false;
+                    }
+                }, 100);
+            }
+
+            // Remove file
+            document.querySelector('.remove-file').addEventListener('click', function () {
+                document.querySelector('.upload-info').style.display = 'none';
+                document.getElementById('file-input').value = '';
+                document.querySelector('[data-next="3"]').disabled = true;
+            });
+
+            // Helper function to format file size
+            function formatFileSize(bytes) {
+                if (bytes < 1024) {
+                    return bytes + ' bytes';
+                } else if (bytes < 1048576) {
+                    return (bytes / 1024).toFixed(1) + ' KB';
+                } else {
+                    return (bytes / 1048576).toFixed(1) + ' MB';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

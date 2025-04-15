@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-students.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Sinh Viên - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'students' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-user-graduate"></i> Quản Lý Sinh Viên</h1>
+                            <div class="page-actions">
+                                <a href="/admin/students/create" class="btn primary">
+                                    <i class="fas fa-plus"></i> Thêm sinh viên mới
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Danh sách sinh viên</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary">
+                                        <i class="fas fa-file-export"></i> Xuất Excel
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="filter-bar">
+                                    <div class="student-search">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="studentSearch" placeholder="Tìm theo tên hoặc MSSV...">
+                                    </div>
+                                    <div class="filter-group">
+                                        <select class="filter-select" id="departmentFilter">
+                                            <option value="all">Tất cả khoa/ngành</option>
+                                            <option value="cntt">Công nghệ thông tin</option>
+                                            <option value="ktmt">Kỹ thuật máy tính</option>
+                                            <option value="attt">An toàn thông tin</option>
+                                            <option value="ktdl">Khoa học dữ liệu</option>
+                                            <option value="httt">Hệ thống thông tin</option>
+                                        </select>
+                                        <select class="filter-select" id="classFilter">
+                                            <option value="all">Tất cả lớp</option>
+                                        </select>
+                                        <select class="filter-select" id="yearFilter">
+                                            <option value="all">Tất cả niên khóa</option>
+                                            <option value="2023-2027">2023-2027</option>
+                                            <option value="2022-2026">2022-2026</option>
+                                            <option value="2021-2025">2021-2025</option>
+                                            <option value="2020-2024">2020-2024</option>
+                                        </select>
+                                        <select class="filter-select" id="statusFilter">
+                                            <option value="all">Tất cả trạng thái</option>
+                                            <option value="active">Đang học</option>
+                                            <option value="inactive">Nghỉ học</option>
+                                            <option value="graduated">Đã tốt nghiệp</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="students-table-container">
+                                    <table class="students-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 60px;"></th>
+                                                <th>Thông tin sinh viên</th>
+                                                <th>Lớp</th>
+                                                <th>Khoa/Ngành</th>
+                                                <th>Niên khóa</th>
+                                                <th>Email</th>
+                                                <th>Trạng thái</th>
+                                                <th style="width: 120px;">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Sample student 1 -->
+                                            <tr>
+                                                <td class="student-avatar-cell">
+                                                    <img src="/images/lambo.jpg" alt="Sinh viên"
+                                                        class="student-avatar-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="student-name">Nguyễn Văn A</span>
+                                                    <span class="student-id">MSSV: 20000123</span>
+                                                </td>
+                                                <td>CNTT 01</td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>2020-2024</td>
+                                                <td>20000123@student.edu.vn</td>
+                                                <td>
+                                                    <span class="student-badge active">Đang học</span>
+                                                </td>
+                                                <td>
+                                                    <div class="student-actions">
+                                                        <button class="action-btn view" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <a href="/admin/students/edit/1" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn delete" title="Xóa" data-id="1"
+                                                            data-name="Nguyễn Văn A" data-mssv="20000123">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample student 2 -->
+                                            <tr>
+                                                <td class="student-avatar-cell">
+                                                    <img src="/images/lambo.jpg" alt="Sinh viên"
+                                                        class="student-avatar-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="student-name">Trần Thị B</span>
+                                                    <span class="student-id">MSSV: 20000124</span>
+                                                </td>
+                                                <td>CNTT 01</td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>2020-2024</td>
+                                                <td>20000124@student.edu.vn</td>
+                                                <td>
+                                                    <span class="student-badge active">Đang học</span>
+                                                </td>
+                                                <td>
+                                                    <div class="student-actions">
+                                                        <button class="action-btn view" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <a href="/admin/students/edit/2" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn delete" title="Xóa" data-id="2"
+                                                            data-name="Trần Thị B" data-mssv="20000124">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample student 3 -->
+                                            <tr>
+                                                <td class="student-avatar-cell">
+                                                    <img src="/images/lambo.jpg" alt="Sinh viên"
+                                                        class="student-avatar-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="student-name">Lê Văn C</span>
+                                                    <span class="student-id">MSSV: 20000125</span>
+                                                </td>
+                                                <td>CNTT 02</td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td>2020-2024</td>
+                                                <td>20000125@student.edu.vn</td>
+                                                <td>
+                                                    <span class="student-badge inactive">Nghỉ học</span>
+                                                </td>
+                                                <td>
+                                                    <div class="student-actions">
+                                                        <button class="action-btn view" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <a href="/admin/students/edit/3" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn delete" title="Xóa" data-id="3"
+                                                            data-name="Lê Văn C" data-mssv="20000125">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample student 4 -->
+                                            <tr>
+                                                <td class="student-avatar-cell">
+                                                    <img src="/images/lambo.jpg" alt="Sinh viên"
+                                                        class="student-avatar-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="student-name">Phạm Thị D</span>
+                                                    <span class="student-id">MSSV: 20000126</span>
+                                                </td>
+                                                <td>KTMT 01</td>
+                                                <td>Kỹ thuật máy tính</td>
+                                                <td>2020-2024</td>
+                                                <td>20000126@student.edu.vn</td>
+                                                <td>
+                                                    <span class="student-badge graduated">Đã tốt nghiệp</span>
+                                                </td>
+                                                <td>
+                                                    <div class="student-actions">
+                                                        <button class="action-btn view" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <a href="/admin/students/edit/4" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn delete" title="Xóa" data-id="4"
+                                                            data-name="Phạm Thị D" data-mssv="20000126">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Add more students as needed... -->
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination">
+                                    <a href="#" class="page-item active">1</a>
+                                    <a href="#" class="page-item">2</a>
+                                    <a href="#" class="page-item">3</a>
+                                    <a href="#" class="page-item">4</a>
+                                    <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Delete confirmation modal -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Xác nhận xóa sinh viên</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-student-info">
+                    <img src="/images/lambo.jpg" alt="Sinh viên" class="modal-student-avatar" id="modalStudentImg">
+                    <div class="modal-student-details">
+                        <h4 id="modalStudentName">Nguyễn Văn A</h4>
+                        <p id="modalStudentId">MSSV: 20000123</p>
+                    </div>
+                </div>
+                <div class="warning-message">
+                    <i class="fas fa-exclamation-circle"></i> Cảnh báo: Hành động này sẽ xóa hoàn toàn thông tin sinh
+                    viên khỏi hệ thống và không thể khôi phục lại.
+                </div>
+                <p>Bạn có chắc chắn muốn xóa sinh viên này?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Department filter change - update available classes
+            document.getElementById('departmentFilter').addEventListener('change', function () {
+                const department = this.value;
+                const classFilter = document.getElementById('classFilter');
+
+                // Clear current options
+                classFilter.innerHTML = '<option value="all">Tất cả lớp</option>';
+
+                if (department === 'cntt') {
+                    classFilter.innerHTML += `
+                        <option value="cntt1">CNTT 01</option>
+                        <option value="cntt2">CNTT 02</option>
+                        <option value="cntt3">CNTT 03</option>
+                    `;
+                } else if (department === 'ktmt') {
+                    classFilter.innerHTML += `
+                        <option value="ktmt1">KTMT 01</option>
+                        <option value="ktmt2">KTMT 02</option>
+                    `;
+                } else if (department === 'attt') {
+                    classFilter.innerHTML += `
+                        <option value="attt1">ATTT 01</option>
+                    `;
+                } else if (department === 'ktdl') {
+                    classFilter.innerHTML += `
+                        <option value="ktdl1">KTDL 01</option>
+                    `;
+                } else if (department === 'httt') {
+                    classFilter.innerHTML += `
+                        <option value="httt1">HTTT 01</option>
+                        <option value="httt2">HTTT 02</option>
+                    `;
+                } else if (department === 'all') {
+                    classFilter.innerHTML += `
+                        <option value="cntt1">CNTT 01</option>
+                        <option value="cntt2">CNTT 02</option>
+                        <option value="cntt3">CNTT 03</option>
+                        <option value="ktmt1">KTMT 01</option>
+                        <option value="ktmt2">KTMT 02</option>
+                        <option value="attt1">ATTT 01</option>
+                        <option value="ktdl1">KTDL 01</option>
+                        <option value="httt1">HTTT 01</option>
+                        <option value="httt2">HTTT 02</option>
+                    `;
+                }
+
+                // Trigger filter update
+                filterStudents();
+            });
+
+            // Search filter functionality
+            const searchInput = document.getElementById('studentSearch');
+            searchInput.addEventListener('input', filterStudents);
+
+            // Status filter
+            document.getElementById('statusFilter').addEventListener('change', filterStudents);
+            document.getElementById('classFilter').addEventListener('change', filterStudents);
+            document.getElementById('yearFilter').addEventListener('change', filterStudents);
+
+            // Modal functionality
+            const modal = document.getElementById('deleteModal');
+            const closeModal = document.getElementById('closeModal');
+            const cancelDelete = document.getElementById('cancelDelete');
+            const confirmDelete = document.getElementById('confirmDelete');
+
+            // Open modal when delete button is clicked
+            document.querySelectorAll('.action-btn.delete').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const studentId = this.dataset.id;
+                    const studentName = this.dataset.name;
+                    const studentMssv = this.dataset.mssv;
+
+                    document.getElementById('modalStudentName').textContent = studentName;
+                    document.getElementById('modalStudentId').textContent = 'MSSV: ' + studentMssv;
+
+                    // Set the student ID to be used in the delete action
+                    confirmDelete.dataset.id = studentId;
+
+                    // Show modal
+                    modal.classList.add('show');
+                });
+            });
+
+            // Close modal functions
+            closeModal.addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+
+            cancelDelete.addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+
+            // Close modal if user clicks outside the modal
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('show');
+                }
+            });
+
+            // Handle delete confirmation
+            confirmDelete.addEventListener('click', function () {
+                const studentId = this.dataset.id;
+                // In a real app, send a request to the server to delete the student
+                alert(`Xóa sinh viên với ID: ${studentId}. Trong ứng dụng thực tế, một request sẽ được gửi đến server.`);
+
+                // Close modal
+                modal.classList.remove('show');
+            });
+
+            // Filter students based on all selected filters
+            function filterStudents() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const department = document.getElementById('departmentFilter').value;
+                const classValue = document.getElementById('classFilter').value;
+                const year = document.getElementById('yearFilter').value;
+                const status = document.getElementById('statusFilter').value;
+
+                const rows = document.querySelectorAll('.students-table tbody tr');
+
+                rows.forEach(row => {
+                    const nameElement = row.querySelector('.student-name');
+                    const idElement = row.querySelector('.student-id');
+                    const classElement = row.querySelector('td:nth-child(3)');
+                    const departmentElement = row.querySelector('td:nth-child(4)');
+                    const yearElement = row.querySelector('td:nth-child(5)');
+                    const statusElement = row.querySelector('.student-badge');
+
+                    const name = nameElement.textContent.toLowerCase();
+                    const id = idElement.textContent.toLowerCase();
+                    const classText = classElement.textContent.toLowerCase();
+                    const departmentText = departmentElement.textContent.toLowerCase();
+                    const yearText = yearElement.textContent;
+                    const statusText = statusElement.textContent.toLowerCase();
+
+                    // Check if row matches all filters
+                    let matchesDepartment = department === 'all' || departmentText.includes(department);
+                    let matchesClass = classValue === 'all' || classText === classValue.toLowerCase();
+                    let matchesYear = year === 'all' || yearText === year;
+                    let matchesStatus = status === 'all' ||
+                        (status === 'active' && statusText === 'đang học') ||
+                        (status === 'inactive' && statusText === 'nghỉ học') ||
+                        (status === 'graduated' && statusText === 'đã tốt nghiệp');
+                    let matchesSearch = searchTerm === '' || name.includes(searchTerm) || id.includes(searchTerm);
+
+                    if (matchesDepartment && matchesClass && matchesYear && matchesStatus && matchesSearch) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Tin Tức - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'news' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-newspaper"></i> Quản Lý Tin Tức</h1>
+                            <div class="page-actions">
+                                <a href="/admin/news/create" class="btn primary">
+                                    <i class="fas fa-plus"></i> Thêm tin tức mới
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Danh sách tin tức</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary">
+                                        <i class="fas fa-file-export"></i> Xuất báo cáo
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="news-filter-bar">
+                                    <div class="news-search">
+                                        <i class="fas fa-search"></i>
+                                        <input type="text" id="newsSearch" placeholder="Tìm kiếm tin tức...">
+                                    </div>
+                                    <div class="filter-group">
+                                        <select class="filter-select" id="categoryFilter">
+                                            <option value="all">Tất cả danh mục</option>
+                                            <option value="notice">Thông báo</option>
+                                            <option value="event">Sự kiện</option>
+                                            <option value="academics">Học thuật</option>
+                                            <option value="admissions">Tuyển sinh</option>
+                                        </select>
+                                        <select class="filter-select" id="statusFilter">
+                                            <option value="all">Tất cả trạng thái</option>
+                                            <option value="published">Đã đăng</option>
+                                            <option value="draft">Bản nháp</option>
+                                            <option value="scheduled">Lên lịch</option>
+                                        </select>
+                                        <select class="filter-select" id="sortFilter">
+                                            <option value="newest">Mới nhất</option>
+                                            <option value="oldest">Cũ nhất</option>
+                                            <option value="views">Lượt xem nhiều nhất</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="news-table-container">
+                                    <table class="news-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 60px;"></th>
+                                                <th>Tiêu đề</th>
+                                                <th style="width: 120px;">Danh mục</th>
+                                                <th style="width: 120px;">Ngày đăng</th>
+                                                <th style="width: 100px;">Lượt xem</th>
+                                                <th style="width: 120px;">Trạng thái</th>
+                                                <th style="width: 120px;">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- Sample news item 1 -->
+                                            <tr>
+                                                <td class="news-thumb-cell">
+                                                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="news-title">Thông Báo Đăng Ký Học Phần Học Kỳ 1 Năm Học
+                                                        2023-2024</span>
+                                                    <span class="news-excerpt">Phòng Đào tạo thông báo kế hoạch đăng ký
+                                                        học phần trực tuyến học kỳ 1 năm học 2023-2024...</span>
+                                                </td>
+                                                <td>
+                                                    <span class="news-badge notice">Thông báo</span>
+                                                </td>
+                                                <td>15/06/2023</td>
+                                                <td>1,245</td>
+                                                <td>
+                                                    <span class="news-badge published">Đã đăng</span>
+                                                </td>
+                                                <td>
+                                                    <div class="news-actions">
+                                                        <a href="/admin/news/edit/1" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn view" title="Xem" data-id="1">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="action-btn delete" title="Xóa" data-id="1"
+                                                            data-title="Thông Báo Đăng Ký Học Phần Học Kỳ 1 Năm Học 2023-2024">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample news item 2 -->
+                                            <tr>
+                                                <td class="news-thumb-cell">
+                                                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="news-title">Hội Thảo Khoa Học "Ứng Dụng Trí Tuệ Nhân
+                                                        Tạo Trong Giáo Dục"</span>
+                                                    <span class="news-excerpt">Khoa Công nghệ thông tin tổ chức hội thảo
+                                                        khoa học về ứng dụng AI trong giáo dục...</span>
+                                                </td>
+                                                <td>
+                                                    <span class="news-badge academics">Học thuật</span>
+                                                </td>
+                                                <td>10/06/2023</td>
+                                                <td>856</td>
+                                                <td>
+                                                    <span class="news-badge published">Đã đăng</span>
+                                                </td>
+                                                <td>
+                                                    <div class="news-actions">
+                                                        <a href="/admin/news/edit/2" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn view" title="Xem" data-id="2">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="action-btn delete" title="Xóa" data-id="2"
+                                                            data-title="Hội Thảo Khoa Học 'Ứng Dụng Trí Tuệ Nhân Tạo Trong Giáo Dục'">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample news item 3 -->
+                                            <tr>
+                                                <td class="news-thumb-cell">
+                                                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="news-title">Thông Tin Tuyển Sinh Đại Học Chính Quy Năm
+                                                        2023</span>
+                                                    <span class="news-excerpt">Trường công bố thông tin tuyển sinh đại
+                                                        học chính quy năm 2023...</span>
+                                                </td>
+                                                <td>
+                                                    <span class="news-badge admissions">Tuyển sinh</span>
+                                                </td>
+                                                <td>05/06/2023</td>
+                                                <td>2,412</td>
+                                                <td>
+                                                    <span class="news-badge published">Đã đăng</span>
+                                                </td>
+                                                <td>
+                                                    <div class="news-actions">
+                                                        <a href="/admin/news/edit/3" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn view" title="Xem" data-id="3">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="action-btn delete" title="Xóa" data-id="3"
+                                                            data-title="Thông Tin Tuyển Sinh Đại Học Chính Quy Năm 2023">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample news item 4 -->
+                                            <tr>
+                                                <td class="news-thumb-cell">
+                                                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="news-title">Cuộc Thi Khởi Nghiệp Sinh Viên 2023</span>
+                                                    <span class="news-excerpt">Trung tâm Hỗ trợ Sinh viên và Quan hệ
+                                                        Doanh nghiệp tổ chức cuộc thi Khởi nghiệp...</span>
+                                                </td>
+                                                <td>
+                                                    <span class="news-badge event">Sự kiện</span>
+                                                </td>
+                                                <td>25/05/2023</td>
+                                                <td>1,108</td>
+                                                <td>
+                                                    <span class="news-badge draft">Bản nháp</span>
+                                                </td>
+                                                <td>
+                                                    <div class="news-actions">
+                                                        <a href="/admin/news/edit/4" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn view" title="Xem" data-id="4">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="action-btn delete" title="Xóa" data-id="4"
+                                                            data-title="Cuộc Thi Khởi Nghiệp Sinh Viên 2023">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <!-- Sample news item 5 -->
+                                            <tr>
+                                                <td class="news-thumb-cell">
+                                                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-thumb">
+                                                </td>
+                                                <td>
+                                                    <span class="news-title">Lịch Thi Học Kỳ 2 Năm Học 2023-2024</span>
+                                                    <span class="news-excerpt">Phòng Khảo thí và Đảm bảo chất lượng
+                                                        thông báo lịch thi kết thúc học kỳ...</span>
+                                                </td>
+                                                <td>
+                                                    <span class="news-badge notice">Thông báo</span>
+                                                </td>
+                                                <td>28/10/2023</td>
+                                                <td>0</td>
+                                                <td>
+                                                    <span class="news-badge scheduled">Lên lịch</span>
+                                                </td>
+                                                <td>
+                                                    <div class="news-actions">
+                                                        <a href="/admin/news/edit/5" class="action-btn edit"
+                                                            title="Sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn view" title="Xem" data-id="5">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="action-btn delete" title="Xóa" data-id="5"
+                                                            data-title="Lịch Thi Học Kỳ 2 Năm Học 2023-2024">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination">
+                                    <a href="#" class="page-item active">1</a>
+                                    <a href="#" class="page-item">2</a>
+                                    <a href="#" class="page-item">3</a>
+                                    <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Delete confirmation modal - enhanced version -->
+    <div class="modal-overlay" id="deleteModal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Xác nhận xóa tin tức</h3>
+                <button class="close-btn" id="closeModal" aria-label="Close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tin tức sau?</p>
+                <div class="news-modal-info">
+                    <img src="/images/lambo.jpg" alt="Tin tức" class="news-modal-thumb" id="modalNewsImg">
+                    <div>
+                        <h4 id="modalNewsTitle">Cuộc Thi Khởi Nghiệp Sinh Viên 2023</h4>
+                        <p><i class="fas fa-exclamation-circle"></i> Khi xóa, nội dung này sẽ không thể khôi phục lại.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Search news functionality
+            document.getElementById('newsSearch').addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                filterNews(searchTerm,
+                    document.getElementById('categoryFilter').value,
+                    document.getElementById('statusFilter').value);
+            });
+
+            // Category filter functionality
+            document.getElementById('categoryFilter').addEventListener('change', function () {
+                filterNews(document.getElementById('newsSearch').value.toLowerCase(),
+                    this.value,
+                    document.getElementById('statusFilter').value);
+            });
+
+            // Status filter functionality
+            document.getElementById('statusFilter').addEventListener('change', function () {
+                filterNews(document.getElementById('newsSearch').value.toLowerCase(),
+                    document.getElementById('categoryFilter').value,
+                    this.value);
+            });
+
+            // Sort functionality
+            document.getElementById('sortFilter').addEventListener('change', function () {
+                // In a real app, this would sort the news items
+                const sortValue = this.value;
+                alert(`Sắp xếp theo: ${sortValue}`);
+            });
+
+            // Modal functionality
+            const deleteModal = document.getElementById('deleteModal');
+            const closeModalBtn = document.getElementById('closeModal');
+            const cancelDeleteBtn = document.getElementById('cancelDelete');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            let currentNewsId = null;
+
+            // Open modal when delete button is clicked
+            document.querySelectorAll('.action-btn.delete').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const newsId = this.dataset.id;
+                    const newsTitle = this.dataset.title;
+                    currentNewsId = newsId;
+
+                    document.getElementById('modalNewsTitle').textContent = newsTitle;
+                    deleteModal.classList.add('show');
+                });
+            });
+
+            // Close modal
+            closeModalBtn.addEventListener('click', () => deleteModal.classList.remove('show'));
+            cancelDeleteBtn.addEventListener('click', () => deleteModal.classList.remove('show'));
+
+            // Close modal if user clicks outside
+            window.addEventListener('click', (e) => {
+                if (e.target === deleteModal) {
+                    deleteModal.classList.remove('show');
+                }
+            });
+
+            // Handle delete confirmation
+            confirmDeleteBtn.addEventListener('click', function () {
+                // In a real app, send a request to delete the news item
+                alert(`Xóa tin tức ID: ${currentNewsId}`);
+                deleteModal.classList.remove('show');
+            });
+
+            // Handle view button clicks
+            document.querySelectorAll('.action-btn.view').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const newsId = this.dataset.id;
+                    // In a real app, this would show a preview or navigate to the news item
+                    window.open(`/news/${newsId}`, '_blank');
+                });
+            });
+
+            // Function to filter news based on search term, category and status
+            function filterNews(searchTerm, category, status) {
+                const rows = document.querySelectorAll('.news-table tbody tr');
+
+                rows.forEach(row => {
+                    const title = row.querySelector('.news-title').textContent.toLowerCase();
+                    const excerpt = row.querySelector('.news-excerpt').textContent.toLowerCase();
+                    const categoryText = row.querySelector('.news-badge').textContent.toLowerCase();
+                    const statusText = row.querySelector('td:nth-child(6) .news-badge').textContent.toLowerCase();
+
+                    const matchesSearch = title.includes(searchTerm) || excerpt.includes(searchTerm);
+
+                    const matchesCategory =
+                        category === 'all' ||
+                        (category === 'notice' && categoryText === 'thông báo') ||
+                        (category === 'event' && categoryText === 'sự kiện') ||
+                        (category === 'academics' && categoryText === 'học thuật') ||
+                        (category === 'admissions' && categoryText === 'tuyển sinh');
+
+                    const matchesStatus =
+                        status === 'all' ||
+                        (status === 'published' && statusText === 'đã đăng') ||
+                        (status === 'draft' && statusText === 'bản nháp') ||
+                        (status === 'scheduled' && statusText === 'lên lịch');
+
+                    if (matchesSearch && matchesCategory && matchesStatus) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

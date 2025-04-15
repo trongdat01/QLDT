@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-grades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Điểm - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'grades' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-graduation-cap"></i> Quản Lý Điểm</h1>
+                            <div class="page-actions">
+                                <a href="/admin/grades/create" class="btn primary">
+                                    <i class="fas fa-plus"></i> Thêm điểm mới
+                                </a>
+                                <a href="/admin/grades/import" class="btn secondary">
+                                    <i class="fas fa-file-import"></i> Nhập từ Excel
+                                </a>
+                                <button class="btn secondary" id="exportGrades">
+                                    <i class="fas fa-file-export"></i> Xuất báo cáo
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Bộ lọc điểm</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary toggle-filters">
+                                        <i class="fas fa-sliders-h"></i> Tùy chọn bộ lọc
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body filter-container">
+                                <div class="grades-filter-grid">
+                                    <div class="filter-group">
+                                        <label>Học kỳ</label>
+                                        <select id="semester-filter">
+                                            <option value="all">Tất cả học kỳ</option>
+                                            <option value="2023-1" selected>Học kỳ 1 - 2023-2024</option>
+                                            <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                            <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Khoa/Ngành</label>
+                                        <select id="department-filter">
+                                            <option value="all">Tất cả khoa/ngành</option>
+                                            <option value="cntt">Công nghệ thông tin</option>
+                                            <option value="ktmt">Kỹ thuật máy tính</option>
+                                            <option value="attt">An toàn thông tin</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Lớp</label>
+                                        <select id="class-filter">
+                                            <option value="all">Tất cả lớp</option>
+                                            <option value="cntt-01">CNTT-01</option>
+                                            <option value="cntt-02">CNTT-02</option>
+                                            <option value="ktmt-01">KTMT-01</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Học phần</label>
+                                        <select id="course-filter">
+                                            <option value="all">Tất cả học phần</option>
+                                            <option value="COMP301">COMP301 - Cơ sở dữ liệu</option>
+                                            <option value="COMP302">COMP302 - Mạng máy tính</option>
+                                            <option value="COMP303">COMP303 - Lập trình web</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Trạng thái</label>
+                                        <select id="status-filter">
+                                            <option value="all">Tất cả trạng thái</option>
+                                            <option value="graded">Đã nhập điểm</option>
+                                            <option value="pending">Chưa nhập điểm</option>
+                                            <option value="processing">Đang xử lý</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group search-group">
+                                        <label>Tìm kiếm</label>
+                                        <div class="search-box">
+                                            <input type="text" id="search-filter"
+                                                placeholder="Tìm theo tên hoặc MSSV...">
+                                            <button><i class="fas fa-search"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button class="btn secondary" id="reset-filters">
+                                        <i class="fas fa-undo"></i> Đặt lại bộ lọc
+                                    </button>
+                                    <button class="btn primary" id="apply-filters">
+                                        <i class="fas fa-filter"></i> Áp dụng bộ lọc
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>COMP301 - Cơ sở dữ liệu (Nhóm 1)</h3>
+                                <div class="card-actions">
+                                    <span class="grade-status">Trạng thái: <strong class="status-indicator pending">Đang
+                                            nhập điểm</strong></span>
+                                    <button class="btn-sm primary" id="save-grades">
+                                        <i class="fas fa-save"></i> Lưu điểm
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="info-pills">
+                                    <div class="info-pill">
+                                        <i class="fas fa-users"></i>
+                                        <span>Sĩ số: 60 sinh viên</span>
+                                    </div>
+                                    <div class="info-pill">
+                                        <i class="fas fa-user-tie"></i>
+                                        <span>Giảng viên: TS. Nguyễn Văn B</span>
+                                    </div>
+                                    <div class="info-pill">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <span>Học kỳ: 1 - 2023-2024</span>
+                                    </div>
+                                    <div class="info-pill">
+                                        <i class="fas fa-chart-line"></i>
+                                        <span>Điểm trung bình lớp: 7.8</span>
+                                    </div>
+                                </div>
+
+                                <div class="grade-components">
+                                    <div class="component-card">
+                                        <div class="component-header">
+                                            <h4>Điểm quá trình</h4>
+                                            <span>40%</span>
+                                        </div>
+                                        <div class="component-items">
+                                            <div class="component-item">
+                                                <span>Chuyên cần</span>
+                                                <span>10%</span>
+                                            </div>
+                                            <div class="component-item">
+                                                <span>Bài tập</span>
+                                                <span>10%</span>
+                                            </div>
+                                            <div class="component-item">
+                                                <span>Kiểm tra</span>
+                                                <span>20%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="component-card">
+                                        <div class="component-header">
+                                            <h4>Điểm thi</h4>
+                                            <span>60%</span>
+                                        </div>
+                                        <div class="component-items">
+                                            <div class="component-item">
+                                                <span>Thi cuối kỳ</span>
+                                                <span>60%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grade-table-container">
+                                    <table class="grade-table">
+                                        <thead>
+                                            <tr>
+                                                <th style="width: 50px;">STT</th>
+                                                <th style="width: 100px;">MSSV</th>
+                                                <th>Họ và tên</th>
+                                                <th>Lớp</th>
+                                                <th style="width: 80px;">Chuyên cần</th>
+                                                <th style="width: 80px;">Bài tập</th>
+                                                <th style="width: 80px;">Kiểm tra</th>
+                                                <th style="width: 80px;">Thi</th>
+                                                <th style="width: 80px;">Tổng kết</th>
+                                                <th style="width: 80px;">Điểm chữ</th>
+                                                <th style="width: 120px;">Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>20000123</td>
+                                                <td>Nguyễn Văn A</td>
+                                                <td>CNTT-01</td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.0"></td>
+                                                <td class="total-grade">8.1</td>
+                                                <td class="letter-grade">A-</td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <a href="/admin/grades/edit/20000123" class="action-btn"
+                                                            title="Chỉnh sửa điểm">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="action-btn" title="Lịch sử điểm">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        <button class="action-btn" title="Ghi chú">
+                                                            <i class="fas fa-sticky-note"></i>
+                                                        </button>
+                                                        <a href="/admin/grades/detail/20000123" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </a>
+                                                        <button class="action-btn delete-grade" title="Xóa điểm"
+                                                            data-id="20000123" data-name="Nguyễn Văn A">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>20000124</td>
+                                                <td>Trần Thị B</td>
+                                                <td>CNTT-01</td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.5"></td>
+                                                <td class="total-grade">8.4</td>
+                                                <td class="letter-grade">A-</td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="action-btn" title="Lịch sử điểm">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        <button class="action-btn" title="Ghi chú">
+                                                            <i class="fas fa-sticky-note"></i>
+                                                        </button>
+                                                        <a href="/admin/grades/detail/20000124" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>20000125</td>
+                                                <td>Lê Văn C</td>
+                                                <td>CNTT-01</td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="6.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.0"></td>
+                                                <td class="total-grade">7.1</td>
+                                                <td class="letter-grade">B</td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="action-btn" title="Lịch sử điểm">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        <button class="action-btn" title="Ghi chú">
+                                                            <i class="fas fa-sticky-note"></i>
+                                                        </button>
+                                                        <a href="/admin/grades/detail/20000125" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>20000126</td>
+                                                <td>Phạm Thị D</td>
+                                                <td>CNTT-02</td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="8.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="7.5"></td>
+                                                <td class="total-grade">7.5</td>
+                                                <td class="letter-grade">B+</td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="action-btn" title="Lịch sử điểm">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        <button class="action-btn" title="Ghi chú">
+                                                            <i class="fas fa-sticky-note"></i>
+                                                        </button>
+                                                        <a href="/admin/grades/detail/20000126" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>20000127</td>
+                                                <td>Hoàng Văn E</td>
+                                                <td>CNTT-02</td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.0"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.5"></td>
+                                                <td><input type="number" min="0" max="10" step="0.1" value="9.0"></td>
+                                                <td class="total-grade">9.2</td>
+                                                <td class="letter-grade">A+</td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="action-btn" title="Lịch sử điểm">
+                                                            <i class="fas fa-history"></i>
+                                                        </button>
+                                                        <button class="action-btn" title="Ghi chú">
+                                                            <i class="fas fa-sticky-note"></i>
+                                                        </button>
+                                                        <a href="/admin/grades/detail/20000127" class="action-btn"
+                                                            title="Xem chi tiết">
+                                                            <i class="fas fa-user-graduate"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="grade-statistics">
+                                    <h3>Thống kê điểm số</h3>
+                                    <div class="statistics-grid">
+                                        <div class="stat-card">
+                                            <div class="stat-title">Điểm trung bình</div>
+                                            <div class="stat-value">7.8</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-title">Điểm cao nhất</div>
+                                            <div class="stat-value">9.2</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-title">Điểm thấp nhất</div>
+                                            <div class="stat-value">5.6</div>
+                                        </div>
+                                        <div class="stat-card">
+                                            <div class="stat-title">Số lượng đạt</div>
+                                            <div class="stat-value">56/60</div>
+                                        </div>
+                                    </div>
+                                    <div class="grade-distribution">
+                                        <h4>Phân bố điểm</h4>
+                                        <div class="grade-chart">
+                                            <!-- Placeholder for a chart, would use a library like Chart.js in production -->
+                                            <div class="grade-bars">
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:5%" data-count="3"></div>
+                                                    <div class="bar-label">F</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:2%" data-count="1"></div>
+                                                    <div class="bar-label">D</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:10%" data-count="6"></div>
+                                                    <div class="bar-label">C</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:15%" data-count="9"></div>
+                                                    <div class="bar-label">C+</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:18%" data-count="11"></div>
+                                                    <div class="bar-label">B</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:22%" data-count="13"></div>
+                                                    <div class="bar-label">B+</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:17%" data-count="10"></div>
+                                                    <div class="bar-label">A-</div>
+                                                </div>
+                                                <div class="grade-bar">
+                                                    <div class="bar-fill" style="height:12%" data-count="7"></div>
+                                                    <div class="bar-label">A</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Grade History Modal -->
+    <div class="modal" id="gradeHistoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Lịch sử điểm - Nguyễn Văn A (20000123)</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Ngày thay đổi</th>
+                            <th>Thành phần</th>
+                            <th>Điểm cũ</th>
+                            <th>Điểm mới</th>
+                            <th>Người thay đổi</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>20/10/2023 15:30</td>
+                            <td>Bài tập</td>
+                            <td>8.0</td>
+                            <td>9.0</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Điểm được điều chỉnh sau khi chấm lại</td>
+                        </tr>
+                        <tr>
+                            <td>15/10/2023 10:15</td>
+                            <td>Kiểm tra</td>
+                            <td>-</td>
+                            <td>7.5</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Nhập điểm lần đầu</td>
+                        </tr>
+                        <tr>
+                            <td>10/10/2023 14:45</td>
+                            <td>Chuyên cần</td>
+                            <td>-</td>
+                            <td>8.5</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Nhập điểm lần đầu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ghi chú điểm - Nguyễn Văn A (20000123)</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="note-form">
+                    <div class="form-group">
+                        <label for="noteText">Ghi chú</label>
+                        <textarea id="noteText" rows="4"
+                            placeholder="Nhập ghi chú về điểm của sinh viên...">Sinh viên có xin chấm phúc khảo bài kiểm tra giữa kỳ. Điểm được điều chỉnh từ 7.0 lên 7.5.</textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Các ghi chú trước đây</label>
+                        <div class="previous-notes">
+                            <div class="note-item">
+                                <div class="note-header">
+                                    <span class="note-author">Nguyễn Văn B</span>
+                                    <span class="note-date">10/10/2023 14:45</span>
+                                </div>
+                                <div class="note-content">
+                                    Sinh viên này tham gia đầy đủ các buổi học, có tinh thần học tập tốt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary">Hủy</button>
+                <button class="btn primary">Lưu ghi chú</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Grade Confirmation Modal -->
+    <div class="modal" id="deleteGradeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Xác nhận xóa điểm</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa điểm của sinh viên sau?</p>
+                <div class="student-info-confirm">
+                    <div class="student-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="student-details">
+                        <h4 id="deleteStudentName">Nguyễn Văn A</h4>
+                        <p id="deleteStudentId">MSSV: 20000123</p>
+                        <p class="text-danger"><i class="fas fa-exclamation-circle"></i> Hành động này không thể hoàn
+                            tác</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle filters visibility
+            const toggleFiltersBtn = document.querySelector('.toggle-filters');
+            const filterContainer = document.querySelector('.filter-container');
+
+            toggleFiltersBtn.addEventListener('click', function () {
+                filterContainer.classList.toggle('show-filters');
+            });
+
+            // Reset filters
+            document.getElementById('reset-filters').addEventListener('click', function () {
+                const filterSelects = document.querySelectorAll('.filter-group select');
+                const searchInput = document.getElementById('search-filter');
+
+                filterSelects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+
+                searchInput.value = '';
+            });
+
+            // Apply filters (just a placeholder action)
+            document.getElementById('apply-filters').addEventListener('click', function () {
+                // In a real app, this would filter the data based on selected criteria
+                alert('Bộ lọc đã được áp dụng!');
+            });
+
+            // Calculate total grade and letter grade when input changes
+            const gradeInputs = document.querySelectorAll('.grade-table input[type="number"]');
+
+            gradeInputs.forEach(input => {
+                input.addEventListener('change', updateGrades);
+                input.addEventListener('input', updateGrades);
+            });
+
+            // Save grades button action
+            document.getElementById('save-grades').addEventListener('click', function () {
+                alert('Điểm đã được lưu thành công!');
+            });
+
+            // Open grade history modal
+            const historyButtons = document.querySelectorAll('.action-btn[title="Lịch sử điểm"]');
+            const historyModal = document.getElementById('gradeHistoryModal');
+
+            historyButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    historyModal.style.display = 'block';
+                });
+            });
+
+            // Open note modal
+            const noteButtons = document.querySelectorAll('.action-btn[title="Ghi chú"]');
+            const noteModal = document.getElementById('noteModal');
+
+            noteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    noteModal.style.display = 'block';
+                });
+            });
+
+            // Close modals
+            const closeButtons = document.querySelectorAll('.close-modal');
+
+            closeButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    historyModal.style.display = 'none';
+                    noteModal.style.display = 'none';
+                });
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function (event) {
+                if (event.target === historyModal) {
+                    historyModal.style.display = 'none';
+                }
+                if (event.target === noteModal) {
+                    noteModal.style.display = 'none';
+                }
+            });
+
+            // Export grades action
+            document.getElementById('exportGrades').addEventListener('click', function () {
+                alert('Đang xuất báo cáo điểm...');
+            });
+
+            // Grade calculation function
+            function updateGrades() {
+                const rows = document.querySelectorAll('.grade-table tbody tr');
+
+                rows.forEach(row => {
+                    const attendanceInput = row.querySelector('td:nth-child(5) input');
+                    const assignmentInput = row.querySelector('td:nth-child(6) input');
+                    const quizInput = row.querySelector('td:nth-child(7) input');
+                    const examInput = row.querySelector('td:nth-child(8) input');
+
+                    const totalGradeCell = row.querySelector('.total-grade');
+                    const letterGradeCell = row.querySelector('.letter-grade');
+
+                    if (attendanceInput && assignmentInput && quizInput && examInput) {
+                        const attendance = parseFloat(attendanceInput.value) || 0;
+                        const assignment = parseFloat(assignmentInput.value) || 0;
+                        const quiz = parseFloat(quizInput.value) || 0;
+                        const exam = parseFloat(examInput.value) || 0;
+
+                        // Calculate total grade (weighted)
+                        const totalGrade = (attendance * 0.10) + (assignment * 0.10) + (quiz * 0.20) + (exam * 0.60);
+                        totalGradeCell.textContent = totalGrade.toFixed(1);
+
+                        // Determine letter grade
+                        letterGradeCell.textContent = getLetterGrade(totalGrade);
+                    }
+                });
+            }
+
+            // Letter grade conversion function
+            function getLetterGrade(score) {
+                if (score >= 9.0) return 'A+';
+                if (score >= 8.5) return 'A';
+                if (score >= 8.0) return 'A-';
+                if (score >= 7.0) return 'B+';
+                if (score >= 6.5) return 'B';
+                if (score >= 6.0) return 'B-';
+                if (score >= 5.5) return 'C+';
+                if (score >= 5.0) return 'C';
+                if (score >= 4.0) return 'D';
+                return 'F';
+            }
+
+            // Delete grade functionality
+            const deleteButtons = document.querySelectorAll('.delete-grade');
+            const deleteModal = document.getElementById('deleteGradeModal');
+            const closeModalBtn = document.querySelector('#deleteGradeModal .close-modal');
+            const cancelDeleteBtn = document.getElementById('cancelDelete');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            let gradeToDelete = null;
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const studentId = this.dataset.id;
+                    const studentName = this.dataset.name;
+
+                    document.getElementById('deleteStudentName').textContent = studentName;
+                    document.getElementById('deleteStudentId').textContent = 'MSSV: ' + studentId;
+                    gradeToDelete = studentId;
+
+                    deleteModal.style.display = 'block';
+                });
+            });
+
+            // Close modal functions
+            closeModalBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'none';
+            });
+
+            cancelDeleteBtn.addEventListener('click', () => {
+                deleteModal.style.display = 'none';
+            });
+
+            // Confirm delete action
+            confirmDeleteBtn.addEventListener('click', () => {
+                // In a real app, make AJAX call to delete the grade
+                alert('Đã xóa điểm của sinh viên có MSSV: ' + gradeToDelete);
+                deleteModal.style.display = 'none';
+
+                // Reload or update UI
+                // In a real app, either reload the page or remove the row from the table
+                // window.location.reload();
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', (e) => {
+                if (e.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

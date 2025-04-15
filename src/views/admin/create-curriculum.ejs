@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-curriculum.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Thêm Chương Trình Học Mới - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'curriculum' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-plus-circle"></i> Thêm Chương Trình Học Mới</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/curriculum">Quản lý chương trình học</a> /
+                                <span>Thêm chương trình mới</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin chương trình</h3>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="curriculumForm" method="post" action="/admin/curriculum/create">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="programCode">Mã chương trình <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="programCode" name="programCode" required>
+                                            <p class="help-text">Mã duy nhất để định danh chương trình học (VD: CNTT,
+                                                KTPM)</p>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="programName">Tên chương trình <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="programName" name="programName" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="programFaculty">Khoa <span class="required">*</span></label>
+                                            <select id="programFaculty" name="programFaculty" required>
+                                                <option value="">-- Chọn khoa --</option>
+                                                <option value="cntt">Công nghệ thông tin</option>
+                                                <option value="kinh-te">Kinh tế</option>
+                                                <option value="ky-thuat">Kỹ thuật</option>
+                                                <option value="y-duoc">Y dược</option>
+                                                <option value="khxh">Khoa học xã hội</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="programType">Hệ đào tạo <span class="required">*</span></label>
+                                            <select id="programType" name="programType" required>
+                                                <option value="">-- Chọn hệ đào tạo --</option>
+                                                <option value="chinh-quy">Chính quy</option>
+                                                <option value="lien-thong">Liên thông</option>
+                                                <option value="vua-hoc-vua-lam">Vừa học vừa làm</option>
+                                                <option value="chat-luong-cao">Chất lượng cao</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="programDegree">Loại bằng <span class="required">*</span></label>
+                                            <select id="programDegree" name="programDegree" required>
+                                                <option value="">-- Chọn loại bằng --</option>
+                                                <option value="dai-hoc">Đại học</option>
+                                                <option value="cao-dang">Cao đẳng</option>
+                                                <option value="thac-si">Thạc sĩ</option>
+                                                <option value="tien-si">Tiến sĩ</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="programCredits">Tổng số tín chỉ <span
+                                                    class="required">*</span></label>
+                                            <input type="number" id="programCredits" name="programCredits" min="1"
+                                                required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="programDuration">Thời gian đào tạo (năm) <span
+                                                    class="required">*</span></label>
+                                            <input type="number" id="programDuration" name="programDuration" min="1"
+                                                step="0.5" required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="programStatus">Trạng thái <span
+                                                    class="required">*</span></label>
+                                            <select id="programStatus" name="programStatus" required>
+                                                <option value="active" selected>Đang áp dụng</option>
+                                                <option value="inactive">Đã lưu trữ</option>
+                                                <option value="draft">Bản nháp</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="programCohort">Áp dụng cho khóa <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="programCohort" name="programCohort"
+                                                placeholder="VD: 2023-2027" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="programDescription">Mô tả chương trình</label>
+                                        <textarea id="programDescription" name="programDescription" rows="4"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="programObjectives">Mục tiêu đào tạo</label>
+                                        <textarea id="programObjectives" name="programObjectives" rows="4"></textarea>
+                                        <p class="help-text">Liệt kê các mục tiêu đào tạo của chương trình, mỗi mục tiêu
+                                            một dòng</p>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="programLearningOutcomes">Chuẩn đầu ra</label>
+                                        <textarea id="programLearningOutcomes" name="programLearningOutcomes"
+                                            rows="4"></textarea>
+                                        <p class="help-text">Liệt kê các chuẩn đầu ra của chương trình, mỗi chuẩn một
+                                            dòng</p>
+                                    </div>
+
+                                    <h3 class="section-title">Cấu trúc chương trình</h3>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="generalCredits">Khối kiến thức đại cương (tín chỉ)</label>
+                                            <input type="number" id="generalCredits" name="generalCredits" min="0">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="coreCredits">Khối kiến thức cơ sở ngành (tín chỉ)</label>
+                                            <input type="number" id="coreCredits" name="coreCredits" min="0">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="specializedCredits">Khối kiến thức chuyên ngành (tín
+                                                chỉ)</label>
+                                            <input type="number" id="specializedCredits" name="specializedCredits"
+                                                min="0">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="electiveCredits">Khối kiến thức tự chọn (tín chỉ)</label>
+                                            <input type="number" id="electiveCredits" name="electiveCredits" min="0">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="graduationRequirements">Điều kiện tốt nghiệp</label>
+                                        <textarea id="graduationRequirements" name="graduationRequirements"
+                                            rows="4"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Tài liệu đính kèm</label>
+                                        <div class="file-upload-container">
+                                            <div class="file-upload-area">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p>Kéo và thả tệp vào đây hoặc</p>
+                                                <label for="fileUpload" class="file-upload-btn">Chọn tệp</label>
+                                                <input type="file" id="fileUpload" class="hidden-file-input" multiple>
+                                                <p class="file-types">Cho phép: PDF, DOCX, XLSX (tối đa 10MB)</p>
+                                            </div>
+                                            <div class="uploaded-files">
+                                                <!-- Uploaded files will appear here -->
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="button" class="btn secondary"
+                                            onclick="window.location.href='/admin/curriculum'">Hủy</button>
+                                        <button type="submit" class="btn primary">Tạo chương trình học</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Nhập từ mẫu có sẵn</h3>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="template-import">
+                                    <p>Nếu bạn đã có sẵn mẫu chương trình học, bạn có thể tải lên file Excel theo định
+                                        dạng sau:</p>
+                                    <div class="template-actions">
+                                        <a href="#" class="btn secondary"><i class="fas fa-download"></i> Tải mẫu
+                                            Excel</a>
+                                        <button class="btn primary"><i class="fas fa-file-import"></i> Nhập từ
+                                            Excel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Form validation
+            const form = document.getElementById('curriculumForm');
+
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                const requiredFields = form.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+
+                        // Add error message if it doesn't exist
+                        if (!field.nextElementSibling || !field.nextElementSibling.classList.contains('error-message')) {
+                            const errorMessage = document.createElement('p');
+                            errorMessage.classList.add('error-message');
+                            errorMessage.textContent = 'Trường này là bắt buộc';
+                            field.parentNode.insertBefore(errorMessage, field.nextSibling);
+                        }
+                    } else {
+                        field.classList.remove('error');
+
+                        // Remove error message if it exists
+                        if (field.nextElementSibling && field.nextElementSibling.classList.contains('error-message')) {
+                            field.nextElementSibling.remove();
+                        }
+                    }
+                });
+
+                if (isValid) {
+                    // In a real app, this would submit the form
+                    alert('Chương trình học đã được tạo thành công!');
+
+                    // Redirect to curriculum list
+                    // window.location.href = '/admin/curriculum';
+                } else {
+                    // Scroll to the first error
+                    const firstError = form.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        firstError.focus();
+                    }
+                }
+            });
+
+            // File upload handling
+            const fileInput = document.getElementById('fileUpload');
+            const uploadedFilesContainer = document.querySelector('.uploaded-files');
+
+            fileInput.addEventListener('change', function (e) {
+                const files = Array.from(e.target.files);
+
+                files.forEach(file => {
+                    // Create file preview element
+                    const filePreview = document.createElement('div');
+                    filePreview.classList.add('file-preview');
+
+                    // Determine file icon based on type
+                    let fileIcon = 'fa-file';
+                    if (file.type.includes('pdf')) fileIcon = 'fa-file-pdf';
+                    else if (file.type.includes('word')) fileIcon = 'fa-file-word';
+                    else if (file.type.includes('sheet') || file.type.includes('excel')) fileIcon = 'fa-file-excel';
+
+                    filePreview.innerHTML = `
+                        <div class="file-icon"><i class="fas ${fileIcon}"></i></div>
+                        <div class="file-info">
+                            <div class="file-name">${file.name}</div>
+                            <div class="file-size">${formatFileSize(file.size)}</div>
+                        </div>
+                        <button type="button" class="remove-file"><i class="fas fa-times"></i></button>
+                    `;
+
+                    uploadedFilesContainer.appendChild(filePreview);
+
+                    // Add remove functionality
+                    const removeBtn = filePreview.querySelector('.remove-file');
+                    removeBtn.addEventListener('click', function () {
+                        filePreview.remove();
+                    });
+                });
+            });
+
+            // Helper function to format file size
+            function formatFileSize(bytes) {
+                if (bytes < 1024) return bytes + ' bytes';
+                else if (bytes < 1048576) return (bytes / 1024).toFixed(1) + ' KB';
+                else return (bytes / 1048576).toFixed(1) + ' MB';
+            }
+
+            // Initialize auto-calculation of total credits
+            const creditInputs = [
+                document.getElementById('generalCredits'),
+                document.getElementById('coreCredits'),
+                document.getElementById('specializedCredits'),
+                document.getElementById('electiveCredits')
+            ];
+
+            const totalCreditsInput = document.getElementById('programCredits');
+
+            creditInputs.forEach(input => {
+                input.addEventListener('input', calculateTotalCredits);
+            });
+
+            function calculateTotalCredits() {
+                let total = 0;
+                creditInputs.forEach(input => {
+                    const value = parseInt(input.value) || 0;
+                    total += value;
+                });
+
+                if (total > 0) {
+                    totalCreditsInput.value = total;
+                }
+            }
+        });
+    </script>
+
+    <style>
+        .section-title {
+            font-size: 1.2rem;
+            color: #4e73df;
+            margin: 30px 0 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .help-text {
+            font-size: 0.85rem;
+            color: #858796;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .error {
+            border-color: #e74a3b !important;
+            background-color: rgba(231, 74, 59, 0.05) !important;
+        }
+
+        .error-message {
+            color: #e74a3b;
+            font-size: 0.85rem;
+            margin-top: 5px;
+            margin-bottom: 0;
+        }
+
+        .file-upload-container {
+            margin-top: 10px;
+        }
+
+        .file-upload-area {
+            border: 2px dashed #d1d3e2;
+            border-radius: 6px;
+            padding: 30px 20px;
+            text-align: center;
+            color: #5a5c69;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .file-upload-area:hover {
+            border-color: #4e73df;
+            background-color: rgba(78, 115, 223, 0.05);
+        }
+
+        .file-upload-area i {
+            font-size: 2.5rem;
+            color: #4e73df;
+            margin-bottom: 15px;
+        }
+
+        .file-upload-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #4e73df;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+
+        .hidden-file-input {
+            display: none;
+        }
+
+        .file-types {
+            font-size: 0.8rem;
+            color: #858796;
+            margin-top: 10px;
+        }
+
+        .uploaded-files {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .file-preview {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+        }
+
+        .file-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            color: #4e73df;
+            text-align: center;
+        }
+
+        .file-info {
+            flex: 1;
+            margin-left: 15px;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #5a5c69;
+        }
+
+        .file-size {
+            font-size: 0.8rem;
+            color: #858796;
+        }
+
+        .remove-file {
+            color: #e74a3b;
+            background: none;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .remove-file:hover {
+            background-color: rgba(231, 74, 59, 0.1);
+        }
+
+        .template-import {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+            padding: 20px;
+            background-color: #f8f9fc;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .template-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .template-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</body>
+
+</html>

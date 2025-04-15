@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Trị Hệ Thống - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'dashboard' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1>Dashboard</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <span>Dashboard</span>
+                            </nav>
+                        </div>
+
+                        <div class="dashboard-stats">
+                            <div class="stat-card primary">
+                                <div class="stat-card-content">
+                                    <h2>15,350</h2>
+                                    <p>Tổng số sinh viên</p>
+                                    <span class="growth positive">+5.2% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-user-graduate"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card success">
+                                <div class="stat-card-content">
+                                    <h2>524</h2>
+                                    <p>Giảng viên</p>
+                                    <span class="growth positive">+2.1% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-chalkboard-teacher"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card warning">
+                                <div class="stat-card-content">
+                                    <h2>1,286</h2>
+                                    <p>Lớp học trong kỳ</p>
+                                    <span class="growth positive">+8.5% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card danger">
+                                <div class="stat-card-content">
+                                    <h2>₫ 25.4T</h2>
+                                    <p>Doanh thu học phí</p>
+                                    <span class="growth positive">+4.8% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-row">
+                            <div class="dashboard-col-7">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Biểu đồ doanh thu học phí</h3>
+                                        <div class="card-actions">
+                                            <select>
+                                                <option>Năm 2023</option>
+                                                <option>Năm 2022</option>
+                                                <option>Năm 2021</option>
+                                            </select>
+                                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="chart-container" style="height: 350px;">
+                                            <!-- Chart placeholder - In production, use Chart.js or similar -->
+                                            <div class="chart-placeholder">
+                                                <div class="mock-chart">
+                                                    <div class="mock-bar" style="height: 30%;"></div>
+                                                    <div class="mock-bar" style="height: 50%;"></div>
+                                                    <div class="mock-bar" style="height: 80%;"></div>
+                                                    <div class="mock-bar" style="height: 45%;"></div>
+                                                    <div class="mock-bar" style="height: 60%;"></div>
+                                                    <div class="mock-bar" style="height: 75%;"></div>
+                                                    <div class="mock-bar" style="height: 40%;"></div>
+                                                    <div class="mock-bar" style="height: 55%;"></div>
+                                                    <div class="mock-bar" style="height: 70%;"></div>
+                                                    <div class="mock-bar" style="height: 65%;"></div>
+                                                    <div class="mock-bar" style="height: 85%;"></div>
+                                                    <div class="mock-bar" style="height: 90%;"></div>
+                                                </div>
+                                                <div class="mock-labels">
+                                                    <span>T1</span>
+                                                    <span>T2</span>
+                                                    <span>T3</span>
+                                                    <span>T4</span>
+                                                    <span>T5</span>
+                                                    <span>T6</span>
+                                                    <span>T7</span>
+                                                    <span>T8</span>
+                                                    <span>T9</span>
+                                                    <span>T10</span>
+                                                    <span>T11</span>
+                                                    <span>T12</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-col-5">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Phân bổ sinh viên theo ngành</h3>
+                                        <div class="card-actions">
+                                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="chart-container" style="height: 350px;">
+                                            <!-- Pie chart placeholder -->
+                                            <div class="chart-placeholder donut-chart">
+                                                <div class="donut-segment"
+                                                    style="--offset: 0; --value: 30; --bg: #4e73df;">
+                                                </div>
+                                                <div class="donut-segment"
+                                                    style="--offset: 30; --value: 25; --bg: #1cc88a;">
+                                                </div>
+                                                <div class="donut-segment"
+                                                    style="--offset: 55; --value: 15; --bg: #36b9cc;">
+                                                </div>
+                                                <div class="donut-segment"
+                                                    style="--offset: 70; --value: 20; --bg: #f6c23e;">
+                                                </div>
+                                                <div class="donut-segment"
+                                                    style="--offset: 90; --value: 10; --bg: #e74a3b;">
+                                                </div>
+                                                <div class="donut-hole"></div>
+                                            </div>
+                                            <div class="chart-legend">
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #4e73df;"></span>
+                                                    <span>Công nghệ thông tin (30%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #1cc88a;"></span>
+                                                    <span>Kinh tế (25%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #36b9cc;"></span>
+                                                    <span>Kỹ thuật (15%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #f6c23e;"></span>
+                                                    <span>Y dược (20%)</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #e74a3b;"></span>
+                                                    <span>Khoa học xã hội (10%)</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-row">
+                            <div class="dashboard-col-6">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Sinh viên mới đăng ký</h3>
+                                        <div class="card-actions">
+                                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="recent-students">
+                                            <div class="student-item">
+                                                <div class="student-avatar">
+                                                    <img src="/images/lambo.jpg" alt="Student">
+                                                </div>
+                                                <div class="student-details">
+                                                    <h4>Nguyễn Văn An</h4>
+                                                    <p>Công nghệ thông tin | MSSV: 20000124</p>
+                                                </div>
+                                                <div class="student-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="student-item">
+                                                <div class="student-avatar">
+                                                    <img src="/images/lambo.jpg" alt="Student">
+                                                </div>
+                                                <div class="student-details">
+                                                    <h4>Trần Thị Bình</h4>
+                                                    <p>Kinh tế | MSSV: 20000125</p>
+                                                </div>
+                                                <div class="student-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="student-item">
+                                                <div class="student-avatar">
+                                                    <img src="/images/lambo.jpg" alt="Student">
+                                                </div>
+                                                <div class="student-details">
+                                                    <h4>Lê Đình Cường</h4>
+                                                    <p>Y dược | MSSV: 20000126</p>
+                                                </div>
+                                                <div class="student-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="student-item">
+                                                <div class="student-avatar">
+                                                    <img src="/images/lambo.jpg" alt="Student">
+                                                </div>
+                                                <div class="student-details">
+                                                    <h4>Phạm Hoài Dương</h4>
+                                                    <p>Kỹ thuật | MSSV: 20000127</p>
+                                                </div>
+                                                <div class="student-actions">
+                                                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="admin-card-footer">
+                                            <a href="/admin/students" class="view-all">Xem tất cả sinh viên <i
+                                                    class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-col-6">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Thông báo mới nhất</h3>
+                                        <div class="card-actions">
+                                            <button class="btn btn-sm primary"><i class="fas fa-plus"></i> Tạo
+                                                mới</button>
+                                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="announcement-list">
+                                            <div class="announcement-item">
+                                                <div class="announcement-icon">
+                                                    <i class="fas fa-bullhorn"></i>
+                                                </div>
+                                                <div class="announcement-content">
+                                                    <h4>Thông báo lịch thi học kỳ 2 năm học 2022-2023</h4>
+                                                    <p>Lịch thi học kỳ 2 đã được cập nhật. Sinh viên vui lòng kiểm
+                                                        tra...</p>
+                                                    <div class="announcement-meta">
+                                                        <span><i class="fas fa-clock"></i> 15/06/2023</span>
+                                                        <span><i class="fas fa-eye"></i> 1,562 lượt xem</span>
+                                                    </div>
+                                                </div>
+                                                <div class="announcement-actions">
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-icon text-danger"><i
+                                                            class="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="announcement-item">
+                                                <div class="announcement-icon">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                </div>
+                                                <div class="announcement-content">
+                                                    <h4>Thông báo đăng ký học phần HK1 năm học 2023-2024</h4>
+                                                    <p>Thời gian đăng ký học phần học kỳ 1 năm học 2023-2024 bắt đầu
+                                                        từ...</p>
+                                                    <div class="announcement-meta">
+                                                        <span><i class="fas fa-clock"></i> 10/06/2023</span>
+                                                        <span><i class="fas fa-eye"></i> 2,317 lượt xem</span>
+                                                    </div>
+                                                </div>
+                                                <div class="announcement-actions">
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-icon text-danger"><i
+                                                            class="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </div>
+                                            <div class="announcement-item">
+                                                <div class="announcement-icon">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                </div>
+                                                <div class="announcement-content">
+                                                    <h4>Lễ tốt nghiệp năm học 2022-2023</h4>
+                                                    <p>Lễ tốt nghiệp cho sinh viên khóa 2019-2023 sẽ diễn ra vào ngày
+                                                        30/06/2023...</p>
+                                                    <div class="announcement-meta">
+                                                        <span><i class="fas fa-clock"></i> 05/06/2023</span>
+                                                        <span><i class="fas fa-eye"></i> 1,890 lượt xem</span>
+                                                    </div>
+                                                </div>
+                                                <div class="announcement-actions">
+                                                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                                                    <button class="btn-icon text-danger"><i
+                                                            class="fas fa-trash-alt"></i></button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="admin-card-footer">
+                                            <a href="/admin/announcements" class="view-all">Xem tất cả thông báo <i
+                                                    class="fas fa-arrow-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+</body>
+
+</html>

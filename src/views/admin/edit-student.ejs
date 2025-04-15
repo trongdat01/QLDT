@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-students.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Sửa Thông Tin Sinh Viên - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'students' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-user-edit"></i> Sửa Thông Tin Sinh Viên</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/students">Sinh viên</a> /
+                                <span>Sửa thông tin</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin sinh viên</h3>
+                                <div class="card-actions">
+                                    <button class="btn-icon" title="Lịch sử thay đổi">
+                                        <i class="fas fa-history"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Hướng dẫn">
+                                        <i class="fas fa-question-circle"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <form class="admin-form" method="post" action="/admin/students/update/1"
+                                    enctype="multipart/form-data">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="studentId">Mã số sinh viên</label>
+                                            <input type="text" id="studentId" name="studentId" required value="20000123"
+                                                readonly>
+                                            <small class="form-text">Mã số sinh viên không thể thay đổi</small>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" name="email" required
+                                                value="20000123@student.edu.vn">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="password">Mật khẩu</label>
+                                            <input type="password" id="password" name="password"
+                                                placeholder="Nhập để thay đổi mật khẩu">
+                                            <small class="form-text">Để trống nếu không đổi mật khẩu</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="lastName">Họ</label>
+                                            <input type="text" id="lastName" name="lastName" required value="Nguyễn">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="middleName">Tên đệm</label>
+                                            <input type="text" id="middleName" name="middleName" value="Văn">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="firstName">Tên</label>
+                                            <input type="text" id="firstName" name="firstName" required value="A">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="dob">Ngày sinh</label>
+                                            <input type="date" id="dob" name="dob" required value="2002-05-15">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="gender">Giới tính</label>
+                                            <select id="gender" name="gender" required>
+                                                <option value="">-- Chọn giới tính --</option>
+                                                <option value="male" selected>Nam</option>
+                                                <option value="female">Nữ</option>
+                                                <option value="other">Khác</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="idCard">Số CMND/CCCD</label>
+                                            <input type="text" id="idCard" name="idCard" value="001102003456">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="phone">Số điện thoại</label>
+                                            <input type="tel" id="phone" name="phone" value="0912345678">
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <label for="address">Địa chỉ</label>
+                                            <input type="text" id="address" name="address"
+                                                value="123 Đường Nguyễn Văn Cừ, Quận 5, TP.HCM">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="department">Khoa/Ngành</label>
+                                            <select id="department" name="department" required>
+                                                <option value="">-- Chọn khoa/ngành --</option>
+                                                <option value="cntt" selected>Công nghệ thông tin</option>
+                                                <option value="ktmt">Kỹ thuật máy tính</option>
+                                                <option value="attt">An toàn thông tin</option>
+                                                <option value="ktdl">Khoa học dữ liệu</option>
+                                                <option value="httt">Hệ thống thông tin</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="class">Lớp</label>
+                                            <select id="class" name="class" required>
+                                                <option value="">-- Chọn lớp --</option>
+                                                <option value="cntt1" selected>CNTT 01</option>
+                                                <option value="cntt2">CNTT 02</option>
+                                                <option value="cntt3">CNTT 03</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="academicYear">Niên khóa</label>
+                                            <select id="academicYear" name="academicYear" required>
+                                                <option value="">-- Chọn niên khóa --</option>
+                                                <option value="2023-2027">2023-2027</option>
+                                                <option value="2022-2026">2022-2026</option>
+                                                <option value="2021-2025">2021-2025</option>
+                                                <option value="2020-2024" selected>2020-2024</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="status">Trạng thái</label>
+                                            <select id="status" name="status" required>
+                                                <option value="active" selected>Đang học</option>
+                                                <option value="inactive">Nghỉ học</option>
+                                                <option value="graduated">Đã tốt nghiệp</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-8">
+                                            <label>Ảnh đại diện</label>
+                                            <div class="file-upload-control">
+                                                <label class="custom-file-upload">
+                                                    <i class="fas fa-cloud-upload-alt"></i>
+                                                    <span class="file-label">Thay đổi ảnh</span>
+                                                    <span class="file-help">Chọn một tập tin hình ảnh (JPG, PNG)</span>
+                                                    <input type="file" id="avatar" name="avatar" accept="image/*">
+                                                </label>
+                                                <div class="preview-container" style="display: block;">
+                                                    <img id="avatar-preview" src="/images/lambo.jpg"
+                                                        alt="Ảnh đại diện hiện tại">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-buttons">
+                                        <a href="/admin/students" class="btn secondary">Hủy</a>
+                                        <button type="submit" class="btn primary">Lưu thay đổi</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Department change - update available classes
+            document.getElementById('department').addEventListener('change', function () {
+                const department = this.value;
+                const classSelect = document.getElementById('class');
+
+                // Clear current options
+                classSelect.innerHTML = '<option value="">-- Chọn lớp --</option>';
+
+                if (department === 'cntt') {
+                    classSelect.innerHTML += `
+                        <option value="cntt1">CNTT 01</option>
+                        <option value="cntt2">CNTT 02</option>
+                        <option value="cntt3">CNTT 03</option>
+                    `;
+                } else if (department === 'ktmt') {
+                    classSelect.innerHTML += `
+                        <option value="ktmt1">KTMT 01</option>
+                        <option value="ktmt2">KTMT 02</option>
+                    `;
+                } else if (department === 'attt') {
+                    classSelect.innerHTML += `
+                        <option value="attt1">ATTT 01</option>
+                    `;
+                } else if (department === 'ktdl') {
+                    classSelect.innerHTML += `
+                        <option value="ktdl1">KTDL 01</option>
+                    `;
+                } else if (department === 'httt') {
+                    classSelect.innerHTML += `
+                        <option value="httt1">HTTT 01</option>
+                        <option value="httt2">HTTT 02</option>
+                    `;
+                }
+            });
+
+            // File upload preview
+            document.getElementById('avatar').addEventListener('change', function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    const preview = document.getElementById('avatar-preview');
+                    const previewContainer = document.querySelector('.preview-container');
+
+                    reader.addEventListener('load', function () {
+                        preview.src = this.result;
+                        previewContainer.style.display = 'block';
+                    });
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

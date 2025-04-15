@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Thanh Toán - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'payments' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1>Quản Lý Thanh Toán</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <span>Thanh toán</span>
+                            </nav>
+                        </div>
+
+                        <div class="dashboard-stats">
+                            <div class="stat-card primary">
+                                <div class="stat-card-content">
+                                    <h2>12.6 tỷ</h2>
+                                    <p>Tổng thu học kỳ</p>
+                                    <span class="growth positive">+5.2% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-money-bill-wave"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card success">
+                                <div class="stat-card-content">
+                                    <h2>8,542</h2>
+                                    <p>Giao dịch thành công</p>
+                                    <span class="growth positive">+2.1% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card warning">
+                                <div class="stat-card-content">
+                                    <h2>3,215</h2>
+                                    <p>Chờ thanh toán</p>
+                                    <span class="growth negative">+12.5% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+
+                            <div class="stat-card danger">
+                                <div class="stat-card-content">
+                                    <h2>125</h2>
+                                    <p>Giao dịch bị hủy</p>
+                                    <span class="growth negative">+3.8% <i class="fas fa-arrow-up"></i></span>
+                                </div>
+                                <div class="stat-card-icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Giao dịch gần đây</h3>
+                                <div class="card-actions">
+                                    <div class="search-box">
+                                        <input type="text" placeholder="Tìm theo MSSV hoặc mã giao dịch...">
+                                        <button><i class="fas fa-search"></i></button>
+                                    </div>
+                                    <select class="filter-select">
+                                        <option value="all">Tất cả trạng thái</option>
+                                        <option value="success">Thành công</option>
+                                        <option value="pending">Đang xử lý</option>
+                                        <option value="failed">Thất bại</option>
+                                        <option value="cancelled">Đã hủy</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="table-responsive">
+                                    <table class="admin-table">
+                                        <thead>
+                                            <tr>
+                                                <th>ID Giao dịch</th>
+                                                <th>MSSV</th>
+                                                <th>Họ tên</th>
+                                                <th>Số tiền</th>
+                                                <th>Mục đích</th>
+                                                <th>Phương thức</th>
+                                                <th>Ngày thanh toán</th>
+                                                <th>Trạng thái</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>TXN-24680</td>
+                                                <td>20000123</td>
+                                                <td>Nguyễn Văn A</td>
+                                                <td>12,800,000 ₫</td>
+                                                <td>Học phí HK1 2023-2024</td>
+                                                <td>Banking</td>
+                                                <td>24/08/2023 14:25</td>
+                                                <td><span class="badge badge-success">Thành công</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="btn-icon" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn-icon" title="Biên lai">
+                                                            <i class="fas fa-file-invoice"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>TXN-24679</td>
+                                                <td>20000124</td>
+                                                <td>Trần Thị B</td>
+                                                <td>12,800,000 ₫</td>
+                                                <td>Học phí HK1 2023-2024</td>
+                                                <td>Momo</td>
+                                                <td>24/08/2023 13:10</td>
+                                                <td><span class="badge badge-warning">Đang xử lý</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="btn-icon" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn-icon" title="Xác nhận" disabled>
+                                                            <i class="fas fa-check"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>TXN-24678</td>
+                                                <td>20000125</td>
+                                                <td>Lê Văn C</td>
+                                                <td>12,800,000 ₫</td>
+                                                <td>Học phí HK1 2023-2024</td>
+                                                <td>VNPay</td>
+                                                <td>24/08/2023 11:45</td>
+                                                <td><span class="badge badge-success">Thành công</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="btn-icon" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn-icon" title="Biên lai">
+                                                            <i class="fas fa-file-invoice"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>TXN-24677</td>
+                                                <td>20000126</td>
+                                                <td>Phạm Thị D</td>
+                                                <td>12,800,000 ₫</td>
+                                                <td>Học phí HK1 2023-2024</td>
+                                                <td>Banking</td>
+                                                <td>24/08/2023 10:30</td>
+                                                <td><span class="badge badge-danger">Thất bại</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="btn-icon" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn-icon" title="Thử lại">
+                                                            <i class="fas fa-redo"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>TXN-24676</td>
+                                                <td>20000127</td>
+                                                <td>Hoàng Văn E</td>
+                                                <td>12,800,000 ₫</td>
+                                                <td>Học phí HK1 2023-2024</td>
+                                                <td>Banking</td>
+                                                <td>24/08/2023 09:15</td>
+                                                <td><span class="badge badge-secondary">Đã hủy</span></td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="btn-icon" title="Xem chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </button>
+                                                        <button class="btn-icon" title="Tạo mới">
+                                                            <i class="fas fa-plus"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="pagination">
+                                    <a href="#" class="page-item active">1</a>
+                                    <a href="#" class="page-item">2</a>
+                                    <a href="#" class="page-item">3</a>
+                                    <a href="#" class="page-item">4</a>
+                                    <a href="#" class="page-item next"><i class="fas fa-angle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-row">
+                            <div class="dashboard-col-7">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Phân tích thanh toán</h3>
+                                        <div class="card-actions">
+                                            <select>
+                                                <option>Học kỳ 1 2023-2024</option>
+                                                <option>Học kỳ 2 2022-2023</option>
+                                                <option>Học kỳ 1 2022-2023</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="chart-container" style="height: 300px;">
+                                            <!-- Chart placeholder -->
+                                            <div class="chart-placeholder">
+                                                <div class="mock-chart">
+                                                    <div class="mock-bar" style="height: 65%;"></div>
+                                                    <div class="mock-bar" style="height: 40%;"></div>
+                                                    <div class="mock-bar" style="height: 25%;"></div>
+                                                    <div class="mock-bar" style="height: 15%;"></div>
+                                                </div>
+                                                <div class="mock-labels">
+                                                    <span>Banking</span>
+                                                    <span>VNPay</span>
+                                                    <span>Momo</span>
+                                                    <span>Khác</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="dashboard-col-5">
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Tình trạng thanh toán</h3>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="payment-stats">
+                                            <div class="payment-stat-item">
+                                                <div class="stat-label">Tổng đã thanh toán</div>
+                                                <div class="stat-value success">72%</div>
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill success" style="width: 72%;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="payment-stat-item">
+                                                <div class="stat-label">Chờ thanh toán</div>
+                                                <div class="stat-value warning">21%</div>
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill warning" style="width: 21%;"></div>
+                                                </div>
+                                            </div>
+                                            <div class="payment-stat-item">
+                                                <div class="stat-label">Thanh toán thất bại</div>
+                                                <div class="stat-value danger">7%</div>
+                                                <div class="progress-bar">
+                                                    <div class="progress-fill danger" style="width: 7%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="admin-card">
+                                    <div class="admin-card-header">
+                                        <h3>Phương thức thanh toán</h3>
+                                    </div>
+                                    <div class="admin-card-body">
+                                        <div class="payment-methods">
+                                            <div class="payment-method-item">
+                                                <div class="method-icon"><i class="fas fa-university"></i></div>
+                                                <div class="method-info">
+                                                    <div class="method-name">Chuyển khoản</div>
+                                                    <div class="method-stats">65% giao dịch</div>
+                                                </div>
+                                                <div class="method-toggle active">
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider"></span>
+                                                </div>
+                                            </div>
+                                            <div class="payment-method-item">
+                                                <div class="method-icon"><i class="fas fa-qrcode"></i></div>
+                                                <div class="method-info">
+                                                    <div class="method-name">VNPay QR</div>
+                                                    <div class="method-stats">20% giao dịch</div>
+                                                </div>
+                                                <div class="method-toggle active">
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider"></span>
+                                                </div>
+                                            </div>
+                                            <div class="payment-method-item">
+                                                <div class="method-icon"><i class="fas fa-wallet"></i></div>
+                                                <div class="method-info">
+                                                    <div class="method-name">Momo</div>
+                                                    <div class="method-stats">12% giao dịch</div>
+                                                </div>
+                                                <div class="method-toggle active">
+                                                    <input type="checkbox" checked>
+                                                    <span class="slider"></span>
+                                                </div>
+                                            </div>
+                                            <div class="payment-method-item">
+                                                <div class="method-icon"><i class="fas fa-credit-card"></i></div>
+                                                <div class="method-info">
+                                                    <div class="method-name">Thẻ tín dụng</div>
+                                                    <div class="method-stats">3% giao dịch</div>
+                                                </div>
+                                                <div class="method-toggle">
+                                                    <input type="checkbox">
+                                                    <span class="slider"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Simple search functionality
+            const searchInput = document.querySelector('.search-box input');
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const tableRows = document.querySelectorAll('.admin-table tbody tr');
+
+                tableRows.forEach(row => {
+                    const mssv = row.querySelector('td:nth-child(2)').textContent.toLowerCase();
+                    const txnId = row.querySelector('td:nth-child(1)').textContent.toLowerCase();
+                    const name = row.querySelector('td:nth-child(3)').textContent.toLowerCase();
+
+                    if (mssv.includes(searchTerm) || txnId.includes(searchTerm) || name.includes(searchTerm)) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+
+            // Status filter functionality
+            const filterSelect = document.querySelector('.filter-select');
+            filterSelect.addEventListener('change', function () {
+                const filterValue = this.value;
+                const tableRows = document.querySelectorAll('.admin-table tbody tr');
+
+                tableRows.forEach(row => {
+                    if (filterValue === 'all') {
+                        row.style.display = '';
+                        return;
+                    }
+
+                    const statusCell = row.querySelector('td:nth-child(8) .badge');
+                    const statusText = statusCell.textContent.toLowerCase();
+
+                    // Map status text to filter values
+                    let matchesFilter = false;
+                    if (filterValue === 'success' && statusText === 'thành công') matchesFilter = true;
+                    if (filterValue === 'pending' && statusText === 'đang xử lý') matchesFilter = true;
+                    if (filterValue === 'failed' && statusText === 'thất bại') matchesFilter = true;
+                    if (filterValue === 'cancelled' && statusText === 'đã hủy') matchesFilter = true;
+
+                    row.style.display = matchesFilter ? '' : 'none';
+                });
+            });
+
+            // Toggle payment method switches
+            const methodToggles = document.querySelectorAll('.method-toggle input');
+            methodToggles.forEach(toggle => {
+                toggle.addEventListener('change', function () {
+                    const methodItem = this.closest('.payment-method-item');
+                    if (this.checked) {
+                        methodItem.querySelector('.method-toggle').classList.add('active');
+                    } else {
+                        methodItem.querySelector('.method-toggle').classList.remove('active');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

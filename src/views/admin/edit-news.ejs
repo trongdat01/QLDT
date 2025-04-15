@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-news.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Chỉnh Sửa Tin Tức - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'news' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-edit"></i> Chỉnh Sửa Tin Tức</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/news">Tin tức</a> /
+                                <span>Chỉnh sửa</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin tin tức</h3>
+                                <div class="card-actions">
+                                    <div class="post-meta">
+                                        <span class="post-created">Tạo: 15/06/2023 bởi Admin</span>
+                                        <span class="post-updated">Cập nhật: 18/06/2023</span>
+                                    </div>
+                                    <button class="btn-sm secondary preview-btn">
+                                        <i class="fas fa-eye"></i> Xem trước
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <form class="admin-form" id="newsForm" method="post" action="/admin/news/update/1"
+                                    enctype="multipart/form-data">
+                                    <div class="news-form-layout">
+                                        <div class="news-form-main">
+                                            <div class="form-group">
+                                                <label for="title">Tiêu đề <span class="required">*</span></label>
+                                                <input type="text" id="title" name="title" required
+                                                    value="Thông Báo Đăng Ký Học Phần Học Kỳ 1 Năm Học 2023-2024">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="subtitle">Tóm tắt</label>
+                                                <textarea id="subtitle" name="subtitle"
+                                                    rows="2">Phòng Đào tạo thông báo kế hoạch đăng ký học phần trực tuyến học kỳ 1 năm học 2023-2024...</textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="content">Nội dung <span class="required">*</span></label>
+                                                <div class="editor-toolbar">
+                                                    <button type="button" class="editor-btn" data-command="bold"
+                                                        title="Đậm">
+                                                        <i class="fas fa-bold"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="italic"
+                                                        title="Nghiêng">
+                                                        <i class="fas fa-italic"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="underline"
+                                                        title="Gạch dưới">
+                                                        <i class="fas fa-underline"></i>
+                                                    </button>
+                                                    <span class="editor-divider"></span>
+                                                    <button type="button" class="editor-btn" data-command="justifyLeft"
+                                                        title="Canh trái">
+                                                        <i class="fas fa-align-left"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="justifyCenter" title="Canh giữa">
+                                                        <i class="fas fa-align-center"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="justifyRight"
+                                                        title="Canh phải">
+                                                        <i class="fas fa-align-right"></i>
+                                                    </button>
+                                                    <span class="editor-divider"></span>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="insertUnorderedList" title="Danh sách">
+                                                        <i class="fas fa-list-ul"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn"
+                                                        data-command="insertOrderedList" title="Danh sách có thứ tự">
+                                                        <i class="fas fa-list-ol"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="createLink"
+                                                        title="Chèn liên kết">
+                                                        <i class="fas fa-link"></i>
+                                                    </button>
+                                                    <button type="button" class="editor-btn" data-command="insertImage"
+                                                        title="Chèn hình ảnh">
+                                                        <i class="fas fa-image"></i>
+                                                    </button>
+                                                </div>
+                                                <div id="editor" class="content-editor" contenteditable="true">
+                                                    <h2>THÔNG BÁO ĐĂNG KÝ HỌC PHẦN HỌC KỲ 1 NĂM HỌC 2023-2024</h2>
+                                                    <p>Phòng Đào tạo thông báo lịch đăng ký học phần trực tuyến học kỳ 1
+                                                        năm học 2023-2024 như sau:</p>
+                                                    <ol>
+                                                        <li><strong>Thời gian đăng ký:</strong> Từ ngày 01/08/2023 đến
+                                                            ngày 10/08/2023</li>
+                                                        <li><strong>Đối tượng:</strong> Tất cả sinh viên hệ chính quy
+                                                            đang theo học tại trường</li>
+                                                        <li><strong>Cách thức đăng ký:</strong> Sinh viên đăng ký trực
+                                                            tuyến thông qua cổng đăng ký học phần</li>
+                                                    </ol>
+                                                    <p>Sinh viên vui lòng kiểm tra thông tin cá nhân, tình trạng học phí
+                                                        trước khi đăng ký. Mọi thắc mắc xin liên hệ Phòng Đào tạo (phòng
+                                                        A105) hoặc email về: <a
+                                                            href="mailto:daotao@example.edu.vn">daotao@example.edu.vn</a>
+                                                    </p>
+                                                    <p><em>Trân trọng,</em></p>
+                                                    <p><strong>Phòng Đào tạo</strong></p>
+                                                </div>
+                                                <textarea id="content" name="content" style="display:none"
+                                                    required><h2>THÔNG BÁO ĐĂNG KÝ HỌC PHẦN HỌC KỲ 1 NĂM HỌC 2023-2024</h2><p>Phòng Đào tạo thông báo lịch đăng ký học phần trực tuyến học kỳ 1 năm học 2023-2024 như sau:</p><ol><li><strong>Thời gian đăng ký:</strong> Từ ngày 01/08/2023 đến ngày 10/08/2023</li><li><strong>Đối tượng:</strong> Tất cả sinh viên hệ chính quy đang theo học tại trường</li><li><strong>Cách thức đăng ký:</strong> Sinh viên đăng ký trực tuyến thông qua cổng đăng ký học phần</li></ol><p>Sinh viên vui lòng kiểm tra thông tin cá nhân, tình trạng học phí trước khi đăng ký. Mọi thắc mắc xin liên hệ Phòng Đào tạo (phòng A105) hoặc email về: <a href="mailto:daotao@example.edu.vn">daotao@example.edu.vn</a></p><p><em>Trân trọng,</em></p><p><strong>Phòng Đào tạo</strong></p></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="news-form-sidebar">
+                                            <div class="sidebar-card">
+                                                <h4>Xuất bản</h4>
+                                                <div class="form-group">
+                                                    <label for="status">Trạng thái</label>
+                                                    <select id="status" name="status">
+                                                        <option value="draft">Bản nháp</option>
+                                                        <option value="published" selected>Đã xuất bản</option>
+                                                        <option value="scheduled">Lên lịch đăng</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="publish-info">
+                                                    <p>Xuất bản: <strong>15/06/2023 10:30</strong></p>
+                                                    <p>Lượt xem: <strong>1,245</strong></p>
+                                                </div>
+
+                                                <div class="form-group schedule-group" style="display: none;">
+                                                    <label for="publishDate">Ngày đăng</label>
+                                                    <input type="date" id="publishDate" name="publishDate">
+                                                </div>
+
+                                                <div class="form-group schedule-group" style="display: none;">
+                                                    <label for="publishTime">Giờ đăng</label>
+                                                    <input type="time" id="publishTime" name="publishTime">
+                                                </div>
+
+                                                <div class="form-actions">
+                                                    <button type="submit" class="btn danger" name="action"
+                                                        value="delete">Xóa</button>
+                                                    <button type="submit" class="btn primary" name="action"
+                                                        value="update">Cập nhật</button>
+                                                </div>
+                                            </div>
+
+                                            <div class="sidebar-card">
+                                                <h4>Danh mục</h4>
+                                                <div class="form-group">
+                                                    <label for="category">Chọn danh mục <span
+                                                            class="required">*</span></label>
+                                                    <select id="category" name="category" required>
+                                                        <option value="">-- Chọn danh mục --</option>
+                                                        <option value="notice" selected>Thông báo</option>
+                                                        <option value="event">Sự kiện</option>
+                                                        <option value="academics">Học thuật</option>
+                                                        <option value="admissions">Tuyển sinh</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="tags">Thẻ</label>
+                                                    <input type="text" id="tags" name="tags"
+                                                        value="đăng ký, học phần, thông báo">
+                                                </div>
+                                            </div>
+
+                                            <div class="sidebar-card">
+                                                <h4>Hình ảnh đại diện</h4>
+                                                <div class="form-group">
+                                                    <div class="featured-image-upload">
+                                                        <div class="upload-area" id="uploadArea" style="display: none;">
+                                                            <i class="fas fa-cloud-upload-alt"></i>
+                                                            <p>Kéo thả hoặc nhấp để tải ảnh lên</p>
+                                                            <span>Kích thước khuyến nghị: 1200x630px</span>
+                                                        </div>
+                                                        <input type="file" id="featuredImage" name="featuredImage"
+                                                            accept="image/*" style="display: none;">
+                                                        <div class="image-preview" id="imagePreview">
+                                                            <img id="previewImg" src="/images/lambo.jpg"
+                                                                alt="Xem trước">
+                                                            <button type="button" class="remove-image" id="removeImage">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // WYSIWYG Editor functionality
+            const editor = document.getElementById('editor');
+            const contentTextarea = document.getElementById('content');
+            const buttons = document.querySelectorAll('.editor-btn');
+
+            // Execute command on click
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const command = this.dataset.command;
+
+                    if (command === 'createLink') {
+                        const url = prompt('Enter the link URL:');
+                        if (url) document.execCommand(command, false, url);
+                    } else if (command === 'insertImage') {
+                        const url = prompt('Enter the image URL:');
+                        if (url) document.execCommand(command, false, url);
+                    } else {
+                        document.execCommand(command, false, null);
+                    }
+
+                    // Update hidden textarea with content
+                    contentTextarea.value = editor.innerHTML;
+                });
+            });
+
+            // Update textarea on editor change
+            editor.addEventListener('input', function () {
+                contentTextarea.value = editor.innerHTML;
+            });
+
+            // Handle status change to show/hide scheduling options
+            document.getElementById('status').addEventListener('change', function () {
+                const scheduleGroups = document.querySelectorAll('.schedule-group');
+                if (this.value === 'scheduled') {
+                    scheduleGroups.forEach(group => group.style.display = 'block');
+                } else {
+                    scheduleGroups.forEach(group => group.style.display = 'none');
+                }
+            });
+
+            // Featured image upload handling
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInput = document.getElementById('featuredImage');
+            const imagePreview = document.getElementById('imagePreview');
+            const previewImg = document.getElementById('previewImg');
+            const removeButton = document.getElementById('removeImage');
+
+            uploadArea.addEventListener('click', () => fileInput.click());
+
+            uploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+
+            uploadArea.addEventListener('dragleave', () => {
+                uploadArea.classList.remove('dragover');
+            });
+
+            uploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+
+                if (e.dataTransfer.files.length) {
+                    fileInput.files = e.dataTransfer.files;
+                    handleFileSelect(e.dataTransfer.files[0]);
+                }
+            });
+
+            fileInput.addEventListener('change', function () {
+                if (this.files.length) {
+                    handleFileSelect(this.files[0]);
+                }
+            });
+
+            removeButton.addEventListener('click', function () {
+                fileInput.value = '';
+                imagePreview.style.display = 'none';
+                uploadArea.style.display = 'flex';
+            });
+
+            function handleFileSelect(file) {
+                if (!file.type.match('image.*')) {
+                    alert('Vui lòng chọn file hình ảnh!');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    previewImg.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                    uploadArea.style.display = 'none';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // Form submission handling
+            document.getElementById('newsForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Check if delete action
+                if (e.submitter.name === 'action' && e.submitter.value === 'delete') {
+                    // Show custom modal instead of basic confirm
+                    const deleteConfirmModal = document.createElement('div');
+                    deleteConfirmModal.className = 'modal-overlay';
+                    deleteConfirmModal.id = 'deleteConfirmModal';
+
+                    deleteConfirmModal.innerHTML = `
+                        <div class="modal-container">
+                            <div class="modal-header">
+                                <h3><i class="fas fa-exclamation-triangle"></i> Xác nhận xóa tin tức</h3>
+                                <button class="close-btn" id="closeDeleteModal">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>Bạn có chắc chắn muốn xóa tin tức sau?</p>
+                                <div class="news-modal-info">
+                                    <img src="${document.getElementById('previewImg').src}" alt="Tin tức" class="news-modal-thumb">
+                                    <div>
+                                        <h4>${document.getElementById('title').value}</h4>
+                                        <p><i class="fas fa-exclamation-circle"></i> Khi xóa, nội dung này sẽ không thể khôi phục lại.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                                <button class="btn danger" id="confirmDelete">Xóa</button>
+                            </div>
+                        </div>
+                    `;
+
+                    document.body.appendChild(deleteConfirmModal);
+
+                    // Show modal with animation
+                    setTimeout(() => {
+                        deleteConfirmModal.classList.add('show');
+                    }, 10);
+
+                    // Close modal handlers
+                    document.getElementById('closeDeleteModal').addEventListener('click', () => {
+                        deleteConfirmModal.classList.remove('show');
+                        setTimeout(() => {
+                            document.body.removeChild(deleteConfirmModal);
+                        }, 300);
+                    });
+
+                    document.getElementById('cancelDelete').addEventListener('click', () => {
+                        deleteConfirmModal.classList.remove('show');
+                        setTimeout(() => {
+                            document.body.removeChild(deleteConfirmModal);
+                        }, 300);
+                    });
+
+                    // Confirm delete handler
+                    document.getElementById('confirmDelete').addEventListener('click', () => {
+                        // In a real app, this would make an AJAX request to delete
+                        alert('Đã xóa tin tức!');
+                        window.location.href = '/admin/news';
+                    });
+
+                    return;
+                }
+
+                // Validate form
+                if (!this.checkValidity()) {
+                    alert('Vui lòng điền đầy đủ thông tin bắt buộc!');
+                    return;
+                }
+
+                // In a real app, this would submit the form
+                alert('Đã cập nhật tin tức thành công!');
+
+                // Redirect back to news list
+                // window.location.href = '/admin/news';
+            });
+
+            // Preview button functionality
+            document.querySelector('.preview-btn').addEventListener('click', function () {
+                // In a real app, this would show a preview of the news
+                alert('Xem trước tin tức (chức năng đang phát triển)');
+            });
+        });
+    </script>
+</body>
+
+</html>

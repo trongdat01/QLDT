@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Quản Lý Học Phần - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'courses' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <!-- Header Section -->
+                        <div class="page-header">
+                            <div class="header-title">
+                                <h1><i class="fas fa-book"></i> Quản Lý Học Phần</h1>
+                                <p class="header-subtitle">Quản lý danh sách học phần và thông tin chi tiết</p>
+                            </div>
+                            <div class="page-actions">
+                                <a href="/admin/courses/create" class="btn primary">
+                                    <i class="fas fa-plus"></i> Thêm học phần mới
+                                </a>
+                                <div class="dropdown">
+                                    <button class="btn secondary dropdown-toggle">
+                                        <i class="fas fa-cog"></i> Thao tác
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                    <div class="dropdown-menu">
+                                        <a href="#" class="dropdown-item import-courses">
+                                            <i class="fas fa-file-import"></i> Nhập từ Excel
+                                        </a>
+                                        <a href="#" class="dropdown-item export-courses">
+                                            <i class="fas fa-file-export"></i> Xuất danh sách
+                                        </a>
+                                        <a href="#" class="dropdown-item print-courses">
+                                            <i class="fas fa-print"></i> In danh sách
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Statistics Cards -->
+                        <div class="stats-cards">
+                            <div class="stat-card">
+                                <div class="stat-card-content">
+                                    <div class="stat-card-info">
+                                        <h3>Tổng Học Phần</h3>
+                                        <div class="stat-number">248</div>
+                                    </div>
+                                    <div class="stat-card-icon">
+                                        <i class="fas fa-book"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-card-footer">
+                                    <span><i class="fas fa-arrow-up"></i> 12 học phần mới trong tháng này</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-card-content">
+                                    <div class="stat-card-info">
+                                        <h3>Đang Mở</h3>
+                                        <div class="stat-number">156</div>
+                                    </div>
+                                    <div class="stat-card-icon">
+                                        <i class="fas fa-check-circle"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-card-footer">
+                                    <span>62.9% học phần đang hoạt động</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-card-content">
+                                    <div class="stat-card-info">
+                                        <h3>Học Phần Bắt Buộc</h3>
+                                        <div class="stat-number">189</div>
+                                    </div>
+                                    <div class="stat-card-icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-card-footer">
+                                    <span>76.2% là học phần bắt buộc</span>
+                                </div>
+                            </div>
+
+                            <div class="stat-card">
+                                <div class="stat-card-content">
+                                    <div class="stat-card-info">
+                                        <h3>Ngành Học</h3>
+                                        <div class="stat-number">24</div>
+                                    </div>
+                                    <div class="stat-card-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                </div>
+                                <div class="stat-card-footer">
+                                    <span>Phân bố trên 24 ngành học</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Content Card -->
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h2>Danh Sách Học Phần</h2>
+                                <!-- Search & Filter Section -->
+                                <div class="search-filter-container">
+                                    <div class="search-box">
+                                        <input type="text" id="searchCourses" placeholder="Tìm kiếm học phần...">
+                                        <i class="fas fa-search"></i>
+                                    </div>
+                                    <button class="btn-sm secondary toggle-filters">
+                                        <i class="fas fa-filter"></i> Bộ lọc
+                                        <i class="fas fa-chevron-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Filter Panel -->
+                            <div class="filter-panel">
+                                <div class="filter-grid">
+                                    <div class="filter-group">
+                                        <label>Khoa</label>
+                                        <select id="departmentFilter">
+                                            <option value="">Tất cả Khoa</option>
+                                            <option value="cntt">Công nghệ thông tin</option>
+                                            <option value="kt">Kinh tế</option>
+                                            <option value="kythuat">Kỹ thuật</option>
+                                            <option value="nn">Ngoại ngữ</option>
+                                            <option value="toan">Toán - Thống kê</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Loại học phần</label>
+                                        <select id="courseTypeFilter">
+                                            <option value="">Tất cả loại</option>
+                                            <option value="required">Bắt buộc</option>
+                                            <option value="elective">Tự chọn</option>
+                                            <option value="project">Đồ án</option>
+                                            <option value="internship">Thực tập</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Số tín chỉ</label>
+                                        <select id="creditFilter">
+                                            <option value="">Tất cả</option>
+                                            <option value="1">1 tín chỉ</option>
+                                            <option value="2">2 tín chỉ</option>
+                                            <option value="3">3 tín chỉ</option>
+                                            <option value="4">4 tín chỉ</option>
+                                            <option value="5+">5+ tín chỉ</option>
+                                        </select>
+                                    </div>
+                                    <div class="filter-group">
+                                        <label>Trạng thái</label>
+                                        <select id="statusFilter">
+                                            <option value="">Tất cả trạng thái</option>
+                                            <option value="active">Đang mở</option>
+                                            <option value="inactive">Đã đóng</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="filter-actions">
+                                    <button class="btn secondary" id="resetFilters">
+                                        <i class="fas fa-undo"></i> Đặt lại
+                                    </button>
+                                    <button class="btn primary" id="applyFilters">
+                                        <i class="fas fa-check"></i> Áp dụng
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="admin-card-body">
+                                <!-- Table View -->
+                                <div class="table-responsive">
+                                    <table class="admin-table courses-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="checkbox-column">
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="selectAll">
+                                                        <label for="selectAll"></label>
+                                                    </div>
+                                                </th>
+                                                <th>Mã học phần</th>
+                                                <th>Tên học phần</th>
+                                                <th>Khoa</th>
+                                                <th>Loại</th>
+                                                <th>Tín chỉ</th>
+                                                <th>Trạng thái</th>
+                                                <th>Thao tác</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course1">
+                                                        <label for="course1"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">COMP101</span></td>
+                                                <td>
+                                                    <div class="course-name">Nhập môn lập trình</div>
+                                                    <div class="course-meta">Cập nhật: 15/05/2023</div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td><span class="badge required">Bắt buộc</span></td>
+                                                <td>3</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/COMP101" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/COMP101" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="COMP101" data-name="Nhập môn lập trình">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course2">
+                                                        <label for="course2"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">COMP102</span></td>
+                                                <td>
+                                                    <div class="course-name">Cấu trúc dữ liệu và giải thuật</div>
+                                                    <div class="course-meta">Cập nhật: 12/05/2023</div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td><span class="badge required">Bắt buộc</span></td>
+                                                <td>4</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/COMP102" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/COMP102" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="COMP102"
+                                                            data-name="Cấu trúc dữ liệu và giải thuật">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course3">
+                                                        <label for="course3"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">MATH101</span></td>
+                                                <td>
+                                                    <div class="course-name">Giải tích 1</div>
+                                                    <div class="course-meta">Cập nhật: 10/05/2023</div>
+                                                </td>
+                                                <td>Toán - Thống kê</td>
+                                                <td><span class="badge required">Bắt buộc</span></td>
+                                                <td>4</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/MATH101" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/MATH101" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="MATH101" data-name="Giải tích 1">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course4">
+                                                        <label for="course4"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">COMP301</span></td>
+                                                <td>
+                                                    <div class="course-name">Trí tuệ nhân tạo</div>
+                                                    <div class="course-meta">Cập nhật: 08/05/2023</div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td><span class="badge elective">Tự chọn</span></td>
+                                                <td>3</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/COMP301" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/COMP301" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="COMP301" data-name="Trí tuệ nhân tạo">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course5">
+                                                        <label for="course5"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">ENG101</span></td>
+                                                <td>
+                                                    <div class="course-name">Tiếng Anh học thuật</div>
+                                                    <div class="course-meta">Cập nhật: 05/05/2023</div>
+                                                </td>
+                                                <td>Ngoại ngữ</td>
+                                                <td><span class="badge required">Bắt buộc</span></td>
+                                                <td>2</td>
+                                                <td><span class="status-badge inactive">Đã đóng</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/ENG101" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/ENG101" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="ENG101" data-name="Tiếng Anh học thuật">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course6">
+                                                        <label for="course6"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">COMP302</span></td>
+                                                <td>
+                                                    <div class="course-name">Phát triển ứng dụng web</div>
+                                                    <div class="course-meta">Cập nhật: 02/05/2023</div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td><span class="badge required">Bắt buộc</span></td>
+                                                <td>3</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/COMP302" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/COMP302" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="COMP302" data-name="Phát triển ứng dụng web">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div class="checkbox">
+                                                        <input type="checkbox" id="course7">
+                                                        <label for="course7"></label>
+                                                    </div>
+                                                </td>
+                                                <td><span class="course-code">PROJ401</span></td>
+                                                <td>
+                                                    <div class="course-name">Đồ án tốt nghiệp</div>
+                                                    <div class="course-meta">Cập nhật: 01/05/2023</div>
+                                                </td>
+                                                <td>Công nghệ thông tin</td>
+                                                <td><span class="badge project">Đồ án</span></td>
+                                                <td>6</td>
+                                                <td><span class="status-badge active">Đang mở</span></td>
+                                                <td>
+                                                    <div class="action-buttons">
+                                                        <a href="/admin/courses/detail/PROJ401" class="btn-icon"
+                                                            title="Chi tiết">
+                                                            <i class="fas fa-eye"></i>
+                                                        </a>
+                                                        <a href="/admin/courses/edit/PROJ401" class="btn-icon"
+                                                            title="Chỉnh sửa">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                        <button class="btn-icon delete-course" title="Xóa"
+                                                            data-id="PROJ401" data-name="Đồ án tốt nghiệp">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!-- Bulk Actions & Pagination -->
+                                <div class="table-footer">
+                                    <div class="bulk-actions">
+                                        <select id="bulkActionSelect">
+                                            <option value="">Chọn thao tác</option>
+                                            <option value="activate">Kích hoạt</option>
+                                            <option value="deactivate">Hủy kích hoạt</option>
+                                            <option value="delete">Xóa</option>
+                                        </select>
+                                        <button class="btn secondary" id="applyBulkAction" disabled>Áp dụng</button>
+                                    </div>
+
+                                    <div class="pagination-container">
+                                        <div class="items-per-page">
+                                            <span>Hiển thị</span>
+                                            <select id="itemsPerPage">
+                                                <option value="10">10</option>
+                                                <option value="25" selected>25</option>
+                                                <option value="50">50</option>
+                                                <option value="100">100</option>
+                                            </select>
+                                            <span>mục</span>
+                                        </div>
+
+                                        <div class="pagination">
+                                            <button class="page-item" disabled><i
+                                                    class="fas fa-angle-double-left"></i></button>
+                                            <button class="page-item" disabled><i
+                                                    class="fas fa-angle-left"></i></button>
+                                            <span class="pagination-info">Trang 1 / 10</span>
+                                            <button class="page-item"><i class="fas fa-angle-right"></i></button>
+                                            <button class="page-item"><i class="fas fa-angle-double-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Delete Course Modal -->
+    <div class="modal" id="deleteCourseModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Xác nhận xóa học phần</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <p>Bạn có chắc chắn muốn xóa học phần sau?</p>
+                    <p>Thao tác này không thể hoàn tác và có thể ảnh hưởng đến dữ liệu liên quan.</p>
+                </div>
+                <div class="course-info-panel">
+                    <div class="info-header">
+                        <span class="course-code-display">COMP101</span>
+                        <h4 id="courseNameToDelete">Nhập môn lập trình</h4>
+                    </div>
+                    <div class="course-details">
+                        <div class="detail-item">
+                            <span class="detail-label">Khoa:</span>
+                            <span class="detail-value">Công nghệ thông tin</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Tín chỉ:</span>
+                            <span class="detail-value">3</span>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-label">Loại:</span>
+                            <span class="detail-value">Bắt buộc</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <label for="deleteReason">Lý do xóa</label>
+                    <textarea id="deleteReason" rows="3" placeholder="Nhập lý do xóa học phần..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xác nhận xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import Courses Modal -->
+    <div class="modal" id="importCoursesModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-file-import"></i> Nhập học phần từ tệp Excel</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <p>Để nhập học phần từ Excel, vui lòng sử dụng mẫu được cung cấp bên dưới:</p>
+                </div>
+                <div class="template-download">
+                    <a href="/templates/courses_import_template.xlsx" class="btn secondary" download>
+                        <i class="fas fa-download"></i> Tải xuống mẫu Excel
+                    </a>
+                </div>
+                <div class="upload-container">
+                    <div class="upload-area" id="uploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Kéo và thả tệp Excel vào đây hoặc</p>
+                        <label for="fileUpload" class="btn primary">Chọn tệp</label>
+                        <input type="file" id="fileUpload" accept=".xlsx,.xls" hidden>
+                        <p class="file-hint">Chỉ chấp nhận tệp Excel (.xlsx, .xls)</p>
+                    </div>
+                    <div class="file-info" id="fileInfo" style="display: none;">
+                        <div class="selected-file">
+                            <i class="fas fa-file-excel"></i>
+                            <div class="file-details">
+                                <span class="file-name" id="fileName">courses_data.xlsx</span>
+                                <span class="file-size" id="fileSize">125 KB</span>
+                            </div>
+                            <button class="btn-icon remove-file" id="removeFile">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="import-options">
+                    <div class="checkbox">
+                        <input type="checkbox" id="updateExisting" checked>
+                        <label for="updateExisting">Cập nhật học phần đã tồn tại</label>
+                    </div>
+                    <div class="checkbox">
+                        <input type="checkbox" id="skipErrors">
+                        <label for="skipErrors">Bỏ qua các dòng có lỗi</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelImport">Hủy</button>
+                <button class="btn primary" id="confirmImport" disabled>Nhập dữ liệu</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Toggle filter panel
+            const toggleFiltersBtn = document.querySelector('.toggle-filters');
+            const filterPanel = document.querySelector('.filter-panel');
+
+            toggleFiltersBtn.addEventListener('click', function () {
+                filterPanel.classList.toggle('show');
+                const icon = this.querySelector('.fa-chevron-down');
+                icon.classList.toggle('fa-chevron-up');
+            });
+
+            // Reset filters
+            const resetFiltersBtn = document.getElementById('resetFilters');
+            resetFiltersBtn.addEventListener('click', function () {
+                const filterSelects = document.querySelectorAll('.filter-group select');
+                filterSelects.forEach(select => {
+                    select.selectedIndex = 0;
+                });
+                document.getElementById('searchCourses').value = '';
+            });
+
+            // Apply filters
+            const applyFiltersBtn = document.getElementById('applyFilters');
+            applyFiltersBtn.addEventListener('click', function () {
+                alert('Bộ lọc đã được áp dụng!');
+                filterPanel.classList.remove('show');
+                toggleFiltersBtn.querySelector('.fa-chevron-up').classList.replace('fa-chevron-up', 'fa-chevron-down');
+            });
+
+            // Select all checkboxes
+            const selectAllCheckbox = document.getElementById('selectAll');
+            const courseCheckboxes = document.querySelectorAll('tbody .checkbox input');
+
+            selectAllCheckbox.addEventListener('change', function () {
+                courseCheckboxes.forEach(checkbox => {
+                    checkbox.checked = this.checked;
+                });
+                updateBulkActionButtonState();
+            });
+
+            courseCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function () {
+                    updateBulkActionButtonState();
+                    // Update selectAll checkbox state
+                    const allChecked = Array.from(courseCheckboxes).every(cb => cb.checked);
+                    const someChecked = Array.from(courseCheckboxes).some(cb => cb.checked);
+                    selectAllCheckbox.checked = allChecked;
+                    selectAllCheckbox.indeterminate = someChecked && !allChecked;
+                });
+            });
+
+            // Enable/disable bulk action button
+            function updateBulkActionButtonState() {
+                const bulkActionButton = document.getElementById('applyBulkAction');
+                const checkedCount = document.querySelectorAll('tbody .checkbox input:checked').length;
+                bulkActionButton.disabled = checkedCount === 0;
+            }
+
+            // Bulk action apply
+            document.getElementById('applyBulkAction').addEventListener('click', function () {
+                const action = document.getElementById('bulkActionSelect').value;
+                const checkedCount = document.querySelectorAll('tbody .checkbox input:checked').length;
+
+                if (!action) {
+                    alert('Vui lòng chọn thao tác cần thực hiện.');
+                    return;
+                }
+
+                if (checkedCount === 0) {
+                    alert('Vui lòng chọn ít nhất một học phần.');
+                    return;
+                }
+
+                let actionText = '';
+                switch (action) {
+                    case 'activate': actionText = 'kích hoạt'; break;
+                    case 'deactivate': actionText = 'hủy kích hoạt'; break;
+                    case 'delete': actionText = 'xóa'; break;
+                }
+
+                if (confirm(`Bạn có chắc muốn ${actionText} ${checkedCount} học phần đã chọn?`)) {
+                    alert(`Đã ${actionText} ${checkedCount} học phần.`);
+                }
+            });
+
+            // Delete course modal
+            const deleteBtns = document.querySelectorAll('.delete-course');
+            const deleteModal = document.getElementById('deleteCourseModal');
+            const cancelDeleteBtn = document.getElementById('cancelDelete');
+            const confirmDeleteBtn = document.getElementById('confirmDelete');
+            const closeModalBtn = deleteModal.querySelector('.close-modal');
+
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const courseId = this.getAttribute('data-id');
+                    const courseName = this.getAttribute('data-name');
+                    document.getElementById('courseNameToDelete').textContent = courseName;
+                    document.querySelector('.course-code-display').textContent = courseId;
+                    deleteModal.classList.add('show');
+                });
+            });
+
+            function closeDeleteModal() {
+                deleteModal.classList.remove('show');
+                document.getElementById('deleteReason').value = '';
+            }
+
+            cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+            closeModalBtn.addEventListener('click', closeDeleteModal);
+
+            confirmDeleteBtn.addEventListener('click', function () {
+                const reason = document.getElementById('deleteReason').value.trim();
+                if (!reason) {
+                    alert('Vui lòng nhập lý do xóa học phần.');
+                    return;
+                }
+                alert('Học phần đã được xóa thành công!');
+                closeDeleteModal();
+            });
+
+            // Import courses modal
+            const importBtn = document.querySelector('.import-courses');
+            const importModal = document.getElementById('importCoursesModal');
+            const cancelImportBtn = document.getElementById('cancelImport');
+            const confirmImportBtn = document.getElementById('confirmImport');
+            const closeImportModalBtn = importModal.querySelector('.close-modal');
+            const fileUploadInput = document.getElementById('fileUpload');
+            const uploadArea = document.getElementById('uploadArea');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileName = document.getElementById('fileName');
+            const fileSize = document.getElementById('fileSize');
+            const removeFileBtn = document.getElementById('removeFile');
+
+            importBtn.addEventListener('click', function () {
+                importModal.classList.add('show');
+            });
+
+            function closeImportModal() {
+                importModal.classList.remove('show');
+                fileUploadInput.value = '';
+                fileInfo.style.display = 'none';
+                uploadArea.style.display = 'block';
+                confirmImportBtn.disabled = true;
+            }
+
+            cancelImportBtn.addEventListener('click', closeImportModal);
+            closeImportModalBtn.addEventListener('click', closeImportModal);
+
+            // File upload handler
+            fileUploadInput.addEventListener('change', function (e) {
+                if (this.files.length > 0) {
+                    const file = this.files[0];
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    uploadArea.style.display = 'none';
+                    fileInfo.style.display = 'block';
+                    confirmImportBtn.disabled = false;
+                }
+            });
+
+            removeFileBtn.addEventListener('click', function () {
+                fileUploadInput.value = '';
+                uploadArea.style.display = 'block';
+                fileInfo.style.display = 'none';
+                confirmImportBtn.disabled = true;
+            });
+
+            // Format file size
+            function formatFileSize(bytes) {
+                if (bytes === 0) return '0 Bytes';
+                const k = 1024;
+                const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+                const i = Math.floor(Math.log(bytes) / Math.log(k));
+                return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+            }
+
+            // Drag and drop for file upload
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+
+            ['dragenter', 'dragover'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, highlight, false);
+            });
+
+            ['dragleave', 'drop'].forEach(eventName => {
+                uploadArea.addEventListener(eventName, unhighlight, false);
+            });
+
+            function highlight() {
+                uploadArea.classList.add('highlight');
+            }
+
+            function unhighlight() {
+                uploadArea.classList.remove('highlight');
+            }
+
+            uploadArea.addEventListener('drop', handleDrop, false);
+
+            function handleDrop(e) {
+                const dt = e.dataTransfer;
+                const files = dt.files;
+
+                if (files.length > 0) {
+                    fileUploadInput.files = files;
+                    const file = files[0];
+                    fileName.textContent = file.name;
+                    fileSize.textContent = formatFileSize(file.size);
+                    uploadArea.style.display = 'none';
+                    fileInfo.style.display = 'block';
+                    confirmImportBtn.disabled = false;
+                }
+            }
+
+            confirmImportBtn.addEventListener('click', function () {
+                alert('Dữ liệu học phần đã được nhập thành công!');
+                closeImportModal();
+            });
+
+            // Dropdown menu
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const dropdownMenu = document.querySelector('.dropdown-menu');
+
+            dropdownToggle.addEventListener('click', function () {
+                dropdownMenu.classList.toggle('show');
+            });
+
+            document.addEventListener('click', function (e) {
+                if (!e.target.matches('.dropdown-toggle') && !e.target.closest('.dropdown-menu')) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+
+            // Export courses handler
+            document.querySelector('.export-courses').addEventListener('click', function () {
+                alert('Xuất danh sách học phần thành công!');
+            });
+
+            // Print courses handler
+            document.querySelector('.print-courses').addEventListener('click', function () {
+                alert('Đang chuẩn bị in danh sách học phần...');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-grades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Chỉnh Sửa Điểm - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'grades' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-edit"></i> Chỉnh Sửa Điểm</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/grades">Quản lý điểm</a> /
+                                <span>Chỉnh sửa điểm</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin điểm sinh viên</h3>
+                                <div class="card-actions">
+                                    <div class="grade-history-info">
+                                        <span>Cập nhật lần cuối: 18/10/2023</span>
+                                        <span>Người cập nhật: Admin</span>
+                                    </div>
+                                    <button type="button" class="btn-sm secondary" id="calculate-grade">
+                                        <i class="fas fa-calculator"></i> Tính điểm tổng kết
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <form id="gradeForm" class="grade-form" method="post"
+                                    action="/admin/grades/edit/20000123">
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="courseId">Học phần <span class="required">*</span></label>
+                                            <select id="courseId" name="courseId" required>
+                                                <option value="">-- Chọn học phần --</option>
+                                                <option value="COMP301" selected>COMP301 - Cơ sở dữ liệu</option>
+                                                <option value="COMP302">COMP302 - Mạng máy tính</option>
+                                                <option value="COMP303">COMP303 - Lập trình web</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="semester">Học kỳ <span class="required">*</span></label>
+                                            <select id="semester" name="semester" required>
+                                                <option value="">-- Chọn học kỳ --</option>
+                                                <option value="2023-1" selected>Học kỳ 1 - 2023-2024</option>
+                                                <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                                <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="groupId">Nhóm <span class="required">*</span></label>
+                                            <select id="groupId" name="groupId" required>
+                                                <option value="">-- Chọn nhóm học phần --</option>
+                                                <option value="1" selected>Nhóm 1</option>
+                                                <option value="2">Nhóm 2</option>
+                                                <option value="3">Nhóm 3</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="studentId">MSSV <span class="required">*</span></label>
+                                            <input type="text" id="studentId" name="studentId" value="20000123" readonly
+                                                required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="studentName">Tên sinh viên <span
+                                                    class="required">*</span></label>
+                                            <input type="text" id="studentName" name="studentName" value="Nguyễn Văn A"
+                                                readonly required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="className">Lớp <span class="required">*</span></label>
+                                            <input type="text" id="className" name="className" value="CNTT-01" readonly
+                                                required>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <button type="button" class="btn secondary full-width" id="viewHistory">
+                                                <i class="fas fa-history"></i> Xem lịch sử điểm
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <div class="grade-components-section">
+                                        <h3>Điểm thành phần</h3>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label for="attendanceGrade">Điểm chuyên cần (10%)</label>
+                                                <input type="number" id="attendanceGrade" name="attendanceGrade" min="0"
+                                                    max="10" step="0.1" class="grade-input" value="8.5">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="assignmentGrade">Điểm bài tập (10%)</label>
+                                                <input type="number" id="assignmentGrade" name="assignmentGrade" min="0"
+                                                    max="10" step="0.1" class="grade-input" value="9.0">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="midtermGrade">Điểm kiểm tra giữa kỳ (20%)</label>
+                                                <input type="number" id="midtermGrade" name="midtermGrade" min="0"
+                                                    max="10" step="0.1" class="grade-input" value="7.5">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="finalGrade">Điểm thi cuối kỳ (60%)</label>
+                                                <input type="number" id="finalGrade" name="finalGrade" min="0" max="10"
+                                                    step="0.1" class="grade-input" value="8.0">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row result-row">
+                                        <div class="form-group">
+                                            <label for="totalGrade">Điểm tổng kết</label>
+                                            <input type="number" id="totalGrade" name="totalGrade" min="0" max="10"
+                                                step="0.1" readonly value="8.1">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="letterGrade">Điểm chữ</label>
+                                            <input type="text" id="letterGrade" name="letterGrade" readonly value="A-">
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="status">Trạng thái</label>
+                                            <select id="status" name="status">
+                                                <option value="passed" selected>Đạt</option>
+                                                <option value="failed">Không đạt</option>
+                                                <option value="incomplete">Chưa hoàn thành</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group full-width">
+                                            <label for="notes">Ghi chú</label>
+                                            <textarea id="notes" name="notes"
+                                                rows="3">Sinh viên có xin phúc khảo điểm kiểm tra giữa kỳ.</textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group full-width">
+                                            <label for="editReason">Lý do chỉnh sửa <span
+                                                    class="required">*</span></label>
+                                            <textarea id="editReason" name="editReason" rows="2" required></textarea>
+                                            <p class="help-text">Vui lòng nhập lý do chỉnh sửa điểm. Thông tin này sẽ
+                                                được lưu vào lịch sử thay đổi.</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-actions">
+                                        <button type="button" class="btn danger" id="deleteGradeBtn">Xóa điểm</button>
+                                        <div class="right-actions">
+                                            <button type="button" class="btn secondary"
+                                                onclick="window.location.href='/admin/grades'">Hủy</button>
+                                            <button type="submit" class="btn primary">Lưu thay đổi</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Grade History Modal -->
+    <div class="modal" id="gradeHistoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Lịch sử điểm - Nguyễn Văn A (20000123)</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <table class="history-table">
+                    <thead>
+                        <tr>
+                            <th>Ngày thay đổi</th>
+                            <th>Thành phần</th>
+                            <th>Điểm cũ</th>
+                            <th>Điểm mới</th>
+                            <th>Người thay đổi</th>
+                            <th>Ghi chú</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>20/10/2023 15:30</td>
+                            <td>Bài tập</td>
+                            <td>8.0</td>
+                            <td>9.0</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Điểm được điều chỉnh sau khi chấm lại</td>
+                        </tr>
+                        <tr>
+                            <td>15/10/2023 10:15</td>
+                            <td>Kiểm tra</td>
+                            <td>-</td>
+                            <td>7.5</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Nhập điểm lần đầu</td>
+                        </tr>
+                        <tr>
+                            <td>10/10/2023 14:45</td>
+                            <td>Chuyên cần</td>
+                            <td>-</td>
+                            <td>8.5</td>
+                            <td>Nguyễn Văn B</td>
+                            <td>Nhập điểm lần đầu</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="closeHistoryModal">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Grade Confirmation Modal -->
+    <div class="modal" id="deleteGradeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-danger"></i> Xác nhận xóa điểm</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa điểm của sinh viên sau?</p>
+                <div class="student-info-confirm">
+                    <div class="student-avatar">
+                        <i class="fas fa-user-graduate"></i>
+                    </div>
+                    <div class="student-details">
+                        <h4>Nguyễn Văn A</h4>
+                        <p>MSSV: 20000123</p>
+                        <p>Học phần: COMP301 - Cơ sở dữ liệu (Nhóm 1)</p>
+                        <p class="text-danger"><i class="fas fa-exclamation-circle"></i> Hành động này không thể hoàn
+                            tác</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="deleteReason">Lý do xóa <span class="required">*</span></label>
+                    <textarea id="deleteReason" rows="2" required></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelDelete">Hủy</button>
+                <button class="btn danger" id="confirmDelete">Xóa</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Calculate total grade and letter grade
+            const calculateGrade = document.getElementById('calculate-grade');
+            calculateGrade.addEventListener('click', function () {
+                const attendance = parseFloat(document.getElementById('attendanceGrade').value) || 0;
+                const assignment = parseFloat(document.getElementById('assignmentGrade').value) || 0;
+                const midterm = parseFloat(document.getElementById('midtermGrade').value) || 0;
+                const final = parseFloat(document.getElementById('finalGrade').value) || 0;
+
+                const totalGrade = (attendance * 0.1) + (assignment * 0.1) + (midterm * 0.2) + (final * 0.6);
+                document.getElementById('totalGrade').value = totalGrade.toFixed(1);
+
+                // Determine letter grade
+                let letterGrade;
+                if (totalGrade >= 9.0) letterGrade = 'A+';
+                else if (totalGrade >= 8.5) letterGrade = 'A';
+                else if (totalGrade >= 8.0) letterGrade = 'A-';
+                else if (totalGrade >= 7.0) letterGrade = 'B+';
+                else if (totalGrade >= 6.5) letterGrade = 'B';
+                else if (totalGrade >= 6.0) letterGrade = 'B-';
+                else if (totalGrade >= 5.5) letterGrade = 'C+';
+                else if (totalGrade >= 5.0) letterGrade = 'C';
+                else if (totalGrade >= 4.0) letterGrade = 'D';
+                else letterGrade = 'F';
+
+                document.getElementById('letterGrade').value = letterGrade;
+
+                // Update status based on grade
+                const statusSelect = document.getElementById('status');
+                if (totalGrade >= 4.0) {
+                    statusSelect.value = 'passed';
+                } else {
+                    statusSelect.value = 'failed';
+                }
+            });
+
+            // Auto-calculate grade when inputs change
+            const gradeInputs = document.querySelectorAll('.grade-input');
+            gradeInputs.forEach(input => {
+                input.addEventListener('change', function () {
+                    calculateGrade.click();
+                });
+            });
+
+            // Open grade history modal
+            const viewHistoryBtn = document.getElementById('viewHistory');
+            const historyModal = document.getElementById('gradeHistoryModal');
+
+            viewHistoryBtn.addEventListener('click', function () {
+                historyModal.style.display = 'block';
+            });
+
+            // Close history modal
+            document.querySelector('#gradeHistoryModal .close-modal').addEventListener('click', function () {
+                historyModal.style.display = 'none';
+            });
+
+            document.getElementById('closeHistoryModal').addEventListener('click', function () {
+                historyModal.style.display = 'none';
+            });
+
+            // Delete grade functionality
+            const deleteGradeBtn = document.getElementById('deleteGradeBtn');
+            const deleteModal = document.getElementById('deleteGradeModal');
+
+            deleteGradeBtn.addEventListener('click', function () {
+                deleteModal.style.display = 'block';
+            });
+
+            // Close delete modal
+            document.querySelector('#deleteGradeModal .close-modal').addEventListener('click', function () {
+                deleteModal.style.display = 'none';
+            });
+
+            document.getElementById('cancelDelete').addEventListener('click', function () {
+                deleteModal.style.display = 'none';
+            });
+
+            // Confirm delete action
+            document.getElementById('confirmDelete').addEventListener('click', function () {
+                const deleteReason = document.getElementById('deleteReason').value.trim();
+
+                if (!deleteReason) {
+                    alert('Vui lòng nhập lý do xóa điểm!');
+                    return;
+                }
+
+                // In a real app, this would make an AJAX request to delete the grade
+                alert('Đã xóa điểm thành công!');
+                deleteModal.style.display = 'none';
+
+                // Redirect back to grades list
+                window.location.href = '/admin/grades';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function (e) {
+                if (e.target === historyModal) {
+                    historyModal.style.display = 'none';
+                }
+                if (e.target === deleteModal) {
+                    deleteModal.style.display = 'none';
+                }
+            });
+
+            // Form submission
+            document.getElementById('gradeForm').addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Validate edit reason
+                const editReason = document.getElementById('editReason').value.trim();
+                if (!editReason) {
+                    alert('Vui lòng nhập lý do chỉnh sửa điểm!');
+                    return;
+                }
+
+                // In a real app, this would submit the form
+                alert('Đã cập nhật điểm thành công!');
+
+                // Redirect back to grades list
+                // window.location.href = '/admin/grades';
+            });
+        });
+    </script>
+</body>
+
+</html>

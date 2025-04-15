@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-grades.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Chi Tiết Điểm Sinh Viên - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'grades' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <h1><i class="fas fa-user-graduate"></i> Chi Tiết Điểm Sinh Viên</h1>
+                            <nav class="breadcrumb">
+                                <a href="/admin/dashboard">Admin</a> /
+                                <a href="/admin/grades">Quản lý điểm</a> /
+                                <span>Chi tiết điểm sinh viên</span>
+                            </nav>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Thông tin sinh viên</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary">
+                                        <i class="fas fa-envelope"></i> Gửi email
+                                    </button>
+                                    <button class="btn-sm primary">
+                                        <i class="fas fa-print"></i> In bảng điểm
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="student-profile">
+                                    <div class="student-profile-header">
+                                        <div class="student-avatar">
+                                            <img src="/images/lambo.jpg" alt="Sinh viên">
+                                        </div>
+                                        <div class="student-info">
+                                            <h2>Nguyễn Văn A</h2>
+                                            <div class="student-meta">
+                                                <div class="meta-item">
+                                                    <i class="fas fa-id-card"></i>
+                                                    <span>MSSV: 20000123</span>
+                                                </div>
+                                                <div class="meta-item">
+                                                    <i class="fas fa-graduation-cap"></i>
+                                                    <span>Công nghệ thông tin</span>
+                                                </div>
+                                                <div class="meta-item">
+                                                    <i class="fas fa-users"></i>
+                                                    <span>Lớp: CNTT-01</span>
+                                                </div>
+                                                <div class="meta-item">
+                                                    <i class="fas fa-calendar-alt"></i>
+                                                    <span>Khóa: 2020-2024</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="student-summary">
+                                            <div class="summary-card">
+                                                <div class="summary-value">3.65</div>
+                                                <div class="summary-label">GPA tích lũy</div>
+                                            </div>
+                                            <div class="summary-card">
+                                                <div class="summary-value">85/145</div>
+                                                <div class="summary-label">Tín chỉ đã học</div>
+                                            </div>
+                                            <div class="summary-card">
+                                                <div class="summary-value">Giỏi</div>
+                                                <div class="summary-label">Xếp loại</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Bảng điểm sinh viên</h3>
+                                <div class="card-actions">
+                                    <div class="semester-select">
+                                        <select id="semester-filter">
+                                            <option value="all">Tất cả học kỳ</option>
+                                            <option value="2023-1" selected>Học kỳ 1 - 2023-2024</option>
+                                            <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                            <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                        </select>
+                                    </div>
+                                    <button class="btn-sm secondary">
+                                        <i class="fas fa-file-export"></i> Xuất Excel
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="grade-table-container">
+                                    <table class="grade-table student-grades">
+                                        <thead>
+                                            <tr>
+                                                <th>STT</th>
+                                                <th>Mã học phần</th>
+                                                <th>Tên học phần</th>
+                                                <th>Tín chỉ</th>
+                                                <th>Điểm quá trình</th>
+                                                <th>Điểm thi</th>
+                                                <th>Điểm tổng kết</th>
+                                                <th>Điểm chữ</th>
+                                                <th>Ghi chú</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>COMP301</td>
+                                                <td>Cơ sở dữ liệu</td>
+                                                <td>3</td>
+                                                <td>8.5</td>
+                                                <td>8.0</td>
+                                                <td>8.1</td>
+                                                <td>A-</td>
+                                                <td>
+                                                    <button class="btn-icon note-btn" title="Xem ghi chú">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>COMP302</td>
+                                                <td>Mạng máy tính</td>
+                                                <td>3</td>
+                                                <td>8.5</td>
+                                                <td>8.5</td>
+                                                <td>8.4</td>
+                                                <td>A-</td>
+                                                <td>
+                                                    <button class="btn-icon note-btn" title="Xem ghi chú">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>COMP304</td>
+                                                <td>Công nghệ phần mềm</td>
+                                                <td>4</td>
+                                                <td>7.0</td>
+                                                <td>7.0</td>
+                                                <td>7.1</td>
+                                                <td>B</td>
+                                                <td>
+                                                    <button class="btn-icon note-btn" title="Xem ghi chú">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>COMP306</td>
+                                                <td>An toàn thông tin</td>
+                                                <td>3</td>
+                                                <td>7.5</td>
+                                                <td>7.5</td>
+                                                <td>7.5</td>
+                                                <td>B+</td>
+                                                <td>
+                                                    <button class="btn-icon note-btn" title="Xem ghi chú">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>COMP307</td>
+                                                <td>Phân tích thiết kế hệ thống</td>
+                                                <td>3</td>
+                                                <td>9.0</td>
+                                                <td>9.0</td>
+                                                <td>9.2</td>
+                                                <td>A+</td>
+                                                <td>
+                                                    <button class="btn-icon note-btn" title="Xem ghi chú">
+                                                        <i class="fas fa-sticky-note"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td colspan="3">Điểm trung bình học kỳ</td>
+                                                <td>16</td>
+                                                <td colspan="3"></td>
+                                                <td colspan="2">3.8</td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+
+                                <div class="grade-history">
+                                    <h3><i class="fas fa-history"></i> Lịch sử điểm</h3>
+                                    <div class="history-tabs">
+                                        <button class="history-tab active" data-tab="all">Tất cả</button>
+                                        <button class="history-tab" data-tab="updates">Thay đổi điểm</button>
+                                        <button class="history-tab" data-tab="notes">Ghi chú</button>
+                                    </div>
+
+                                    <div class="history-table-container">
+                                        <table class="history-table">
+                                            <thead>
+                                                <tr>
+                                                    <th>Ngày thay đổi</th>
+                                                    <th>Học phần</th>
+                                                    <th>Thành phần</th>
+                                                    <th>Điểm cũ</th>
+                                                    <th>Điểm mới</th>
+                                                    <th>Người thay đổi</th>
+                                                    <th>Ghi chú</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>20/10/2023 15:30</td>
+                                                    <td>COMP301 - Cơ sở dữ liệu</td>
+                                                    <td>Bài tập</td>
+                                                    <td>8.0</td>
+                                                    <td>8.5</td>
+                                                    <td>Nguyễn Văn B</td>
+                                                    <td>Điểm được điều chỉnh sau khi chấm lại</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>15/10/2023 10:15</td>
+                                                    <td>COMP302 - Mạng máy tính</td>
+                                                    <td>Kiểm tra</td>
+                                                    <td>-</td>
+                                                    <td>8.5</td>
+                                                    <td>Trần Thị C</td>
+                                                    <td>Nhập điểm lần đầu</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10/10/2023 14:45</td>
+                                                    <td>COMP304 - Công nghệ phần mềm</td>
+                                                    <td>Chuyên cần</td>
+                                                    <td>-</td>
+                                                    <td>8.0</td>
+                                                    <td>Phạm Văn E</td>
+                                                    <td>Nhập điểm lần đầu</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header">
+                                <h3>Biểu đồ phân tích điểm</h3>
+                                <div class="card-actions">
+                                    <button class="btn-sm secondary">
+                                        <i class="fas fa-expand"></i> Mở rộng
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="admin-card-body">
+                                <div class="charts-container">
+                                    <div class="chart-wrapper">
+                                        <h4>Điểm trung bình theo học kỳ</h4>
+                                        <div class="chart-placeholder">
+                                            <div class="bar-chart">
+                                                <div class="chart-bar" style="height: 60%;" data-semester="HK1 21-22">
+                                                    <span class="bar-value">3.4</span>
+                                                </div>
+                                                <div class="chart-bar" style="height: 70%;" data-semester="HK2 21-22">
+                                                    <span class="bar-value">3.7</span>
+                                                </div>
+                                                <div class="chart-bar" style="height: 65%;" data-semester="HK1 22-23">
+                                                    <span class="bar-value">3.6</span>
+                                                </div>
+                                                <div class="chart-bar active" style="height: 80%;"
+                                                    data-semester="HK2 22-23">
+                                                    <span class="bar-value">3.9</span>
+                                                </div>
+                                            </div>
+                                            <div class="chart-labels">
+                                                <span>HK1 21-22</span>
+                                                <span>HK2 21-22</span>
+                                                <span>HK1 22-23</span>
+                                                <span>HK2 22-23</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="chart-wrapper">
+                                        <h4>Phân bố điểm theo thang điểm</h4>
+                                        <div class="chart-placeholder">
+                                            <!-- Placeholder for a real chart -->
+                                            <div class="pie-chart-placeholder">
+                                                <div class="pie-segment"
+                                                    style="transform: rotate(0deg); background-color: #4e73df; clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);">
+                                                    <span class="pie-label">25%</span>
+                                                </div>
+                                                <div class="pie-segment"
+                                                    style="transform: rotate(90deg); background-color: #1cc88a; clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);">
+                                                    <span class="pie-label">20%</span>
+                                                </div>
+                                                <div class="pie-segment"
+                                                    style="transform: rotate(180deg); background-color: #f6c23e; clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 50%);">
+                                                    <span class="pie-label">30%</span>
+                                                </div>
+                                                <div class="pie-segment"
+                                                    style="transform: rotate(270deg); background-color: #e74a3b; clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 100%, 50% 100%);">
+                                                    <span class="pie-label">25%</span>
+                                                </div>
+                                            </div>
+                                            <div class="chart-legend">
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #4e73df;"></span>
+                                                    <span class="legend-label">A/A+</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #1cc88a;"></span>
+                                                    <span class="legend-label">B/B+</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #f6c23e;"></span>
+                                                    <span class="legend-label">C/C+</span>
+                                                </div>
+                                                <div class="legend-item">
+                                                    <span class="legend-color"
+                                                        style="background-color: #e74a3b;"></span>
+                                                    <span class="legend-label">D/F</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Note Modal -->
+    <div class="modal" id="noteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ghi chú điểm - COMP301: Cơ sở dữ liệu</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="note-form">
+                    <div class="form-group">
+                        <label for="noteText">Ghi chú mới</label>
+                        <textarea id="noteText" rows="4" placeholder="Nhập ghi chú về điểm của sinh viên..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Các ghi chú trước đây</label>
+                        <div class="previous-notes">
+                            <div class="note-item">
+                                <div class="note-header">
+                                    <span class="note-author">Nguyễn Văn B</span>
+                                    <span class="note-date">20/10/2023 15:30</span>
+                                </div>
+                                <div class="note-content">
+                                    Sinh viên đã xin chấm phúc khảo bài tập và được điều chỉnh điểm từ 8.0 lên 8.5.
+                                </div>
+                            </div>
+                            <div class="note-item">
+                                <div class="note-header">
+                                    <span class="note-author">Nguyễn Văn B</span>
+                                    <span class="note-date">10/10/2023 14:45</span>
+                                </div>
+                                <div class="note-content">
+                                    Sinh viên này tham gia đầy đủ các buổi học, có tinh thần học tập tốt.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary">Đóng</button>
+                <button class="btn primary">Lưu ghi chú</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Semester filter functionality
+            document.getElementById('semester-filter').addEventListener('change', function () {
+                // In a real app, this would fetch data for the selected semester
+                alert('Đã chọn ' + this.options[this.selectedIndex].text);
+            });
+
+            // History tabs functionality
+            document.querySelectorAll('.history-tab').forEach(tab => {
+                tab.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    document.querySelectorAll('.history-tab').forEach(t => {
+                        t.classList.remove('active');
+                    });
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+
+                    // Get tab value
+                    const tabValue = this.getAttribute('data-tab');
+
+                    // Filter history table based on tab (placeholder)
+                    console.log('Selected history tab:', tabValue);
+                });
+            });
+
+            // Open note modal
+            document.querySelectorAll('.note-btn').forEach(btn => {
+                btn.addEventListener('click', function () {
+                    document.getElementById('noteModal').style.display = 'block';
+                });
+            });
+
+            // Close modal
+            document.querySelector('.close-modal').addEventListener('click', function () {
+                document.getElementById('noteModal').style.display = 'none';
+            });
+
+            // Close modal when clicking outside
+            window.addEventListener('click', function (event) {
+                const modal = document.getElementById('noteModal');
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Close modal with close button in footer
+            document.querySelector('.modal-footer .btn.secondary').addEventListener('click', function () {
+                document.getElementById('noteModal').style.display = 'none';
+            });
+
+            // Save note (placeholder)
+            document.querySelector('.modal-footer .btn.primary').addEventListener('click', function () {
+                const noteText = document.getElementById('noteText').value;
+                if (noteText.trim()) {
+                    alert('Đã lưu ghi chú: ' + noteText);
+                    document.getElementById('noteModal').style.display = 'none';
+                } else {
+                    alert('Vui lòng nhập ghi chú!');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

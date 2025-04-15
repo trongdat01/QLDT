@@ -1,0 +1,46 @@
+<footer class="admin-footer">
+    <div class="footer-info">
+        <p>&copy; 2023 EDUMANAGER - Hệ thống Quản lý Đào tạo Đại học</p>
+        <p>Phiên bản <span class="version">2.0.1</span></p>
+    </div>
+    <div class="footer-links">
+        <a href="/admin/help">Trợ giúp</a>
+        <a href="/admin/documentation">Tài liệu</a>
+        <a href="/admin/contact">Liên hệ</a>
+    </div>
+</footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Mobile menu toggle functionality
+        const mobileMenuToggle = document.querySelector('.admin-mobile-menu-toggle');
+        const adminSidebar = document.querySelector('.admin-sidebar');
+
+        if (mobileMenuToggle && adminSidebar) {
+            mobileMenuToggle.addEventListener('click', function (event) {
+                event.stopPropagation();
+                adminSidebar.classList.toggle('show');
+            });
+
+            // Close menu when clicking outside on mobile
+            document.addEventListener('click', function (event) {
+                if (window.innerWidth <= 992) {
+                    if (!event.target.closest('.admin-sidebar') &&
+                        !event.target.closest('.admin-mobile-menu-toggle')) {
+                        adminSidebar.classList.remove('show');
+                    }
+                }
+            });
+        }
+
+        // Initialize tooltips if available
+        if (typeof initTooltips === 'function') {
+            initTooltips();
+        }
+
+        // Initialize datepickers if available
+        if (typeof initDatepickers === 'function') {
+            initDatepickers();
+        }
+    });
+</script>

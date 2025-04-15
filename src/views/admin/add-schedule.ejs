@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-schedule.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Thêm Lịch Học - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'schedule' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <div class="page-header">
+                            <div class="header-content">
+                                <h1><i class="fas fa-calendar-plus"></i> Thêm Lịch Học</h1>
+                                <nav class="breadcrumb">
+                                    <a href="/admin/dashboard">Dashboard</a> /
+                                    <a href="/admin/schedule">Quản lý lịch học</a> /
+                                    <span>Thêm lịch học</span>
+                                </nav>
+                            </div>
+                            <div class="page-actions">
+                                <a href="/admin/schedule" class="btn secondary"><i class="fas fa-arrow-left"></i> Quay
+                                    lại</a>
+                            </div>
+                        </div>
+
+                        <div class="admin-card">
+                            <div class="admin-card-header with-tabs">
+                                <div class="tab-navigation">
+                                    <div class="tab-item active" data-tab="single-schedule">
+                                        <i class="fas fa-calendar-day"></i> Thêm lịch học đơn lẻ
+                                    </div>
+                                    <div class="tab-item" data-tab="batch-schedule">
+                                        <i class="fas fa-calendar-week"></i> Thêm lịch theo kế hoạch
+                                    </div>
+                                    <div class="tab-item" data-tab="recurring-schedule">
+                                        <i class="fas fa-redo"></i> Thêm lịch định kỳ
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="admin-card-body">
+                                <!-- Single Schedule Tab -->
+                                <div class="tab-content active" id="single-schedule-tab">
+                                    <form id="singleScheduleForm" class="schedule-form">
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin cơ bản</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="academicYear">Năm học <span
+                                                            class="required">*</span></label>
+                                                    <select id="academicYear" name="academicYear" required>
+                                                        <option value="">-- Chọn năm học --</option>
+                                                        <option value="2023-2024" selected>2023-2024</option>
+                                                        <option value="2022-2023">2022-2023</option>
+                                                        <option value="2021-2022">2021-2022</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="semester">Học kỳ <span class="required">*</span></label>
+                                                    <select id="semester" name="semester" required>
+                                                        <option value="">-- Chọn học kỳ --</option>
+                                                        <option value="1" selected>Học kỳ 1</option>
+                                                        <option value="2">Học kỳ 2</option>
+                                                        <option value="3">Học kỳ hè</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseId">Học phần <span
+                                                            class="required">*</span></label>
+                                                    <div class="search-select">
+                                                        <input type="text" id="courseSearch"
+                                                            placeholder="Tìm kiếm học phần...">
+                                                        <div class="search-results" id="courseSearchResults"
+                                                            style="display: none;">
+                                                            <div class="search-result-item" data-id="COMP301"
+                                                                data-name="Cơ sở dữ liệu">
+                                                                <div class="result-code">COMP301</div>
+                                                                <div class="result-name">Cơ sở dữ liệu</div>
+                                                                <div class="result-info">3 tín chỉ | CNTT</div>
+                                                            </div>
+                                                            <div class="search-result-item" data-id="COMP302"
+                                                                data-name="Mạng máy tính">
+                                                                <div class="result-code">COMP302</div>
+                                                                <div class="result-name">Mạng máy tính</div>
+                                                                <div class="result-info">3 tín chỉ | CNTT</div>
+                                                            </div>
+                                                            <div class="search-result-item" data-id="COMP304"
+                                                                data-name="Công nghệ phần mềm">
+                                                                <div class="result-code">COMP304</div>
+                                                                <div class="result-name">Công nghệ phần mềm</div>
+                                                                <div class="result-info">4 tín chỉ | CNTT</div>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" id="courseId" name="courseId" required>
+                                                    </div>
+                                                    <div class="selected-course" id="selectedCourse"
+                                                        style="display: none;">
+                                                        <div class="selected-item">
+                                                            <span class="item-code"
+                                                                id="selectedCourseCode">COMP301</span>
+                                                            <span class="item-name" id="selectedCourseName">Cơ sở dữ
+                                                                liệu</span>
+                                                            <button type="button" class="btn-icon remove-selection"
+                                                                id="removeCourseSelection">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="classGroup">Nhóm lớp <span
+                                                            class="required">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" id="classGroup" name="classGroup"
+                                                            placeholder="Ví dụ: 01, 02,..." required>
+                                                        <div class="input-hint">Mã nhóm sẽ được kết hợp với mã học phần
+                                                            (VD: COMP301-01)</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin giảng viên</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="teacherId">Giảng viên <span
+                                                            class="required">*</span></label>
+                                                    <div class="search-select">
+                                                        <input type="text" id="teacherSearch"
+                                                            placeholder="Tìm kiếm giảng viên...">
+                                                        <div class="search-results" id="teacherSearchResults"
+                                                            style="display: none;">
+                                                            <div class="search-result-item" data-id="GV001"
+                                                                data-name="Nguyễn Văn B">
+                                                                <div class="result-avatar">
+                                                                    <i class="fas fa-user-tie"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="result-name">TS. Nguyễn Văn B</div>
+                                                                    <div class="result-info">Khoa CNTT</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="search-result-item" data-id="GV002"
+                                                                data-name="Trần Thị C">
+                                                                <div class="result-avatar">
+                                                                    <i class="fas fa-user-tie"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="result-name">TS. Trần Thị C</div>
+                                                                    <div class="result-info">Khoa CNTT</div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="search-result-item" data-id="GV003"
+                                                                data-name="Phạm Văn E">
+                                                                <div class="result-avatar">
+                                                                    <i class="fas fa-user-tie"></i>
+                                                                </div>
+                                                                <div>
+                                                                    <div class="result-name">TS. Phạm Văn E</div>
+                                                                    <div class="result-info">Khoa CNTT</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <input type="hidden" id="teacherId" name="teacherId" required>
+                                                    </div>
+                                                    <div class="selected-teacher" id="selectedTeacher"
+                                                        style="display: none;">
+                                                        <div class="selected-item">
+                                                            <div class="item-avatar">
+                                                                <i class="fas fa-user-tie"></i>
+                                                            </div>
+                                                            <span class="item-name" id="selectedTeacherName">TS. Nguyễn
+                                                                Văn B</span>
+                                                            <button type="button" class="btn-icon remove-selection"
+                                                                id="removeTeacherSelection">
+                                                                <i class="fas fa-times"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="teacherAssistantId">Trợ giảng</label>
+                                                    <select id="teacherAssistantId" name="teacherAssistantId">
+                                                        <option value="">-- Không có trợ giảng --</option>
+                                                        <option value="TA001">ThS. Lê Thị D</option>
+                                                        <option value="TA002">ThS. Vũ Văn F</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thời gian và địa điểm</h3>
+
+                                            <div class="time-slots-container">
+                                                <div class="time-slot-item" id="timeSlot1">
+                                                    <div class="time-slot-header">
+                                                        <h4>Buổi học #1</h4>
+                                                        <button type="button" class="btn-icon remove-time-slot"
+                                                            disabled>
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label for="dayOfWeek1">Thứ <span
+                                                                    class="required">*</span></label>
+                                                            <select id="dayOfWeek1" name="timeSlots[0].dayOfWeek"
+                                                                required>
+                                                                <option value="">-- Chọn thứ --</option>
+                                                                <option value="2">Thứ 2</option>
+                                                                <option value="3">Thứ 3</option>
+                                                                <option value="4">Thứ 4</option>
+                                                                <option value="5">Thứ 5</option>
+                                                                <option value="6">Thứ 6</option>
+                                                                <option value="7">Thứ 7</option>
+                                                                <option value="1">Chủ nhật</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="timeSlotPeriod1">Tiết học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="timeSlotPeriod1" name="timeSlots[0].period"
+                                                                required>
+                                                                <option value="">-- Chọn tiết học --</option>
+                                                                <option value="1-3">Tiết 1-3 (07:00 - 09:30)</option>
+                                                                <option value="4-6">Tiết 4-6 (09:45 - 12:15)</option>
+                                                                <option value="7-9">Tiết 7-9 (13:00 - 15:30)</option>
+                                                                <option value="10-12">Tiết 10-12 (15:45 - 18:15)
+                                                                </option>
+                                                                <option value="13-15">Tiết 13-15 (18:30 - 21:00)
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="room1">Phòng học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="room1" name="timeSlots[0].room" required>
+                                                                <option value="">-- Chọn phòng học --</option>
+                                                                <optgroup label="Khu A">
+                                                                    <option value="A101">A101</option>
+                                                                    <option value="A102">A102</option>
+                                                                    <option value="A201">A201</option>
+                                                                    <option value="A202">A202</option>
+                                                                    <option value="A301">A301</option>
+                                                                    <option value="A302">A302</option>
+                                                                </optgroup>
+                                                                <optgroup label="Khu B">
+                                                                    <option value="B101">B101</option>
+                                                                    <option value="B102">B102</option>
+                                                                    <option value="B201">B201</option>
+                                                                    <option value="B202">B202</option>
+                                                                </optgroup>
+                                                                <optgroup label="Khu C">
+                                                                    <option value="C101">C101</option>
+                                                                    <option value="C102">C102</option>
+                                                                    <option value="C201">C201</option>
+                                                                    <option value="C202">C202</option>
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="lessonType1">Loại buổi học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="lessonType1" name="timeSlots[0].lessonType"
+                                                                required>
+                                                                <option value="theory">Lý thuyết</option>
+                                                                <option value="practice">Thực hành</option>
+                                                                <option value="discussion">Thảo luận</option>
+                                                                <option value="exam">Kiểm tra</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="time-slot-item" id="timeSlot2">
+                                                    <div class="time-slot-header">
+                                                        <h4>Buổi học #2</h4>
+                                                        <button type="button" class="btn-icon remove-time-slot">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </div>
+
+                                                    <div class="form-row">
+                                                        <div class="form-group">
+                                                            <label for="dayOfWeek2">Thứ <span
+                                                                    class="required">*</span></label>
+                                                            <select id="dayOfWeek2" name="timeSlots[1].dayOfWeek"
+                                                                required>
+                                                                <option value="">-- Chọn thứ --</option>
+                                                                <option value="2">Thứ 2</option>
+                                                                <option value="3">Thứ 3</option>
+                                                                <option value="4">Thứ 4</option>
+                                                                <option value="5">Thứ 5</option>
+                                                                <option value="6">Thứ 6</option>
+                                                                <option value="7">Thứ 7</option>
+                                                                <option value="1">Chủ nhật</option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="timeSlotPeriod2">Tiết học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="timeSlotPeriod2" name="timeSlots[1].period"
+                                                                required>
+                                                                <option value="">-- Chọn tiết học --</option>
+                                                                <option value="1-3">Tiết 1-3 (07:00 - 09:30)</option>
+                                                                <option value="4-6">Tiết 4-6 (09:45 - 12:15)</option>
+                                                                <option value="7-9">Tiết 7-9 (13:00 - 15:30)</option>
+                                                                <option value="10-12">Tiết 10-12 (15:45 - 18:15)
+                                                                </option>
+                                                                <option value="13-15">Tiết 13-15 (18:30 - 21:00)
+                                                                </option>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="room2">Phòng học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="room2" name="timeSlots[1].room" required>
+                                                                <option value="">-- Chọn phòng học --</option>
+                                                                <optgroup label="Khu A">
+                                                                    <option value="A101">A101</option>
+                                                                    <option value="A102">A102</option>
+                                                                    <option value="A201">A201</option>
+                                                                    <option value="A202">A202</option>
+                                                                    <option value="A301">A301</option>
+                                                                    <option value="A302">A302</option>
+                                                                </optgroup>
+                                                                <optgroup label="Khu B">
+                                                                    <option value="B101">B101</option>
+                                                                    <option value="B102">B102</option>
+                                                                    <option value="B201">B201</option>
+                                                                    <option value="B202">B202</option>
+                                                                </optgroup>
+                                                                <optgroup label="Khu C">
+                                                                    <option value="C101">C101</option>
+                                                                    <option value="C102">C102</option>
+                                                                    <option value="C201">C201</option>
+                                                                    <option value="C202">C202</option>
+                                                                </optgroup>
+                                                            </select>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label for="lessonType2">Loại buổi học <span
+                                                                    class="required">*</span></label>
+                                                            <select id="lessonType2" name="timeSlots[1].lessonType"
+                                                                required>
+                                                                <option value="theory">Lý thuyết</option>
+                                                                <option value="practice">Thực hành</option>
+                                                                <option value="discussion">Thảo luận</option>
+                                                                <option value="exam">Kiểm tra</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-time-slot">
+                                                    <button type="button" class="btn secondary" id="addTimeSlotBtn">
+                                                        <i class="fas fa-plus"></i> Thêm buổi học
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin lớp học</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="maxStudents">Số lượng sinh viên tối đa <span
+                                                            class="required">*</span></label>
+                                                    <input type="number" id="maxStudents" name="maxStudents" min="1"
+                                                        value="60" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="registrationType">Hình thức đăng ký <span
+                                                            class="required">*</span></label>
+                                                    <select id="registrationType" name="registrationType" required>
+                                                        <option value="online" selected>Đăng ký online</option>
+                                                        <option value="manual">Phân lớp thủ công</option>
+                                                        <option value="mixed">Kết hợp</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="startDate">Ngày bắt đầu <span
+                                                            class="required">*</span></label>
+                                                    <input type="date" id="startDate" name="startDate" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="endDate">Ngày kết thúc <span
+                                                            class="required">*</span></label>
+                                                    <input type="date" id="endDate" name="endDate" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label>Khóa học áp dụng</label>
+                                                <div class="checkbox-group">
+                                                    <div class="checkbox-item">
+                                                        <input type="checkbox" id="applyCohort2020"
+                                                            name="applyCohorts[]" value="2020" checked>
+                                                        <label for="applyCohort2020">Khóa 2020-2024</label>
+                                                    </div>
+                                                    <div class="checkbox-item">
+                                                        <input type="checkbox" id="applyCohort2021"
+                                                            name="applyCohorts[]" value="2021">
+                                                        <label for="applyCohort2021">Khóa 2021-2025</label>
+                                                    </div>
+                                                    <div class="checkbox-item">
+                                                        <input type="checkbox" id="applyCohort2022"
+                                                            name="applyCohorts[]" value="2022">
+                                                        <label for="applyCohort2022">Khóa 2022-2026</label>
+                                                    </div>
+                                                    <div class="checkbox-item">
+                                                        <input type="checkbox" id="applyCohort2023"
+                                                            name="applyCohorts[]" value="2023">
+                                                        <label for="applyCohort2023">Khóa 2023-2027</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="notes">Ghi chú</label>
+                                                <textarea id="notes" name="notes" rows="3"
+                                                    placeholder="Nhập ghi chú về lớp học (nếu có)..."></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="button" class="btn secondary" id="cancelBtn">Hủy</button>
+                                            <button type="button" class="btn outline" id="saveAsDraftBtn">Lưu
+                                                nháp</button>
+                                            <button type="submit" class="btn primary" id="saveScheduleBtn">Tạo lịch
+                                                học</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                <!-- Batch Schedule Tab -->
+                                <div class="tab-content" id="batch-schedule-tab">
+                                    <div class="batch-schedule-placeholder">
+                                        <i class="fas fa-calendar-week"></i>
+                                        <h3>Thêm lịch học theo kế hoạch</h3>
+                                        <p>Tính năng này cho phép bạn nhập lịch học theo kế hoạch học kỳ.</p>
+                                        <p>Tính năng đang được phát triển.</p>
+                                    </div>
+                                </div>
+
+                                <!-- Recurring Schedule Tab -->
+                                <div class="tab-content" id="recurring-schedule-tab">
+                                    <div class="recurring-schedule-placeholder">
+                                        <i class="fas fa-redo"></i>
+                                        <h3>Thêm lịch học định kỳ</h3>
+                                        <p>Tính năng này cho phép bạn tạo các lịch học lặp lại theo định kỳ.</p>
+                                        <p>Tính năng đang được phát triển.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Conflict Warning Modal -->
+    <div class="modal" id="conflictWarningModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle text-warning"></i> Cảnh báo xung đột lịch học</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-warning">
+                    <p>Hệ thống phát hiện xung đột với một số lịch học đã tồn tại:</p>
+                </div>
+
+                <div class="conflict-list">
+                    <div class="conflict-item">
+                        <div class="conflict-icon">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="conflict-details">
+                            <h4>Xung đột giảng viên</h4>
+                            <p>TS. Nguyễn Văn B đã có lịch dạy vào <strong>Thứ 2, tiết 1-3, phòng B101</strong></p>
+                            <p class="conflict-class">COMP202-01: Cấu trúc dữ liệu và giải thuật</p>
+                        </div>
+                    </div>
+
+                    <div class="conflict-item">
+                        <div class="conflict-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <div class="conflict-details">
+                            <h4>Xung đột phòng học</h4>
+                            <p>Phòng học <strong>A301</strong> đã được sử dụng vào <strong>Thứ 5, tiết 7-9</strong></p>
+                            <p class="conflict-class">COMP301-02: Cơ sở dữ liệu</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn secondary" id="cancelScheduleBtn">Hủy tạo lịch</button>
+                <button class="btn primary" id="ignoreConflictBtn">Bỏ qua và tạo lịch</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-check-circle text-success"></i> Tạo lịch học thành công</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="success-message">
+                    <p>Lịch học đã được tạo thành công!</p>
+                    <div class="schedule-summary">
+                        <div class="summary-item">
+                            <span class="summary-label">Học phần:</span>
+                            <span class="summary-value" id="summaryCourseName">COMP301 - Cơ sở dữ liệu (Nhóm 01)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Giảng viên:</span>
+                            <span class="summary-value" id="summaryTeacherName">TS. Nguyễn Văn B</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Thời gian học:</span>
+                            <span class="summary-value" id="summarySchedule">Thứ 2 (7-9), Thứ 5 (7-9)</span>
+                        </div>
+                        <div class="summary-item">
+                            <span class="summary-label">Phòng học:</span>
+                            <span class="summary-value" id="summaryRooms">A301, A301</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="/admin/schedule" class="btn secondary">Quay lại danh sách</a>
+                <button class="btn primary" id="addAnotherScheduleBtn">Tạo lịch học khác</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching functionality
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    tabItems.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Course search functionality
+            const courseSearch = document.getElementById('courseSearch');
+            const courseSearchResults = document.getElementById('courseSearchResults');
+            const selectedCourse = document.getElementById('selectedCourse');
+            const courseIdField = document.getElementById('courseId');
+
+            courseSearch.addEventListener('focus', function () {
+                courseSearchResults.style.display = 'block';
+            });
+
+            courseSearch.addEventListener('blur', function () {
+                // Delay hiding to allow for clicking on results
+                setTimeout(() => {
+                    courseSearchResults.style.display = 'none';
+                }, 200);
+            });
+
+            // Handle course selection
+            const courseResultItems = document.querySelectorAll('#courseSearchResults .search-result-item');
+            courseResultItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const courseId = this.getAttribute('data-id');
+                    const courseName = this.getAttribute('data-name');
+
+                    // Set hidden input value
+                    courseIdField.value = courseId;
+
+                    // Update selected course display
+                    document.getElementById('selectedCourseCode').textContent = courseId;
+                    document.getElementById('selectedCourseName').textContent = courseName;
+
+                    // Show selected course and hide search
+                    courseSearch.value = '';
+                    selectedCourse.style.display = 'block';
+                    courseSearchResults.style.display = 'none';
+                    courseSearch.style.display = 'none';
+                });
+            });
+
+            // Remove course selection
+            document.getElementById('removeCourseSelection').addEventListener('click', function () {
+                courseIdField.value = '';
+                selectedCourse.style.display = 'none';
+                courseSearch.style.display = 'block';
+            });
+
+            // Teacher search functionality
+            const teacherSearch = document.getElementById('teacherSearch');
+            const teacherSearchResults = document.getElementById('teacherSearchResults');
+            const selectedTeacher = document.getElementById('selectedTeacher');
+            const teacherIdField = document.getElementById('teacherId');
+
+            teacherSearch.addEventListener('focus', function () {
+                teacherSearchResults.style.display = 'block';
+            });
+
+            teacherSearch.addEventListener('blur', function () {
+                // Delay hiding to allow for clicking on results
+                setTimeout(() => {
+                    teacherSearchResults.style.display = 'none';
+                }, 200);
+            });
+
+            // Handle teacher selection
+            const teacherResultItems = document.querySelectorAll('#teacherSearchResults .search-result-item');
+            teacherResultItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    const teacherId = this.getAttribute('data-id');
+                    const teacherName = this.getAttribute('data-name');
+
+                    // Set hidden input value
+                    teacherIdField.value = teacherId;
+
+                    // Update selected teacher display
+                    document.getElementById('selectedTeacherName').textContent = 'TS. ' + teacherName;
+
+                    // Show selected teacher and hide search
+                    teacherSearch.value = '';
+                    selectedTeacher.style.display = 'block';
+                    teacherSearchResults.style.display = 'none';
+                    teacherSearch.style.display = 'none';
+                });
+            });
+
+            // Remove teacher selection
+            document.getElementById('removeTeacherSelection').addEventListener('click', function () {
+                teacherIdField.value = '';
+                selectedTeacher.style.display = 'none';
+                teacherSearch.style.display = 'block';
+            });
+
+            // Add time slot functionality
+            let timeSlotCount = 2;
+            const addTimeSlotBtn = document.getElementById('addTimeSlotBtn');
+            const timeSlotsContainer = document.querySelector('.time-slots-container');
+
+            addTimeSlotBtn.addEventListener('click', function () {
+                timeSlotCount++;
+
+                const newTimeSlot = document.createElement('div');
+                newTimeSlot.className = 'time-slot-item';
+                newTimeSlot.id = 'timeSlot' + timeSlotCount;
+                newTimeSlot.innerHTML = `
+                    <div class="time-slot-header">
+                        <h4>Buổi học #${timeSlotCount}</h4>
+                        <button type="button" class="btn-icon remove-time-slot">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="dayOfWeek${timeSlotCount}">Thứ <span class="required">*</span></label>
+                            <select id="dayOfWeek${timeSlotCount}" name="timeSlots[${timeSlotCount - 1}].dayOfWeek" required>
+                                <option value="">-- Chọn thứ --</option>
+                                <option value="2">Thứ 2</option>
+                                <option value="3">Thứ 3</option>
+                                <option value="4">Thứ 4</option>
+                                <option value="5">Thứ 5</option>
+                                <option value="6">Thứ 6</option>
+                                <option value="7">Thứ 7</option>
+                                <option value="1">Chủ nhật</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="timeSlotPeriod${timeSlotCount}">Tiết học <span class="required">*</span></label>
+                            <select id="timeSlotPeriod${timeSlotCount}" name="timeSlots[${timeSlotCount - 1}].period" required>
+                                <option value="">-- Chọn tiết học --</option>
+                                <option value="1-3">Tiết 1-3 (07:00 - 09:30)</option>
+                                <option value="4-6">Tiết 4-6 (09:45 - 12:15)</option>
+                                <option value="7-9">Tiết 7-9 (13:00 - 15:30)</option>
+                                <option value="10-12">Tiết 10-12 (15:45 - 18:15)</option>
+                                <option value="13-15">Tiết 13-15 (18:30 - 21:00)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="room${timeSlotCount}">Phòng học <span class="required">*</span></label>
+                            <select id="room${timeSlotCount}" name="timeSlots[${timeSlotCount - 1}].room" required>
+                                <option value="">-- Chọn phòng học --</option>
+                                <optgroup label="Khu A">
+                                    <option value="A101">A101</option>
+                                    <option value="A102">A102</option>
+                                    <option value="A201">A201</option>
+                                    <option value="A202">A202</option>
+                                    <option value="A301">A301</option>
+                                    <option value="A302">A302</option>
+                                </optgroup>
+                                <optgroup label="Khu B">
+                                    <option value="B101">B101</option>
+                                    <option value="B102">B102</option>
+                                    <option value="B201">B201</option>
+                                    <option value="B202">B202</option>
+                                </optgroup>
+                                <optgroup label="Khu C">
+                                    <option value="C101">C101</option>
+                                    <option value="C102">C102</option>
+                                    <option value="C201">C201</option>
+                                    <option value="C202">C202</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="lessonType${timeSlotCount}">Loại buổi học <span class="required">*</span></label>
+                            <select id="lessonType${timeSlotCount}" name="timeSlots[${timeSlotCount - 1}].lessonType" required>
+                                <option value="theory">Lý thuyết</option>
+                                <option value="practice">Thực hành</option>
+                                <option value="discussion">Thảo luận</option>
+                                <option value="exam">Kiểm tra</option>
+                            </select>
+                        </div>
+                    </div>
+                `;
+
+                // Insert before the "Add time slot" button container
+                timeSlotsContainer.insertBefore(newTimeSlot, document.querySelector('.add-time-slot'));
+
+                // Add remove event listener to the new time slot
+                const removeBtn = newTimeSlot.querySelector('.remove-time-slot');
+                removeBtn.addEventListener('click', function () {
+                    newTimeSlot.remove();
+                });
+            });
+
+            // Remove time slot functionality
+            document.querySelectorAll('.remove-time-slot').forEach(button => {
+                if (!button.disabled) {
+                    button.addEventListener('click', function () {
+                        this.closest('.time-slot-item').remove();
+                    });
+                }
+            });
+
+            // Set default dates
+            const currentDate = new Date();
+            const startDate = document.getElementById('startDate');
+            const endDate = document.getElementById('endDate');
+
+            // Format date as YYYY-MM-DD
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            // Set default start date to current date
+            startDate.value = formatDate(currentDate);
+
+            // Set default end date to 4 months later
+            const endDateValue = new Date(currentDate);
+            endDateValue.setMonth(currentDate.getMonth() + 4);
+            endDate.value = formatDate(endDateValue);
+
+            // Form submission with conflict check
+            const scheduleForm = document.getElementById('singleScheduleForm');
+            const conflictWarningModal = document.getElementById('conflictWarningModal');
+            const successModal = document.getElementById('successModal');
+
+            scheduleForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+
+                // Basic form validation
+                const requiredFields = this.querySelectorAll('[required]');
+                let isValid = true;
+
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        isValid = false;
+                        field.classList.add('error');
+
+                        // Show error message if not exists
+                        let errorMessage = field.parentNode.querySelector('.error-message');
+                        if (!errorMessage) {
+                            errorMessage = document.createElement('div');
+                            errorMessage.className = 'error-message';
+                            errorMessage.textContent = 'Thông tin này là bắt buộc';
+                            field.parentNode.appendChild(errorMessage);
+                        }
+                    } else {
+                        field.classList.remove('error');
+                        const errorMessage = field.parentNode.querySelector('.error-message');
+                        if (errorMessage) {
+                            errorMessage.remove();
+                        }
+                    }
+                });
+
+                if (!isValid) {
+                    // Scroll to first error
+                    const firstError = document.querySelector('.error');
+                    if (firstError) {
+                        firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }
+                    return;
+                }
+
+                // In a real app, you would check for conflicts via AJAX
+                // For this demo, we'll simulate a conflict
+
+                // Show conflict warning modal (in a real app, this would be conditional)
+                // conflictWarningModal.classList.add('show');
+
+                // For demo, skip conflict check and show success directly
+                showSuccessModal();
+            });
+
+            // Close modal buttons
+            document.querySelectorAll('.close-modal').forEach(button => {
+                button.addEventListener('click', function () {
+                    this.closest('.modal').classList.remove('show');
+                });
+            });
+
+            // Conflict modal buttons
+            document.getElementById('cancelScheduleBtn').addEventListener('click', function () {
+                conflictWarningModal.classList.remove('show');
+            });
+
+            document.getElementById('ignoreConflictBtn').addEventListener('click', function () {
+                conflictWarningModal.classList.remove('show');
+                showSuccessModal();
+            });
+
+            // Success modal functions
+            function showSuccessModal() {
+                // In a real app, you would populate this with actual data from the form
+                document.getElementById('summaryCourseName').textContent = document.getElementById('selectedCourseCode').textContent + ' - ' +
+                    document.getElementById('selectedCourseName').textContent + ' (Nhóm ' + document.getElementById('classGroup').value + ')';
+
+                document.getElementById('summaryTeacherName').textContent = document.getElementById('selectedTeacherName').textContent;
+
+                // Get days and periods
+                const days = Array.from(document.querySelectorAll('[id^=dayOfWeek]')).map(select => {
+                    return select.options[select.selectedIndex] ? 'Thứ ' + select.options[select.selectedIndex].text.replace('Thứ ', '') : '';
+                }).filter(day => day !== '');
+
+                const periods = Array.from(document.querySelectorAll('[id^=timeSlotPeriod]')).map(select => {
+                    return select.options[select.selectedIndex] ?
+                        select.options[select.selectedIndex].text.match(/Tiết ([0-9-]+)/)[1] : '';
+                }).filter(period => period !== '');
+
+                // Combine days and periods
+                const scheduleText = days.map((day, i) => `${day} (${periods[i]})`).join(', ');
+                document.getElementById('summarySchedule').textContent = scheduleText;
+
+                // Get rooms
+                const rooms = Array.from(document.querySelectorAll('[id^=room]')).map(select =>
+                    select.options[select.selectedIndex] ? select.options[select.selectedIndex].value : ''
+                ).filter(room => room !== '');
+
+                document.getElementById('summaryRooms').textContent = rooms.join(', ');
+
+                successModal.classList.add('show');
+            }
+
+            document.getElementById('addAnotherScheduleBtn').addEventListener('click', function () {
+                successModal.classList.remove('show');
+                scheduleForm.reset();
+            });
+
+            // Cancel button functionality
+            document.getElementById('cancelBtn').addEventListener('click', function () {
+                if (confirm('Bạn có chắc muốn hủy? Tất cả thông tin sẽ không được lưu.')) {
+                    window.location.href = '/admin/schedule';
+                }
+            });
+
+            // Save as draft functionality
+            document.getElementById('saveAsDraftBtn').addEventListener('click', function () {
+                alert('Đã lưu lịch học dưới dạng bản nháp.');
+            });
+
+            // Initialize tooltips, datepickers, etc. if needed
+        });
+    </script>
+
+    <style>
+        /* Additional inline styles for this page */
+        .search-select {
+            position: relative;
+        }
+
+        .search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #d1d3e2;
+            border-radius: 0 0 5px 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 10;
+        }
+
+        .search-result-item {
+            padding: 10px 15px;
+            cursor: pointer;
+            border-bottom: 1px solid #e3e6f0;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-result-item:hover {
+            background-color: #f8f9fc;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-code {
+            font-family: monospace;
+            background-color: #e3e6f0;
+            padding: 3px 5px;
+            border-radius: 3px;
+            margin-right: 10px;
+            font-size: 0.85rem;
+        }
+
+        .result-name {
+            font-weight: 500;
+        }
+
+        .result-info {
+            font-size: 0.8rem;
+            color: #858796;
+            margin-top: 2px;
+        }
+
+        .result-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #e3e6f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5a5c69;
+            margin-right: 10px;
+        }
+
+        .selected-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background-color: #f8f9fc;
+            border-radius: 5px;
+            border: 1px solid #d1d3e2;
+        }
+
+        .item-code {
+            font-family: monospace;
+            background-color: #4e73df;
+            color: white;
+            padding: 3px 6px;
+            border-radius: 3px;
+            margin-right: 10px;
+            font-size: 0.85rem;
+        }
+
+        .item-name {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .item-avatar {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #4e73df;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 10px;
+        }
+
+        .time-slot-item {
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .time-slot-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .time-slot-header h4 {
+            margin: 0;
+            color: #4e73df;
+            font-size: 1rem;
+        }
+
+        .add-time-slot {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .input-hint {
+            font-size: 0.8rem;
+            color: #858796;
+            margin-top: 5px;
+        }
+
+        .checkbox-group,
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item,
+        .radio-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .checkbox-item input,
+        .radio-item input {
+            margin: 0;
+            width: auto;
+        }
+
+        .placeholder-icon {
+            font-size: 4rem;
+            color: #d1d3e2;
+            margin-bottom: 20px;
+        }
+
+        .batch-schedule-placeholder,
+        .recurring-schedule-placeholder {
+            text-align: center;
+            padding: 50px 0;
+            color: #858796;
+        }
+
+        .batch-schedule-placeholder i,
+        .recurring-schedule-placeholder i {
+            font-size: 4rem;
+            color: #d1d3e2;
+            margin-bottom: 20px;
+        }
+
+        .batch-schedule-placeholder h3,
+        .recurring-schedule-placeholder h3 {
+            margin-bottom: 20px;
+            color: #5a5c69;
+        }
+
+        .conflict-list {
+            margin-top: 20px;
+        }
+
+        .conflict-item {
+            display: flex;
+            gap: 15px;
+            padding: 15px;
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .conflict-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #f6c23e20;
+            color: #f6c23e;
+            font-size: 1.2rem;
+        }
+
+        .conflict-details h4 {
+            margin-top: 0;
+            margin-bottom: 5px;
+            color: #5a5c69;
+        }
+
+        .conflict-details p {
+            margin: 0 0 5px 0;
+        }
+
+        .conflict-class {
+            font-size: 0.9rem;
+            color: #858796;
+        }
+
+        .schedule-summary {
+            background-color: #f8f9fc;
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .summary-item {
+            display: flex;
+            margin-bottom: 8px;
+        }
+
+        .summary-label {
+            font-weight: 600;
+            color: #4e73df;
+            width: 100px;
+        }
+
+        .success-message {
+            text-align: center;
+        }
+
+        .success-message p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .text-warning {
+            color: #f6c23e;
+        }
+
+        .text-success {
+            color: #1cc88a;
+        }
+
+        @media (max-width: 768px) {
+            .form-row {
+                flex-direction: column;
+            }
+
+            .checkbox-group,
+            .radio-group {
+                grid-template-columns: 1fr;
+            }
+
+            .conflict-item {
+                flex-direction: column;
+            }
+
+            .conflict-icon {
+                align-self: flex-start;
+            }
+
+            .summary-item {
+                flex-direction: column;
+            }
+
+            .summary-label {
+                width: auto;
+                margin-bottom: 5px;
+            }
+        }
+    </style>
+</body>
+
+</html>

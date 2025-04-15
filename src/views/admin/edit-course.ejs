@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/admin.css">
+    <link rel="stylesheet" href="/css/admin-courses.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Chỉnh Sửa Học Phần - EDUMANAGER</title>
+</head>
+
+<body class="admin-body">
+    <div class="admin-container">
+        <!-- Include admin sidebar -->
+        <%- include('../partials/admin-sidebar', { activeMenu: 'courses' }) %>
+
+            <main class="admin-main">
+                <!-- Include admin header -->
+                <%- include('../partials/admin-header') %>
+
+                    <div class="admin-content">
+                        <!-- Page Header -->
+                        <div class="page-header">
+                            <div class="header-title">
+                                <h1><i class="fas fa-edit"></i> Chỉnh Sửa Học Phần</h1>
+                                <p class="header-subtitle">Cập nhật thông tin học phần trong hệ thống</p>
+                            </div>
+                            <div class="page-actions">
+                                <a href="/admin/courses" class="btn secondary">
+                                    <i class="fas fa-arrow-left"></i> Quay lại danh sách
+                                </a>
+                                <button class="btn danger" id="deleteCourseBtn">
+                                    <i class="fas fa-trash"></i> Xóa học phần
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Course Information Card -->
+                        <div class="info-summary-card">
+                            <div class="info-header">
+                                <span class="course-code-chip">COMP101</span>
+                                <h2>Nhập môn lập trình</h2>
+                                <span class="status-badge active">Đang mở</span>
+                            </div>
+                            <div class="info-stats">
+                                <div class="stat-item">
+                                    <i class="fas fa-layer-group"></i>
+                                    <span>Công nghệ thông tin</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-tag"></i>
+                                    <span>Bắt buộc</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-award"></i>
+                                    <span>3 tín chỉ</span>
+                                </div>
+                                <div class="stat-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Cập nhật: 15/05/2023</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Edit Form -->
+                        <div class="admin-card">
+                            <div class="admin-card-header with-tabs">
+                                <div class="tab-navigation horizontal-tabs">
+                                    <div class="tab-item active" data-tab="basic-info">
+                                        <i class="fas fa-info-circle"></i> Thông tin cơ bản
+                                    </div>
+                                    <div class="tab-item" data-tab="requirements">
+                                        <i class="fas fa-tasks"></i> Điều kiện học phần
+                                    </div>
+                                    <div class="tab-item" data-tab="content">
+                                        <i class="fas fa-align-left"></i> Nội dung & Đề cương
+                                    </div>
+                                    <div class="tab-item" data-tab="classes">
+                                        <i class="fas fa-users"></i> Lớp học phần
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="admin-card-body">
+                                <form id="editCourseForm" class="edit-course-form">
+                                    <!-- Basic Information Tab -->
+                                    <div class="tab-content active" id="basic-info-tab">
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin cơ bản</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseCode">Mã học phần <span
+                                                            class="required">*</span></label>
+                                                    <input type="text" id="courseCode" name="courseCode" value="COMP101"
+                                                        required>
+                                                    <small class="form-hint">Mã học phần duy nhất, không trùng
+                                                        lặp</small>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseName">Tên học phần <span
+                                                            class="required">*</span></label>
+                                                    <input type="text" id="courseName" name="courseName"
+                                                        value="Nhập môn lập trình" required>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseNameEn">Tên tiếng Anh</label>
+                                                    <input type="text" id="courseNameEn" name="courseNameEn"
+                                                        value="Introduction to Programming">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseAlias">Tên viết tắt</label>
+                                                    <input type="text" id="courseAlias" name="courseAlias" value="NMLT">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin học thuật</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseDepartment">Khoa phụ trách <span
+                                                            class="required">*</span></label>
+                                                    <select id="courseDepartment" name="courseDepartment" required>
+                                                        <option value="">-- Chọn khoa --</option>
+                                                        <option value="cntt" selected>Công nghệ thông tin</option>
+                                                        <option value="toan">Toán - Thống kê</option>
+                                                        <option value="kt">Kinh tế</option>
+                                                        <option value="nn">Ngoại ngữ</option>
+                                                        <option value="kythuat">Kỹ thuật</option>
+                                                        <option value="vatly">Vật lý</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseType">Loại học phần <span
+                                                            class="required">*</span></label>
+                                                    <select id="courseType" name="courseType" required>
+                                                        <option value="">-- Chọn loại --</option>
+                                                        <option value="required" selected>Bắt buộc</option>
+                                                        <option value="elective">Tự chọn</option>
+                                                        <option value="project">Đồ án</option>
+                                                        <option value="internship">Thực tập</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseCredits">Tổng số tín chỉ <span
+                                                            class="required">*</span></label>
+                                                    <input type="number" id="courseCredits" name="courseCredits" min="1"
+                                                        max="10" value="3" required>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseTheoryCredits">Tín chỉ lý thuyết</label>
+                                                    <input type="number" id="courseTheoryCredits"
+                                                        name="courseTheoryCredits" min="0" max="10" value="2">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="coursePracticeCredits">Tín chỉ thực hành</label>
+                                                    <input type="number" id="coursePracticeCredits"
+                                                        name="coursePracticeCredits" min="0" max="10" value="1">
+                                                </div>
+                                            </div>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseLessons">Số tiết học</label>
+                                                    <input type="number" id="courseLessons" name="courseLessons" min="1"
+                                                        value="45">
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseStatus">Trạng thái</label>
+                                                    <select id="courseStatus" name="courseStatus">
+                                                        <option value="active" selected>Đang mở</option>
+                                                        <option value="inactive">Đã đóng</option>
+                                                        <option value="pending">Chờ duyệt</option>
+                                                    </select>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseLanguage">Ngôn ngữ giảng dạy</label>
+                                                    <select id="courseLanguage" name="courseLanguage">
+                                                        <option value="vi" selected>Tiếng Việt</option>
+                                                        <option value="en">Tiếng Anh</option>
+                                                        <option value="mixed">Song ngữ</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Thông tin bổ sung</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label for="courseApplicableYear">Áp dụng cho năm</label>
+                                                    <input type="number" id="courseApplicableYear"
+                                                        name="courseApplicableYear" min="1" value="1">
+                                                    <small class="form-hint">Năm học đề xuất trong chương trình đào
+                                                        tạo</small>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="courseSemester">Học kỳ đề xuất</label>
+                                                    <select id="courseSemester" name="courseSemester">
+                                                        <option value="1" selected>Học kỳ 1</option>
+                                                        <option value="2">Học kỳ 2</option>
+                                                        <option value="3">Học kỳ hè</option>
+                                                        <option value="all">Tất cả các học kỳ</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseNotes">Ghi chú</label>
+                                                <textarea id="courseNotes" name="courseNotes"
+                                                    rows="3">Học phần cơ bản dành cho sinh viên năm nhất ngành CNTT và các ngành liên quan.</textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="button" class="btn secondary" id="resetBasicInfo">Đặt
+                                                lại</button>
+                                            <button type="button" class="btn primary" id="saveBasicInfo">Lưu thay
+                                                đổi</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Requirements Tab -->
+                                    <div class="tab-content" id="requirements-tab">
+                                        <div class="form-section">
+                                            <h3 class="section-title">Điều kiện tiên quyết</h3>
+                                            <p class="section-desc">Thiết lập các học phần sinh viên cần phải học trước
+                                                khi đăng ký học phần này</p>
+
+                                            <div class="prerequisites-container">
+                                                <div class="selected-items" id="selectedPrerequisites">
+                                                    <div class="selected-item">
+                                                        <span class="item-code">COMP001</span>
+                                                        <span class="item-name">Tin học đại cương</span>
+                                                        <input type="hidden" name="prerequisites[]" value="COMP001">
+                                                        <button type="button" class="btn-icon remove-item">
+                                                            <i class="fas fa-times"></i>
+                                                        </button>
+                                                    </div>
+                                                    <div class="empty-message" style="display: none;">Chưa có học phần
+                                                        tiên quyết nào được chọn</div>
+                                                </div>
+
+                                                <div class="add-item-section">
+                                                    <button type="button" class="btn secondary" id="addPrerequisiteBtn">
+                                                        <i class="fas fa-plus"></i> Thêm học phần tiên quyết
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Học phần song hành</h3>
+                                            <p class="section-desc">Thiết lập các học phần sinh viên phải học cùng học
+                                                kỳ với học phần này</p>
+
+                                            <div class="corequisites-container">
+                                                <div class="selected-items" id="selectedCorequisites">
+                                                    <div class="empty-message">Chưa có học phần song hành nào được chọn
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-item-section">
+                                                    <button type="button" class="btn secondary" id="addCorequisiteBtn">
+                                                        <i class="fas fa-plus"></i> Thêm học phần song hành
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Yêu cầu khác</h3>
+
+                                            <div class="form-row">
+                                                <div class="form-group">
+                                                    <label>Điểm tối thiểu các học phần tiên quyết</label>
+                                                    <div class="radio-group">
+                                                        <div class="radio-item">
+                                                            <input type="radio" id="minGradeD"
+                                                                name="minPrerequisiteGrade" value="D" checked>
+                                                            <label for="minGradeD">Điểm D trở lên (đạt yêu cầu tối
+                                                                thiểu)</label>
+                                                        </div>
+                                                        <div class="radio-item">
+                                                            <input type="radio" id="minGradeC"
+                                                                name="minPrerequisiteGrade" value="C">
+                                                            <label for="minGradeC">Điểm C trở lên</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Yêu cầu tham gia các hoạt động</label>
+                                                    <div class="checkbox-group">
+                                                        <div class="checkbox-item">
+                                                            <input type="checkbox" id="requireLab" name="requireLab">
+                                                            <label for="requireLab">Bắt buộc tham gia thực hành</label>
+                                                        </div>
+                                                        <div class="checkbox-item">
+                                                            <input type="checkbox" id="requireMidterm"
+                                                                name="requireMidterm" checked>
+                                                            <label for="requireMidterm">Bắt buộc tham gia kiểm tra giữa
+                                                                kỳ</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="button" class="btn secondary" id="resetRequirements">Đặt
+                                                lại</button>
+                                            <button type="button" class="btn primary" id="saveRequirements">Lưu thay
+                                                đổi</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Content Tab -->
+                                    <div class="tab-content" id="content-tab">
+                                        <div class="form-section">
+                                            <h3 class="section-title">Mô tả học phần</h3>
+
+                                            <div class="form-group">
+                                                <label for="courseDescription">Mô tả chung</label>
+                                                <textarea id="courseDescription" name="courseDescription" rows="4"
+                                                    class="rich-editor">Học phần này giới thiệu các khái niệm cơ bản về lập trình máy tính, cấu trúc dữ liệu và thuật toán. Sinh viên sẽ được học cách giải quyết vấn đề bằng tư duy lập trình và thực hành với ngôn ngữ C/C++.</textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseObjectives">Mục tiêu học phần</label>
+                                                <textarea id="courseObjectives" name="courseObjectives" rows="4"
+                                                    class="rich-editor">- Hiểu các khái niệm cơ bản về lập trình và thuật toán
+- Áp dụng cấu trúc dữ liệu và thuật toán đơn giản để giải quyết bài toán
+- Phát triển kỹ năng lập trình cơ bản với ngôn ngữ C/C++
+- Phát triển tư duy logic và kỹ năng giải quyết vấn đề</textarea>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="courseLearningOutcomes">Chuẩn đầu ra</label>
+                                                <textarea id="courseLearningOutcomes" name="courseLearningOutcomes"
+                                                    rows="4" class="rich-editor">- Viết được các chương trình đơn giản bằng ngôn ngữ C/C++
+- Áp dụng các cấu trúc điều khiển như vòng lặp, rẽ nhánh trong chương trình
+- Sử dụng được các cấu trúc dữ liệu cơ bản như mảng, chuỗi, con trỏ
+- Phân tích và giải quyết các bài toán đơn giản sử dụng kỹ thuật lập trình
+- Thiết kế và triển khai các thuật toán đơn giản</textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Nội dung học phần</h3>
+
+                                            <div class="content-syllabus">
+                                                <div class="syllabus-header">
+                                                    <div class="header-column">STT</div>
+                                                    <div class="header-column">Nội dung</div>
+                                                    <div class="header-column">Số tiết</div>
+                                                    <div class="header-column">Hình thức dạy</div>
+                                                    <div class="header-column">Thao tác</div>
+                                                </div>
+
+                                                <div class="syllabus-item">
+                                                    <div class="item-column">1</div>
+                                                    <div class="item-column">Giới thiệu về lập trình và ngôn ngữ C/C++
+                                                    </div>
+                                                    <div class="item-column">6</div>
+                                                    <div class="item-column">Lý thuyết + Thực hành</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="syllabus-item">
+                                                    <div class="item-column">2</div>
+                                                    <div class="item-column">Biến, kiểu dữ liệu và toán tử</div>
+                                                    <div class="item-column">6</div>
+                                                    <div class="item-column">Lý thuyết + Thực hành</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="syllabus-item">
+                                                    <div class="item-column">3</div>
+                                                    <div class="item-column">Cấu trúc điều khiển (if, switch, vòng lặp)
+                                                    </div>
+                                                    <div class="item-column">9</div>
+                                                    <div class="item-column">Lý thuyết + Thực hành</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-syllabus-item">
+                                                    <button type="button" class="btn secondary" id="addSyllabusBtn">
+                                                        <i class="fas fa-plus"></i> Thêm nội dung
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-section">
+                                            <h3 class="section-title">Đánh giá học phần</h3>
+
+                                            <div class="assessment-components">
+                                                <div class="assessment-header">
+                                                    <div class="header-column">Thành phần đánh giá</div>
+                                                    <div class="header-column">Trọng số</div>
+                                                    <div class="header-column">Mô tả</div>
+                                                    <div class="header-column">Thao tác</div>
+                                                </div>
+
+                                                <div class="assessment-item">
+                                                    <div class="item-column">Chuyên cần</div>
+                                                    <div class="item-column">10%</div>
+                                                    <div class="item-column">Điểm danh và tham gia lớp học</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="assessment-item">
+                                                    <div class="item-column">Bài tập</div>
+                                                    <div class="item-column">20%</div>
+                                                    <div class="item-column">Các bài tập nhỏ và thực hành</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="assessment-item">
+                                                    <div class="item-column">Giữa kỳ</div>
+                                                    <div class="item-column">20%</div>
+                                                    <div class="item-column">Kiểm tra lý thuyết và thực hành</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="assessment-item">
+                                                    <div class="item-column">Cuối kỳ</div>
+                                                    <div class="item-column">50%</div>
+                                                    <div class="item-column">Bài thi cuối kỳ trên máy tính</div>
+                                                    <div class="item-column">
+                                                        <div class="action-buttons">
+                                                            <button type="button" class="btn-icon edit-item">
+                                                                <i class="fas fa-edit"></i>
+                                                            </button>
+                                                            <button type="button" class="btn-icon delete-item">
+                                                                <i class="fas fa-trash"></i>
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="add-assessment-item">
+                                                    <button type="button" class="btn secondary" id="addAssessmentBtn">
+                                                        <i class="fas fa-plus"></i> Thêm thành phần đánh giá
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-actions">
+                                            <button type="button" class="btn secondary" id="resetContent">Đặt
+                                                lại</button>
+                                            <button type="button" class="btn primary" id="saveContent">Lưu thay
+                                                đổi</button>
+                                        </div>
+                                    </div>
+
+                                    <!-- Classes Tab -->
+                                    <div class="tab-content" id="classes-tab">
+                                        <div class="classes-section">
+                                            <div class="section-header">
+                                                <h3 class="section-title">Lớp học phần - Học kỳ hiện tại</h3>
+                                                <button type="button" class="btn primary" id="addClassBtn">
+                                                    <i class="fas fa-plus"></i> Thêm lớp học phần
+                                                </button>
+                                            </div>
+
+                                            <div class="responsive-table">
+                                                <table class="admin-table classes-table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Mã lớp</th>
+                                                            <th>Giảng viên</th>
+                                                            <th>Số lượng</th>
+                                                            <th>Đã đăng ký</th>
+                                                            <th>Lịch học</th>
+                                                            <th>Phòng học</th>
+                                                            <th>Trạng thái</th>
+                                                            <th>Thao tác</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>COMP101.01</td>
+                                                            <td>TS. Nguyễn Văn A</td>
+                                                            <td>50</td>
+                                                            <td>45</td>
+                                                            <td>T2 (7-9), T5 (7-9)</td>
+                                                            <td>A101, B203</td>
+                                                            <td><span class="status-badge active">Đang mở</span></td>
+                                                            <td>
+                                                                <div class="action-buttons">
+                                                                    <button type="button" class="btn-icon edit-class">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn-icon view-students">
+                                                                        <i class="fas fa-users"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn-icon delete-class">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>COMP101.02</td>
+                                                            <td>TS. Trần Thị B</td>
+                                                            <td>50</td>
+                                                            <td>48</td>
+                                                            <td>T3 (1-3), T6 (1-3)</td>
+                                                            <td>A102, B204</td>
+                                                            <td><span class="status-badge active">Đang mở</span></td>
+                                                            <td>
+                                                                <div class="action-buttons">
+                                                                    <button type="button" class="btn-icon edit-class">
+                                                                        <i class="fas fa-edit"></i>
+                                                                    </button>
+                                                                    <button type="button"
+                                                                        class="btn-icon view-students">
+                                                                        <i class="fas fa-users"></i>
+                                                                    </button>
+                                                                    <button type="button" class="btn-icon delete-class">
+                                                                        <i class="fas fa-trash"></i>
+                                                                    </button>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+
+                                        <div class="classes-section">
+                                            <div class="section-header">
+                                                <h3 class="section-title">Lịch sử lớp học phần</h3>
+                                                <div class="semester-filter">
+                                                    <label>Học kỳ: </label>
+                                                    <select id="semesterFilter">
+                                                        <option value="2022-2">Học kỳ 2 - 2022-2023</option>
+                                                        <option value="2022-1">Học kỳ 1 - 2022-2023</option>
+                                                        <option value="2021-2">Học kỳ 2 - 2021-2022</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="history-placeholder">
+                                                <i class="fas fa-history"></i>
+                                                <p>Chọn học kỳ để xem lịch sử lớp học phần</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Include admin footer -->
+                    <%- include('../partials/admin-footer') %>
+            </main>
+    </div>
+
+    <!-- Course Search Modal for Prerequisites -->
+    <div class="modal" id="courseSearchModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-search"></i> Tìm kiếm học phần</h3>
+                <button class="close-modal"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <div class="search-container">
+                    <div class="search-input-group">
+                        <input type="text" id="courseSearchInput" placeholder="Nhập mã hoặc tên học phần...">
+                        <button type="button" id="searchCourseBtn" class="btn primary">
+                            <i class="fas fa-search"></i> Tìm kiếm
+                        </button>
+                    </div>
+
+                    <div class="search-results">
+                        <div class="search-result-item">
+                            <div class="result-info">
+                                <span class="result-code">MATH101</span>
+                                <span class="result-name">Giải tích 1</span>
+                                <span class="result-meta">Toán - Thống kê | 4 tín chỉ</span>
+                            </div>
+                            <button class="btn-sm primary add-course-btn" data-id="MATH101" data-name="Giải tích 1">
+                                <i class="fas fa-plus"></i> Thêm
+                            </button>
+                        </div>
+                        <div class="search-result-item">
+                            <div class="result-info">
+                                <span class="result-code">COMP102</span>
+                                <span class="result-name">Cấu trúc dữ liệu và giải thuật</span>
+                                <span class="result-meta">Công nghệ thông tin | 4 tín chỉ</span>
+                            </div>
+                            <button class="btn-sm primary add-course-btn" data-id="COMP102"
+                                data-name="Cấu trúc dữ liệu và giải thuật">
+                                <i class="fas fa-plus"></i> Thêm
+                            </button>
+                        </div>
+                        <div class="search-result-item">
+                            <div class="result-info">
+                                <span class="result-code">PHY101</span>
+                                <span class="result-name">Vật lý đại cương</span>
+                                <span class="result-meta">Vật lý | 3 tín chỉ</span>
+                            </div>
+                            <button class="btn-sm primary add-course-btn" data-id="PHY101" data-name="Vật lý đại cương">
+                                <i class="fas fa-plus"></i> Thêm
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="hidden" id="searchResultType" value="prerequisites">
+                <button class="btn secondary" id="closeSearchModal">Đóng</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Notification -->
+    <div class="notification success" id="successNotification">
+        <div class="notification-icon">
+            <i class="fas fa-check-circle"></i>
+        </div>
+        <div class="notification-content">
+            <h4>Thành công</h4>
+            <p id="notificationMessage">Đã lưu thông tin học phần thành công!</p>
+        </div>
+        <button class="notification-close">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Tab switching functionality
+            const tabItems = document.querySelectorAll('.tab-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabItems.forEach(item => {
+                item.addEventListener('click', function () {
+                    // Remove active class from all tabs
+                    tabItems.forEach(tab => tab.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked tab
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab') + '-tab';
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+
+            // Auto-calculate total credits
+            const theoryCredits = document.getElementById('courseTheoryCredits');
+            const practiceCredits = document.getElementById('coursePracticeCredits');
+            const totalCredits = document.getElementById('courseCredits');
+
+            function updateTotalCredits() {
+                const theory = parseInt(theoryCredits.value) || 0;
+                const practice = parseInt(practiceCredits.value) || 0;
+                totalCredits.value = theory + practice;
+            }
+
+            theoryCredits.addEventListener('input', updateTotalCredits);
+            practiceCredits.addEventListener('input', updateTotalCredits);
+
+            // Auto-calculate lessons
+            function updateLessons() {
+                const theory = parseInt(theoryCredits.value) || 0;
+                const practice = parseInt(practiceCredits.value) || 0;
+                document.getElementById('courseLessons').value = (theory * 15) + (practice * 30);
+            }
+
+            theoryCredits.addEventListener('input', updateLessons);
+            practiceCredits.addEventListener('input', updateLessons);
+
+            // Prerequisites functionality
+            const addPrerequisiteBtn = document.getElementById('addPrerequisiteBtn');
+            const courseSearchModal = document.getElementById('courseSearchModal');
+            const closeSearchModal = document.getElementById('closeSearchModal');
+            const searchResultType = document.getElementById('searchResultType');
+
+            addPrerequisiteBtn.addEventListener('click', function () {
+                searchResultType.value = 'prerequisites';
+                courseSearchModal.classList.add('show');
+            });
+
+            // Add Corequisite button
+            document.getElementById('addCorequisiteBtn').addEventListener('click', function () {
+                searchResultType.value = 'corequisites';
+                courseSearchModal.classList.add('show');
+            });
+
+            closeSearchModal.addEventListener('click', function () {
+                courseSearchModal.classList.remove('show');
+            });
+
+            // Close modal when clicking X
+            document.querySelector('#courseSearchModal .close-modal').addEventListener('click', function () {
+                courseSearchModal.classList.remove('show');
+            });
+
+            // Add course from search results
+            const addCourseBtns = document.querySelectorAll('.add-course-btn');
+
+            addCourseBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    const courseId = this.getAttribute('data-id');
+                    const courseName = this.getAttribute('data-name');
+                    const type = searchResultType.value;
+
+                    if (type === 'prerequisites') {
+                        addPrerequisite(courseId, courseName);
+                    } else if (type === 'corequisites') {
+                        addCorequisite(courseId, courseName);
+                    }
+
+                    courseSearchModal.classList.remove('show');
+                });
+            });
+
+            function addPrerequisite(id, name) {
+                const selectedPrerequisites = document.getElementById('selectedPrerequisites');
+                const emptyMessage = selectedPrerequisites.querySelector('.empty-message');
+
+                if (emptyMessage) {
+                    emptyMessage.style.display = 'none';
+                }
+
+                // Check if this prerequisite is already added
+                const existingItem = selectedPrerequisites.querySelector(`[data-id="${id}"]`);
+                if (existingItem) return;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'selected-item';
+                itemElement.setAttribute('data-id', id);
+                itemElement.innerHTML = `
+                    <span class="item-code">${id}</span>
+                    <span class="item-name">${name}</span>
+                    <input type="hidden" name="prerequisites[]" value="${id}">
+                    <button type="button" class="btn-icon remove-item">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                selectedPrerequisites.appendChild(itemElement);
+
+                // Add remove functionality
+                const removeButton = itemElement.querySelector('.remove-item');
+                removeButton.addEventListener('click', function () {
+                    itemElement.remove();
+
+                    // Check if there are no prerequisites left
+                    if (selectedPrerequisites.children.length === 0 ||
+                        (selectedPrerequisites.children.length === 1 &&
+                            selectedPrerequisites.children[0].classList.contains('empty-message'))) {
+                        if (emptyMessage) {
+                            emptyMessage.style.display = 'block';
+                        } else {
+                            selectedPrerequisites.innerHTML = '<div class="empty-message">Chưa có học phần tiên quyết nào được chọn</div>';
+                        }
+                    }
+                });
+            }
+
+            function addCorequisite(id, name) {
+                const selectedCorequisites = document.getElementById('selectedCorequisites');
+                const emptyMessage = selectedCorequisites.querySelector('.empty-message');
+
+                if (emptyMessage) {
+                    emptyMessage.remove();
+                }
+
+                // Check if this corequisite is already added
+                const existingItem = selectedCorequisites.querySelector(`[data-id="${id}"]`);
+                if (existingItem) return;
+
+                const itemElement = document.createElement('div');
+                itemElement.className = 'selected-item';
+                itemElement.setAttribute('data-id', id);
+                itemElement.innerHTML = `
+                    <span class="item-code">${id}</span>
+                    <span class="item-name">${name}</span>
+                    <input type="hidden" name="corequisites[]" value="${id}">
+                    <button type="button" class="btn-icon remove-item">
+                        <i class="fas fa-times"></i>
+                    </button>
+                `;
+
+                selectedCorequisites.appendChild(itemElement);
+
+                // Add remove functionality
+                const removeButton = itemElement.querySelector('.remove-item');
+                removeButton.addEventListener('click', function () {
+                    itemElement.remove();
+
+                    // Check if there are no corequisites left
+                    if (selectedCorequisites.children.length === 0) {
+                        selectedCorequisites.innerHTML = '<div class="empty-message">Chưa có học phần song hành nào được chọn</div>';
+                    }
+                });
+            }
+
+            // Save button functionality with notification
+            const saveButtons = [
+                document.getElementById('saveBasicInfo'),
+                document.getElementById('saveRequirements'),
+                document.getElementById('saveContent')
+            ];
+
+            const successNotification = document.getElementById('successNotification');
+            const notificationMessage = document.getElementById('notificationMessage');
+
+            saveButtons.forEach(button => {
+                if (button) {
+                    button.addEventListener('click', function () {
+                        // Display success notification
+                        notificationMessage.textContent = 'Đã lưu thông tin học phần thành công!';
+                        successNotification.classList.add('show');
+
+                        // Hide notification after 3 seconds
+                        setTimeout(() => {
+                            successNotification.classList.remove('show');
+                        }, 3000);
+                    });
+                }
+            });
+
+            // Close notification on click
+            document.querySelector('.notification-close').addEventListener('click', function () {
+                successNotification.classList.remove('show');
+            });
+
+            // Delete course button
+            const deleteCourseBtn = document.getElementById('deleteCourseBtn');
+
+            deleteCourseBtn.addEventListener('click', function () {
+                if (confirm('Bạn có chắc chắn muốn xóa học phần này? Hành động này không thể hoàn tác.')) {
+                    alert('Học phần đã được xóa thành công!');
+                    // In a real app, redirect to courses list or handle deletion via AJAX
+                    window.location.href = '/admin/courses';
+                }
+            });
+
+            // Classes tab functionality
+            document.getElementById('semesterFilter').addEventListener('change', function () {
+                const selectedSemester = this.value;
+                alert(`Đang tải lớp học phần cho học kỳ: ${selectedSemester}`);
+                // In a real app, this would load class data for the selected semester via AJAX
+            });
+
+            // Add class button
+            document.getElementById('addClassBtn').addEventListener('click', function () {
+                alert('Chức năng thêm lớp học phần sẽ được triển khai sau.');
+                // In a real app, this would open a modal to add a new class section
+            });
+
+            // Edit class buttons
+            document.querySelectorAll('.edit-class').forEach(button => {
+                button.addEventListener('click', function () {
+                    const classCode = this.closest('tr').querySelector('td:first-child').textContent;
+                    alert(`Đang mở chỉnh sửa lớp: ${classCode}`);
+                    // In a real app, this would open a modal to edit the class details
+                });
+            });
+
+            // View students buttons
+            document.querySelectorAll('.view-students').forEach(button => {
+                button.addEventListener('click', function () {
+                    const classCode = this.closest('tr').querySelector('td:first-child').textContent;
+                    alert(`Đang xem danh sách sinh viên của lớp: ${classCode}`);
+                    // In a real app, this would open a modal with the student list
+                });
+            });
+
+            // Delete class buttons
+            document.querySelectorAll('.delete-class').forEach(button => {
+                button.addEventListener('click', function () {
+                    const classCode = this.closest('tr').querySelector('td:first-child').textContent;
+                    if (confirm(`Bạn có chắc chắn muốn xóa lớp học phần ${classCode}?`)) {
+                        alert(`Đã xóa lớp học phần: ${classCode}`);
+                        this.closest('tr').remove();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <style>
+        /* Additional inline styles specific to edit course page */
+        .info-summary-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-left: 5px solid #0056b3;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .course-code-chip {
+            background-color: #0056b3;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .info-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            flex: 1;
+        }
+
+        .info-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .stat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .stat-item i {
+            color: #0056b3;
+        }
+
+        /* Tab Navigation */
+        .admin-card-header.with-tabs {
+            padding: 0;
+            border-bottom: none;
+        }
+
+        .horizontal-tabs {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: none;
+            /* Firefox */
+            -ms-overflow-style: none;
+            /* IE and Edge */
+        }
+
+        .horizontal-tabs::-webkit-scrollbar {
+            display: none;
+            /* Chrome, Safari, Opera */
+        }
+
+        .horizontal-tabs .tab-item {
+            padding: 15px 20px;
+            font-weight: 500;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .horizontal-tabs .tab-item:hover {
+            background-color: #f8f9fa;
+            color: #0056b3;
+        }
+
+        .horizontal-tabs .tab-item.active {
+            color: #0056b3;
+            border-bottom-color: #0056b3;
+            background-color: #f8f9fa;
+        }
+
+        .horizontal-tabs .tab-item i {
+            font-size: 1rem;
+        }
+
+        /* Content and Syllabus */
+        .content-syllabus,
+        .assessment-components {
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .syllabus-header,
+        .assessment-header {
+            display: flex;
+            background-color: #f8f9fa;
+            font-weight: 600;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .header-column {
+            padding: 10px 15px;
+            flex: 1;
+        }
+
+        .header-column:first-child {
+            max-width: 70px;
+        }
+
+        .header-column:last-child {
+            max-width: 100px;
+            text-align: center;
+        }
+
+        .syllabus-item,
+        .assessment-item {
+            display: flex;
+            border-bottom: 1px solid #e3e6f0;
+            align-items: center;
+        }
+
+        .item-column {
+            padding: 12px 15px;
+            flex: 1;
+        }
+
+        .item-column:first-child {
+            max-width: 70px;
+        }
+
+        .item-column:last-child {
+            max-width: 100px;
+            text-align: center;
+        }
+
+        .add-syllabus-item,
+        .add-assessment-item {
+            padding: 15px;
+            text-align: center;
+            background-color: #f8f9fa;
+        }
+
+        /* Classes Tab */
+        .classes-section {
+            margin-bottom: 30px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .semester-filter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .semester-filter select {
+            padding: 8px 12px;
+            border: 1px solid #d1d3e2;
+            border-radius: 5px;
+            background-color: white;
+        }
+
+        .history-placeholder {
+            text-align: center;
+            padding: 50px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            color: #858796;
+        }
+
+        .history-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #d1d3e2;
+        }
+
+        /* Search Modal */
+        .search-container {
+            padding: 10px 0;
+        }
+
+        .search-input-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .search-input-group input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #d1d3e2;
+            border-radius: 5px;
+            font-size: 0.95rem;
+        }
+
+        .search-results {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #e3e6f0;
+            border-radius: 5px;
+        }
+
+        .search-result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+
+        .search-result-item:hover {
+            background-color: #f8f9fc;
+        }
+
+        .result-info {
+            flex: 1;
+        }
+
+        .result-code {
+            background-color: #e3e6f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            margin-right: 10px;
+        }
+
+        .result-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .result-meta {
+            display: block;
+            font-size: 0.8rem;
+            color: #858796;
+            margin-top: 5px;
+        }
+
+        /* Success Notification */
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            min-width: 300px;
+            max-width: 400px;
+        }
+
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .notification.success {
+            background-color: #1cc88a;
+            color: white;
+        }
+
+        .notification-icon {
+            font-size: 1.5rem;
+            margin-right: 15px;
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-content h4 {
+            margin: 0 0 5px;
+            font-size: 1rem;
+        }
+
+        .notification-content p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            color: white;
+            opacity: 0.7;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0;
+            margin-left: 10px;
+        }
+
+        .notification-close:hover {
+            opacity: 1;
+        }
+
+        /* Radio and checkbox groups */
+        .radio-group,
+        .checkbox-group {
+            margin-top: 8px;
+        }
+
+        .radio-item,
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .radio-item input,
+        .checkbox-item input {
+            margin-right: 8px;
+            width: auto;
+        }
+
+        /* Responsive fixes */
+        @media (max-width: 768px) {
+            .info-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .horizontal-tabs .tab-item {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+
+            .syllabus-item,
+            .assessment-item,
+            .syllabus-header,
+            .assessment-header {
+                font-size: 0.9rem;
+            }
+
+            .search-input-group {
+                flex-direction: column;
+            }
+
+            .info-stats {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
+    </style>
+</body>
+
+</html>
